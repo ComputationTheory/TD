@@ -1,22 +1,36 @@
+.DEFAULT_GOAL := all
+
 # -------------------------------
 # Configuration
 # -------------------------------
 
-SHELL      := bash
-BUILDDIR   := build
-DOCSDIR    := docs
+SHELL       := bash
+BUILDDIR    := build
+DOCSDIR     := docs
+COURSESDIR  := src/courses
 
-# Course selection (persistent)
+# Discover courses and select the first one alphabetically by default.
+COURSE_DIRS := $(wildcard $(COURSESDIR)/*/)
+COURSES     := $(sort $(notdir $(patsubst %/,%,$(COURSE_DIRS))))
+
+# Persistent local selection, overridden with: make COURSE=xxx <target>
 -include .current_course.mk
-COURSE     ?= lea
-COURSE 	   := $(strip $(COURSE))
-PREFIX     := $(COURSE)
-PREFIXCORR := $(COURSE)-correction
-SRCDIR     := src/$(COURSE)
+COURSE ?= $(firstword $(COURSES))
+override COURSE := $(strip $(COURSE))
 
-# LaTeX engine (override with: make PDFLATEX=xelatex)
+SRCDIR := $(COURSESDIR)/$(COURSE)
+
+# Output directories mirror the course/document/correction structure.
+COURSE_BUILDDIR     := $(BUILDDIR)/$(COURSE)
+CORRECTION_BUILDDIR := $(COURSE_BUILDDIR)/correction
+COURSE_DOCSDIR      := $(DOCSDIR)/$(COURSE)
+CORRECTION_DOCSDIR  := $(COURSE_DOCSDIR)/correction
+
+# LaTeX engine and number of compilation passes.
 PDFLATEX ?= pdflatex
-PDFLATEX_FLAGS := -halt-on-error -interaction=nonstopmode -output-directory=$(BUILDDIR)
+PASSES  ?= 2
+
+PDFLATEX_FLAGS := -halt-on-error -interaction=nonstopmode
 
 # latex-libs (local clone + TEXINPUTS)
 LATEX_LIBS_DIR       := latex-libs
@@ -30,122 +44,207 @@ else
   PATHSEP := :
 endif
 
-# Add latex-libs to TeX search path (recursive with //); keep default path via trailing sep
+# Add latex-libs to the TeX search path recursively. The trailing separator
+# preserves the default TeX search path.
 export TEXINPUTS := $(CURDIR)/$(LATEX_LIBS_DIR)//$(PATHSEP)$(TEXINPUTS)
 
 # -------------------------------
 # Documents to generate
 # -------------------------------
 
+# Every .tex file directly inside the selected course directory is a driver.
 MAIN := $(basename $(notdir $(wildcard $(SRCDIR)/*.tex)))
 CORR := $(MAIN:%=%-correction)
 
+MAIN_PDFS := $(MAIN:%=$(COURSE_DOCSDIR)/%.pdf)
+CORR_PDFS := $(MAIN:%=$(CORRECTION_DOCSDIR)/%.pdf)
+
 # -------------------------------
-# Main targets
+# Public targets
 # -------------------------------
 
-.PHONY: main corr all deps update clean cleanall help FORCE configure list check-course
+.PHONY: all main correction all-courses
+.PHONY: configure list update clean cleanall help
+.PHONY: $(MAIN) $(CORR)
 
-all: 			main corr
-main:			$(MAIN:%=$(DOCSDIR)/$(PREFIX)-%.pdf)
-corr: 			$(MAIN:%=$(DOCSDIR)/$(PREFIXCORR)-%.pdf)
+# Build every subject and correction for the selected course.
+all: main correction
 
-$(MAIN): %:	    	$(DOCSDIR)/$(PREFIX)-%.pdf
-$(CORR): %-correction:	$(DOCSDIR)/$(PREFIXCORR)-%.pdf
+# Build every subject for the selected course.
+main: _check-course $(MAIN_PDFS)
+
+# Build every correction for the selected course.
+correction: _check-course $(CORR_PDFS)
+
+# Build every subject and correction for every course.
+all-courses:
+	@if [ -z "$(strip $(COURSES))" ]; then \
+	  echo ">>> ERROR: no course found in $(COURSESDIR)"; \
+	  exit 1; \
+	fi
+	@for course in $(COURSES); do \
+	  echo ">>> Building course: $$course"; \
+	  $(MAKE) --no-print-directory \
+	    COURSE="$$course" \
+	    PASSES="$(PASSES)" \
+	    all || exit $$?; \
+	done
+
+# Individual document aliases:
+$(MAIN): %: $(COURSE_DOCSDIR)/%.pdf
+
+$(CORR): %-correction: $(CORRECTION_DOCSDIR)/%.pdf
 
 # -------------------------------
 # Compilation rules
 # -------------------------------
 
-# Sujet
-$(DOCSDIR)/$(PREFIX)-%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps check-course
-	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIX)-$* $<
-	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIX)-$* $<
-	@mv -f "$(BUILDDIR)/$(PREFIX)-$*.pdf" "$@"
+# Subject
+$(COURSE_DOCSDIR)/%.pdf: $(SRCDIR)/%.tex _force | _check-course _check-passes _directories _deps
+	$(PDFLATEX) $(PDFLATEX_FLAGS) \
+	  -output-directory="$(COURSE_BUILDDIR)" \
+	  -jobname="$*" \
+	  "$<"
+	@if [ "$(PASSES)" -eq 2 ]; then \
+	  $(PDFLATEX) $(PDFLATEX_FLAGS) \
+	    -output-directory="$(COURSE_BUILDDIR)" \
+	    -jobname="$*" \
+	    "$<" || exit $$?; \
+	fi
+	@mv -f "$(COURSE_BUILDDIR)/$*.pdf" "$@"
 
 # Correction
-$(DOCSDIR)/$(PREFIXCORR)-%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps check-course
-	@printf '\\def\\CORRECTION{}\\input{%s}\n' "$(SRCDIR)/$*.tex" > "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
-	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIXCORR)-$* "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
-	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIXCORR)-$* "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
-	@mv -f "$(BUILDDIR)/$(PREFIXCORR)-$*.pdf" "$@"
-
-FORCE:
+$(CORRECTION_DOCSDIR)/%.pdf: $(SRCDIR)/%.tex _force | _check-course _check-passes _directories _deps
+	@printf '\\def\\CORRECTION{}\\input{%s}\n' \
+	  "$(SRCDIR)/$*.tex" \
+	  > "$(CORRECTION_BUILDDIR)/$*.tex"
+	$(PDFLATEX) $(PDFLATEX_FLAGS) \
+	  -output-directory="$(CORRECTION_BUILDDIR)" \
+	  -jobname="$*" \
+	  "$(CORRECTION_BUILDDIR)/$*.tex"
+	@if [ "$(PASSES)" -eq 2 ]; then \
+	  echo ">>> Building $@ (pass 2/$(PASSES))"; \
+	  $(PDFLATEX) $(PDFLATEX_FLAGS) \
+	    -output-directory="$(CORRECTION_BUILDDIR)" \
+	    -jobname="$*" \
+	    "$(CORRECTION_BUILDDIR)/$*.tex" || exit $$?; \
+	fi
+	@mv -f "$(CORRECTION_BUILDDIR)/$*.pdf" "$@"
 
 # -------------------------------
-# Dependencies management
+# Internal targets
 # -------------------------------
 
-# Ensure local clone of latex-libs exists (used as a prerequisite by build rules)
-deps:
-	@if [ ! -d "$(LATEX_LIBS_DIR)/.git" ]; then \
-	  echo ">>> Cloning latex-libs into $(LATEX_LIBS_DIR)"; \
-	  ( git clone --depth 1 "$(LATEX_LIBS_SSH_URL)"   "$(LATEX_LIBS_DIR)" 2>/dev/null \
-	    || git clone --depth 1 "$(LATEX_LIBS_HTTPS_URL)" "$(LATEX_LIBS_DIR)" ); \
+.PHONY: _check-course _check-passes _directories _deps _force
+
+_check-course:
+	@if [ -z "$(COURSE)" ] || [ ! -d "$(SRCDIR)" ]; then \
+	  echo ">>> ERROR: course '$(COURSE)' not found"; \
+	  echo ">>> Use 'make list' or 'make configure COURSE=<name>'."; \
+	  exit 1; \
+	fi
+	@if ! compgen -G "$(SRCDIR)/*.tex" >/dev/null; then \
+	  echo ">>> ERROR: no .tex driver found in $(SRCDIR)"; \
+	  exit 1; \
 	fi
 
-# Update both the main repo and the local dependency clone
-update:
-	@echo ">>> Updating main repository"; \
-	git pull --ff-only || echo ">>> Skipping main repo update (offline or non-fast-forward)."; \
-	if [ -d "$(LATEX_LIBS_DIR)/.git" ]; then \
-	  echo ">>> Updating $(LATEX_LIBS_DIR)"; \
-	  git -C "$(LATEX_LIBS_DIR)" pull --ff-only || echo ">>> Skipping latex-libs update (offline or non-fast-forward)."; \
-	else \
-	  echo ">>> latex-libs not present; run 'make deps' when online."; \
-	fi; \
+_check-passes:
+	@if [ "$(PASSES)" != 1 ] && [ "$(PASSES)" != 2 ]; then \
+	  echo ">>> ERROR: PASSES must be 1 or 2 (received: $(PASSES))"; \
+	  exit 1; \
+	fi
+
+_directories:
+	@mkdir -p \
+	  "$(COURSE_BUILDDIR)" \
+	  "$(CORRECTION_BUILDDIR)" \
+	  "$(COURSE_DOCSDIR)" \
+	  "$(CORRECTION_DOCSDIR)"
+
+# Ensure that the local latex-libs clone exists.
+_deps:
+	@if [ ! -d "$(LATEX_LIBS_DIR)/.git" ]; then \
+	  echo ">>> Cloning latex-libs into $(LATEX_LIBS_DIR)"; \
+	  git clone --depth 1 \
+	    "$(LATEX_LIBS_SSH_URL)" \
+	    "$(LATEX_LIBS_DIR)" 2>/dev/null \
+	  || git clone --depth 1 \
+	    "$(LATEX_LIBS_HTTPS_URL)" \
+	    "$(LATEX_LIBS_DIR)"; \
+	fi
+
+# Force compilation because Make does not track files included by LaTeX.
+_force:
 
 # -------------------------------
 # Course selection
 # -------------------------------
 
+# Usage: make configure COURSE=lea
 configure:
-	@if [ -z "$(COURSE)" ]; then \
-	  echo "Usage: make configure COURSE=<nom>"; exit 1; \
-	fi
-	@c=$$(echo "$(COURSE)" | tr '[:upper:]' '[:lower:]'); \
-	echo "COURSE=$$c" > .current_course.mk; \
-	echo ">>> Cours courant: $$c"
-
-list:
-	@echo "Cours disponibles :"; \
-	for d in src/*; do \
-	  if [ -d "$$d" ] && ls "$$d"/*.tex >/dev/null 2>&1; then \
-	    echo " - $${d##*/}"; \
-	  fi; \
-	done; \
-	if [ -f .current_course.mk ]; then \
-	  echo "Cours courant : $(COURSE)"; \
-	else \
-	  echo "(aucun cours configuré, défaut: $(COURSE))"; \
-	fi
-
-check-course:
-	@if [ ! -d "$(SRCDIR)" ]; then \
-	  echo ">>> ERROR: cours '$(COURSE)' introuvable (dossier manquant: $(SRCDIR))"; \
-	  echo ">>> Utilisez: make list  puis  make configure COURSE=<nom>"; \
+	@c=$$(printf '%s' "$(COURSE)" | tr '[:upper:]' '[:lower:]'); \
+	if [ ! -d "$(COURSESDIR)/$$c" ]; then \
+	  echo ">>> ERROR: course '$$c' not found"; \
+	  echo ">>> Missing directory: $(COURSESDIR)/$$c"; \
+	  echo ">>> Use 'make list' to list available courses."; \
 	  exit 1; \
+	fi; \
+	if ! compgen -G "$(COURSESDIR)/$$c/*.tex" >/dev/null; then \
+	  echo ">>> ERROR: no .tex driver found in $(COURSESDIR)/$$c"; \
+	  exit 1; \
+	fi; \
+	printf 'COURSE := %s\n' "$$c" > .current_course.mk; \
+	echo ">>> Current course: $$c"
+
+# List available courses and their document drivers.
+list:
+	@echo "Available courses:"; \
+	if [ -z "$(strip $(COURSES))" ]; then \
+	  echo "   (none)"; \
+	  exit 0; \
+	fi; \
+	for d in $(COURSE_DIRS); do \
+	  course=$${d%/}; \
+	  course=$${course##*/}; \
+	  if [ "$$course" = "$(COURSE)" ]; then \
+	    printf " * %s (current)\n" "$$course"; \
+	  else \
+	    printf " - %s\n" "$$course"; \
+	  fi; \
+	  for f in "$$d"*.tex; do \
+	    [ -e "$$f" ] || continue; \
+	    name=$${f##*/}; \
+	    printf "     %s\n" "$${name%.tex}"; \
+	  done; \
+	done
+
+# -------------------------------
+# Updates and cleaning
+# -------------------------------
+
+update:
+	@echo ">>> Updating main repository"; \
+	git pull --ff-only \
+	  || echo ">>> Skipping main repository update (offline or non-fast-forward)."; \
+	if [ -d "$(LATEX_LIBS_DIR)/.git" ]; then \
+	  echo ">>> Updating $(LATEX_LIBS_DIR)"; \
+	  git -C "$(LATEX_LIBS_DIR)" pull --ff-only \
+	    || echo ">>> Skipping latex-libs update (offline or non-fast-forward)."; \
+	else \
+	  echo ">>> latex-libs not present; it will be cloned during the next build."; \
 	fi
 
-# -------------------------------
-# Create folders
-# -------------------------------
-
-$(BUILDDIR):
-	@mkdir -p $@
-
-$(DOCSDIR):
-	@mkdir -p $@
-
-# -------------------------------
-# Cleaning
-# -------------------------------
-
+# Remove all LaTeX intermediate files for every course.
 clean:
-	@rm -rf "$(BUILDDIR)"/*
+	@rm -rf "$(BUILDDIR)"
+	@echo ">>> Removed build artifacts"
 
+# Also remove generated course directories while preserving docs/.nojekyll.
 cleanall: clean
-	@rm -f "$(DOCSDIR)"/*.pdf
+	@for course in $(COURSES); do \
+	  rm -rf "$(DOCSDIR)/$$course"; \
+	done
+	@echo ">>> Removed generated PDFs"
 
 # -------------------------------
 # Help
@@ -153,14 +252,16 @@ cleanall: clean
 
 help:
 	@echo "Usage:"
-	@echo "  make                       – build all subject PDFs (tds + tps)"
-	@echo "  make corr                  – build tds and tps correction PDFs (requires private repo access)"
-	@echo "  make all                   – build all subject and correction PDFs (requires private repo access)"
-	@echo "  make tp1-lexer             – build $(DOCSDIR)/lea-tp1-lexer.pdf (same for other files in $(SRCDIR))"
-	@echo "  make tp1-lexer-correction  – build $(DOCSDIR)/lea-correction-tp1-lexer.pdf (same for other files in $(SRCDIR))"
-	@echo "  make configure COURSE=xxx  – Sets current course main repository as src/xxx (default: $(COURSE))"
-	@echo "  make list                  – Lists available courses"
-	@echo "  make update                – update local project, latex-libs, and corrections if needed (git pull)"
-	@echo "  make clean                 – remove build artifacts"
-	@echo "  make cleanall              – also remove generated PDFs"
-
+	@echo "  make | make all               – Build every subject and correction for the current course."
+	@echo "  make main                     – Build every subject for the current course."
+	@echo "  make correction               – Build every correction for the current course."
+	@echo "  make all-courses              – Build every subject and correction for every course."
+	@echo "  make td                       – Build $(COURSE_DOCSDIR)/td.pdf."
+	@echo "  make td-correction            – Build $(CORRECTION_DOCSDIR)/td.pdf."
+	@echo "  make PASSES=1 td              – Build one document with a single LaTeX pass."
+	@echo "  make COURSE=<name> <target>   – Build a course without changing the persistent selection."
+	@echo "  make configure COURSE=<name>  – Persistently select a course from $(COURSESDIR)/<name>."
+	@echo "  make list                     – List available courses and document drivers."
+	@echo "  make update                   – Update the main repository and latex-libs."
+	@echo "  make clean                    – Remove LaTeX intermediate files for every course."
+	@echo "  make cleanall                 – Also remove every generated course directory from docs/."

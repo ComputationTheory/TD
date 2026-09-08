@@ -1,0 +1,181 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+
+\ifdefined\CORRECTION
+  \documentclass[livret, correction]{td}
+\else
+  \documentclass[livret]{td}
+\fi
+
+\typeTD
+
+\makeatletter
+\def\input@path{{src/exercises}}
+\makeatother
+
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath,amssymb, mathrsfs, stmaryrd}
+\newcommand\eqdef{\stackrel{\text{def}}{=}}
+
+\usepackage{statemachines}
+\usepackage{trees}
+\usetikzlibrary{decorations.pathmorphing}
+
+
+\codeUE{XLG4IU020}
+
+\intituleUE{Langages et automates}
+
+\author[Matthieu Perrin]{
+  Matthieu \textsc{Perrin}\\
+  Nantes Université\\
+  Laboratoire des Sciences du Numérique de Nantes \\
+  UMR CNRS 6004\\
+  Bureau 410, bâtiment 34 \\
+  \url{matthieu.perrin@univ-nantes.fr}\\
+}
+
+\institution{Nantes Université}
+
+\logo{src/img/logoUN.png}
+
+\cursus[L2 Informatique]{
+  \begin{tabular}[b]{l}
+    UFR Sciences et Techniques\\
+    Licence Informatique\\
+    2\ieme{} année\\
+  \end{tabular}
+}
+
+\usepackage{pdfpages}
+\hypersetup{
+  pdftitle  = {Langages et Automates -- Livret de TD},
+  pdfauthor = {Matthieu Perrin},
+  pdfsubject  = {Livret de TD de L2 sur les langages formels et les automates},
+  pdfkeywords = {automates finis, expressions régulières, grammaires, analyse lexicale}
+}
+
+\begin{document}
+
+\maketitlepage
+%\maketitlepage
+ 
+\session{Rappels mathématiques}
+\input{introduction/maths/set_proofs}
+\input{introduction/maths/induction}
+\input{introduction/maths/equipotence}
+\sessionappendix
+\input{introduction/maths/revision}
+\input{introduction/maths/challenge}
+ 
+ 
+\session{Mots et langages}
+\input{introduction/languages/words}
+\input{introduction/languages/languages}
+\input{introduction/languages/palindrome}
+\sessionappendix
+\input{introduction/languages/revision}
+\input{introduction/languages/challenge}
+ 
+ 
+\session{Expressions rationnelles}
+\input{lexing/regexp/read_regexp}
+\input{lexing/regexp/write_regexp}
+\input{lexing/regexp/excel}
+\sessionappendix
+\input{lexing/regexp/revision}
+\input{lexing/regexp/challenge}
+ 
+ 
+\session{Lemme d'Arden et identités remarquables}
+\input{lexing/arden/simplification}
+\input{lexing/arden/arden}
+\input{lexing/arden/identities}
+\sessionappendix
+\input{lexing/arden/revision}
+\input{lexing/arden/challenge}
+ 
+ 
+\session{Automates finis}
+\input{lexing/automata/definitions}
+\input{lexing/automata/write_automata}
+\input{lexing/automata/normalform}
+\sessionappendix
+\input{lexing/automata/revision}
+\input{lexing/automata/challenge}
+ 
+ 
+\session{Théorème de Kleene}
+\input{lexing/kleene/automaton_to_regexp}
+\input{lexing/kleene/thompson}
+\sessionappendix
+\input{lexing/kleene/revision}
+\input{lexing/kleene/challenge}
+ 
+ 
+\session{Automates finis déterministes et complets}
+\input{lexing/determinisation/properties}
+\sessionappendix
+\input{lexing/determinisation/revision}
+\input{lexing/determinisation/challenge}
+ 
+ 
+\session{Automates minimaux et émondés}
+\input{lexing/minimisation/minimisation}
+\input{lexing/minimisation/equivalence}
+\sessionappendix
+\input{lexing/minimisation/revision}
+\input{lexing/minimisation/challenge}
+ 
+ 
+\session{Le lemme de l'étoile}
+\input{lexing/expressiveness/pumping}
+\input{lexing/expressiveness/types}
+\sessionappendix
+\input{lexing/expressiveness/revision}
+\input{lexing/expressiveness/challenge}
+ 
+ 
+\session{Grammaires algébriques}
+\input{parsing/grammars/calculator}
+\input{parsing/grammars/write_grammars}
+\input{parsing/grammars/read_grammars}
+\sessionappendix
+\input{parsing/grammars/revision}
+\input{parsing/grammars/challenge}
+ 
+ 
+\session{Algorithme Cocke-Younger-Kasami}
+\input{parsing/CYK/CYK}
+\input{parsing/CYK/FNC}
+\sessionappendix
+\input{parsing/CYK/revision}
+\input{parsing/CYK/challenge}
+ 
+ 
+\session{Automates à pile}
+\input{parsing/pushdown/definitions}
+\input{parsing/pushdown/write_pushdown}
+\sessionappendix
+\input{parsing/pushdown/revision}
+\input{parsing/pushdown/challenge}
+ 
+ 
+\session{Décidabilité des langages algébriques}
+\input{parsing/decidability/LRparser}
+\input{parsing/decidability/pumping}
+\sessionappendix
+\input{parsing/decidability/revision}
+\input{parsing/decidability/challenge}
+ 
+
+\session{Grammaires rationnelles}
+\input{parsing/rational/write_rational}
+\input{parsing/rational/rational_to_other}
+\sessionappendix
+\input{parsing/rational/revision}
+\input{parsing/rational/challenge}
+
+\end{document}
+
+\endinput
