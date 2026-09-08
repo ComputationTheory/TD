@@ -51,5 +51,52 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  Il faut passer par le système d'équations rationnelles, puis utiliser le lemme d'Arden.
+  
+  \begin{question}
+  \item $\left\{\begin{array}{lllll}
+    L_1 & = & a L_1 \mid b L_1 \mid a L_2  & = & (a\mid b)L_1 \mid a L_2\\
+    L_2 & = & b L_3 \\
+    L_3 & = & a L_3 \mid b L_3 \mid \varepsilon & = & (a\mid b)L_3 \mid \varepsilon\\
+  \end{array}\right.$
+    
+    \begin{itemize}
+    \item $L_3 = (a\mid b)L_3 \mid \varepsilon$. $\varepsilon\notin\{a, b\}$ donc d'après le lemme d'Arden, $L_3 = (a\mid b)^\star$ 
+    \item $L_2 = b L_3 = b (a\mid b)^\star$
+    \item $L_1 = (a\mid b)L_1 \mid a L_2 = (a\mid b)L_1 \mid a b (a\mid b)^\star$. $\varepsilon\notin\{a, b\}$ donc d'après le lemme d'Arden, $L_1 = (a\mid b)^\star ab (a\mid b)^\star$.
+    \end{itemize}
+    
+  \item $\left\{\begin{array}{lll}
+    L_1 & = & a L_2 \mid b L_1 \mid \varepsilon\\
+    L_2 & = & b L_1 \\
+  \end{array}\right.$
+    
+    \begin{itemize}
+    \item $L_1 = a L_2 \mid b L_1 \mid \varepsilon = a b L_1 \mid b L_1 \mid \varepsilon = (a b \mid b) L_1 \mid \varepsilon$.
+      $\varepsilon\notin\{ab, b\}$ donc d'après le lemme d'Arden, $L_1 = (ab \mid b)^\star$.
+    \item $L_2 = b L_1 = b(ab \mid b)^\star$
+    \end{itemize}
+
+  \item
+    $\left\{\begin{array}{lllll}
+    L_1 & = & a L_2 \mid b L_1 \mid\varepsilon &=& (b^\star a^+ b)^+ (a \mid b^+) \mid b^\star \\ 
+    L_2 & = & a L_2 \mid b L_3                 &=& a^\star b (b^\star a^+ b)^\star (a \mid b^+)\\ 
+    L_3 & = & a L_4 \mid b L_1                 &=& (b^\star a^+ b)^\star (a \mid b^+) \\ 
+    L_4 & = & a L_2 \mid b L_3 \mid\varepsilon &=& a^\star b (b^\star a^+ b)^\star (a \mid b^+) \mid \varepsilon\\ 
+  \end{array}\right.$
+    
+    \begin{itemize}
+    \item $L_2 = a L_2 \mid b L_3$.  $\varepsilon\notin\{a\}$ donc d'après le lemme d'Arden, $L_2 = a^\star b L_3$.
+    \item $L_1 = a L_2 \mid b L_1 = b L_1 \mid a^+ b L_3 \mid\varepsilon$. On a $\varepsilon\notin\{b\}$ donc d'après le lemme d'Arden, $L_1 = b^\star a^+ b L_3 \mid b^\star$.
+    \item $L_4 = a L_2 \mid b L_3 \mid\varepsilon = a^+ b L_3 \mid b L_3 \mid\varepsilon = a^\star b L_3 \mid \varepsilon$
+    \item $L_3 = a L_4 \mid b L_1 = a^+ b L_3 \mid a \mid b^+ a^+ b L_3 \mid b^+ = b^\star a^+ b L_3 \mid a \mid b^+  = (b^\star a^+ b)^\star (a \mid b^+)$
+    \end{itemize}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

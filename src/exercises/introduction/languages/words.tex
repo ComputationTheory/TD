@@ -21,5 +21,31 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{itemize}
+  \item Sur $\Sigma = \{a, b, c\}$, $x = abbcc = a\cdot b\cdot b\cdot c\cdot c$ :
+    \begin{question}
+    \item $|x| = 5$
+    \item par exemple $bac$
+    \item par exemple $acc$
+    \item $\{abb, bbc, bcc\}$
+    \item $\mathit{Pref}(x) = \{\varepsilon, a, ab, abb, abbc, abbcc\}$
+    \item $\mathit{SuffProp}(x) = \{\varepsilon, c, cc, bcc, bbcc\}$ (tous les suffixes sauf le mot entier)
+    \end{question}
+  \item Sur $\Sigma = \{ab, ac, bc, c\}$, $x = abbcc = ab\cdot bc\cdot c$ :
+    \resetquestion
+    \begin{question}
+    \item $|x| = 3$
+    \item par exemple $ab\cdot ab\cdot ab$
+    \item il n'y en a qu'un : $ab\cdot c$
+    \item $\{ab.bc.c\}$
+    \item $\mathit{Pref}(x) = \{\varepsilon, ab, ab\cdot bc, ab\cdot bc\cdot c\}$
+    \item $\mathit{SuffProp}(x) = \{\varepsilon, c, bc\cdot c\}$ (tous les suffixes sauf le mot entier)
+    \end{question}
+  \end{itemize}
+
+\end{correction}
+
 \endgroup
 \endinput

@@ -45,5 +45,175 @@
 
 \end{exercice}
 
+\begin{correction}
+  
+  \begin{question}
+
+  \item
+    $
+      \mathcal{L}_F(A)=\{a^n b^n \mid n\in\mathbb{N}\},\qquad
+      \mathcal{L}_\varepsilon(A)=\{a^n b^n \mid n\in\mathbb{N}\},\qquad
+      \mathcal{L}(A)=\emptyset.
+    $
+
+  \item Automate non-déterministe reconnaissant $L_1=\{u\in\{a,b\}^\star\mid |u|_a=|u|_b\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state                     (0) at (0,0) {$0$};
+      \state[initial, accepting] (s) at (1,0) {$1$};
+      \state                     (2) at (2,0) {$2$};
+
+      \path (0) edge[loop above] node       {\smAlign{\smPAtrans{a}{\varepsilon}{A}\smPAtrans{b}{A}{\varepsilon}}} (0);
+      \path (2) edge[loop above] node       {\smAlign{\smPAtrans{b}{\varepsilon}{A}\smPAtrans{a}{A}{\varepsilon}}} (2);
+      \path (s) edge[bend left]  node       {\smPAtrans{a}{\blank}{A\blank}} (0);
+      \path (s) edge[bend right] node[swap] {\smPAtrans{b}{\blank}{A\blank}} (2);
+      \path (0) edge[bend left]  node       {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (s);
+      \path (2) edge[bend right] node[swap] {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (s);
+      \path (s) edge[loop above] node       {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (s);
+    \end{tikzpicture}
+
+  \item Automate non-déterministe reconnaissant $L_2=\{u\in\{a,b\}^\star\mid u \text{ est un palindrome}\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state[accepting] (f) at (2,0) {$2$};
+
+      \path (s) edge[loop above] node {\smAlign{\smPAtrans{a}{\varepsilon}{A}\smPAtrans{b}{\varepsilon}{B}}} (s);
+      \path (s) edge             node {\smAlign{\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}\smPAtrans{a}{\varepsilon}{\varepsilon}\smPAtrans{b}{\varepsilon}{\varepsilon}}} (p);
+      \path (p) edge[loop above] node {\smAlign{\smPAtrans{a}{A}{\varepsilon}\smPAtrans{b}{B}{\varepsilon}}} (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate non-déterministe reconnaissant la grammaire
+    $\left\langle \{a,b\},\{S\},S,\{S\rightarrow \varepsilon\mid aS\mid Sb\}\right\rangle$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state[accepting] (f) at (1,0) {$1$};
+      \path (s) edge[loop above] node {\smAlign{
+          \smPAtrans{\varepsilon}{S}{\varepsilon}
+          \smPAtrans{\varepsilon}{S}{aS}
+          \smPAtrans{\varepsilon}{S}{Sb}
+          \smPAtrans{a}{a}{\varepsilon}
+          \smPAtrans{b}{b}{\varepsilon}}} (s);
+      \path (s) edge node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_4=\{x c x^\textsc{r}\mid x\in\{a,b\}^\star\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state[accepting] (f) at (2,0) {$2$};
+
+      \path (s) edge[loop above] node {\smAlign{\smPAtrans{a}{\varepsilon}{A}\smPAtrans{b}{\varepsilon}{B}}} (s);
+      \path (s) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node {\smAlign{\smPAtrans{a}{A}{\varepsilon}\smPAtrans{b}{B}{\varepsilon}}} (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate non-déterministe reconnaissant la grammaire
+    
+    $\left\langle \{a,b\},\{S,T\},S,
+    \left\{\begin{array}{rcl}
+      S &\rightarrow& \varepsilon \mid aT\\
+      T &\rightarrow& Ta \mid b
+    \end{array}\right\}\right\rangle$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state[accepting] (f) at (1,0) {$1$};
+
+      \path (s) edge[loop above] node {\smAlign{
+          \smPAtrans{\varepsilon}{S}{\varepsilon}
+          \smPAtrans{\varepsilon}{S}{aT}
+          \smPAtrans{\varepsilon}{T}{Ta}
+          \smPAtrans{\varepsilon}{T}{b}
+          \smPAtrans{a}{a}{\varepsilon}
+          \smPAtrans{b}{b}{\varepsilon}
+      }} (s);
+      \path (s) edge node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_6=\{a^n c^m b^n \mid n,m\in\mathbb{N}\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state            (q) at (2,0) {$2$};
+      \state[accepting] (f) at (3,0) {$3$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+
+      \path (p) edge[loop above] node {\smPAtrans{c}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (q);
+
+      \path (q) edge[loop above] node {\smPAtrans{b}{A}{\varepsilon}} (q);
+      \path (q) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_7=\{a^n b^n c^m \mid n,m>0\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state            (q) at (2,0) {$2$};
+      \state[accepting] (f) at (3,0) {$3$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node {\smPAtrans{b}{A}{\varepsilon}} (p);
+
+      \path (p) edge[loop above] node {\smPAtrans{b}{A}{\varepsilon}} (p);
+      \path (p) edge             node {\smPAtrans{c}{\blank}{\blank}} (q);
+
+      \path (q) edge[loop above] node {\smPAtrans{c}{\blank}{\blank}} (q);
+      \path (q) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_8=\{a^n b^{n+m} c^m \mid n,m\in\mathbb{N}\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base), x=30mm]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state[accepting] (f) at (2,0) {$2$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node       {\smAlign{\smPAtrans{b}{A}{\varepsilon}\smPAtrans{b}{\blank}{B\blank}}} (p);
+
+      \path (p) edge[loop above] node {\smAlign{
+          \smPAtrans{b}{A}{\varepsilon}
+          \smPAtrans{b}{B}{BB}
+          \smPAtrans{b}{\blank}{B\blank}
+      }} (p);
+
+      \path (p) edge             node {\smPAtrans{c}{B}{\varepsilon}} (f);
+      \path (f) edge[loop above] node {\smAlign{
+          \smPAtrans{c}{B}{\varepsilon}
+          \smPAtrans{\varepsilon}{\blank}{\varepsilon}
+      }} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_9=\{a^n b^n b^n \mid n\in\mathbb{N}\}=\{a^n b^{2n}\mid n\in\mathbb{N}\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial, accepting] (s) at (0,0) {$0$};
+      \state                     (p) at (1,0) {$1$};
+      \state                     (q) at (2,0) {$2$};
+      \state[accepting]          (f) at (3,0) {$3$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}}                  (s);
+      \path (s) edge             node {\smPAtrans{b}{A}{\varepsilon}}                  (p);
+      \path (p) edge             node {\smPAtrans{b}{\varepsilon}{\varepsilon}}        (q);
+      \path (q) edge[bend left]  node {\smPAtrans{b}{A}{\varepsilon}}                  (p);
+      \path (s) edge[bend right] node[swap] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+      \path (q) edge             node       {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

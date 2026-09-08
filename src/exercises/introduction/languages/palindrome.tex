@@ -30,5 +30,33 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Preuve par récurrence forte. Soit $i \ge 2$. Supposons la propriété pour tout $k<i$,
+    et prouvons la propriété pour $i$. On sépare les cas $i\le 5$ et $i > 5$ pair et $i > 5$ impair.
+    \begin{description}
+    \item [Cas $i \le 5$.]  On a $f_2 = ab$ ($u_2=\varepsilon$), $f_3 = aba$ ($u_3=a$) , $f_4 = abaab$ ($u_4=aba$) car $\varepsilon$.
+    \item [Cas $i > 5$ impair.] $n-2$ est impair et $n-3$ est pair et
+      par hypothèse de récurrence, $f_{n-2} = u_{n-2} b a$ et $f_{n-3}= u_{n-3} a b$
+      avec $u_{n-2}$ et $u_{n-3}$ des palindromes.
+
+      Donc $f_{n} = f_{n-1} f_{n-2} = f_{n-2} f_{n-3} f_{n-2} = u_{n-2} b a u_{n-3} a b u_{n-2} b a$.
+
+      Mais $u_{n-2}$ et $u_{n-3}$ sont des palindromes, donc $u_{n-2} b a u_{n-3} a b u_{n-2}$ est également un palindrome.
+
+      En posant $u_{n} = u_{n-2} b a u_{n-3} a b u_{n-2}$, on a alors $f_{n}  = u_n ba$ où $u_n$ est un palindrome.
+
+    \item [Cas $i > 5$ pair.]
+      $n-2$ est pair et $n-3$ est impair et
+      par hypothèse de récurrence, $f_{n-2} = u_{n-2} a b$ et $f_{n-3}= u_{n-3} b a$
+      avec $u_{n-2}$ et $u_{n-3}$ des palindromes.
+      
+      En posant $u_{n} = u_{n-2} a b  u_{n-3} b a  u_{n-2}$, on a alors $f_{n}  = u_n ab$ où $u_n$ est un palindrome.
+    \end{description}
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

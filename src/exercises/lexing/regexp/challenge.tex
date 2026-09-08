@@ -43,6 +43,35 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item $\begin{array}[t]{rcl}
+    \textit{mois30} &\rightarrow& \text{avril} \mid \text{juin} \mid \text{septembre} \mid \text{novembre}\\
+    \textit{mois31} &\rightarrow& \text{janvier} \mid \text{mars} \mid \text{mai} \mid \text{juillet} \mid \text{août} \mid \text{octobre} \mid \text{décembre}\\
+    \textit{mois} &\rightarrow& \textit{mois30} \mid \textit{mois31} \mid \text{février} \vspace{2mm}\\
+    \textit{année} &\rightarrow& \text{[0-9]}\cdot\text{[0-9]}\cdot\text{[0-9]}\cdot\text{[0-9]}\vspace{2mm}\\
+    \textit{date\_question\_a} &\rightarrow& (0\cdot\text{[1-9]} \mid 1\cdot\text{[0-9]} \mid 2\cdot\text{[0-8]}) \cdot \textit{mois} \cdot \textit{année}\\
+    &&\mid 30  \cdot (\textit{mois30}\mid\textit{mois31}) \cdot \textit{année} \\
+    &&\mid 31  \cdot \textit{mois31} \cdot \textit{année} \\
+  \end{array}$
+
+  \item $\begin{array}[t]{rcl}
+    \textit{div4} &\rightarrow& (1 | 3 | 5 | 7 | 9) \cdot (2 | 6)  ~~~~~~~~~~~~~~~~~~~~~~~~~~~ \texttt{// nombres à deux chiffres}\\
+    &&\mid (2 | 4 | 6 | 8) \cdot (0 | 4 | 8)                       \hspace\fill \texttt{// divisibles par 4}\\
+    &&\mid 04 \mid 08                                              \hspace\fill \texttt{// mais pas par 100}\vspace{2mm}\\
+    \textit{bissextile} &\rightarrow& \text{[0-9]}\cdot\text{[0-9]} \cdot \textit{div4} \mid \textit{div4} \cdot 0 0  \hspace\fill \texttt{// années bissextiles}\\
+  \end{array}$
+
+  \item $\begin{array}[t]{rcl}
+    \textit{date} &\rightarrow& \textit{date\_question\_a} \mid 29  \cdot \text{février} \cdot \textit{bissextile} \\
+  \end{array}$
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
 

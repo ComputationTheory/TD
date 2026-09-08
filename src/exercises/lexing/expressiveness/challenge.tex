@@ -23,5 +23,41 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item $L_2 = \big(\varepsilon \mid aa\,a^\star\big)\,(\,b\mid c\,)\,(a\mid b\mid c)^\star$ est rationnel.
+
+  \item Supposons (par l'absurde), que $L_1 \eqdef \{ab^n c^n \mid n>0\}$ est rationnel.\\
+    Soit $N$ donné par le lemme de l'étoile.\\
+    \textbf{Posons $u = a b^N c^N$.} On a $u\in L_1$ et $|u|=2N+1\ge N$.\\
+    Soit $u=xyz$ la décomposition donnée par le lemme de l'étoile.\\
+    Comme $|xy|\le N$, $y$ est contenu dans $ab^N$, donc $y\in a^\star b^\star$ et $y\neq\varepsilon$.\\
+    \textbf{Posons $i=0$.} Alors $xy^iz$ est de la forme $a b^{N'} c^N$ avec $N'\neq N$.\\
+    Donc $xy^iz \notin L_1$. Absurde, donc $L_1$ n'est pas rationnel.
+
+  \item $L\cap \mathcal{L}\big(ab(a\mid b\mid c)^\star\big) = ab(a\mid b\mid c)^\star \cap (L_1\cup L_2)= L_1$.
+    Donc $L\cap \mathcal{L}\big(ab(a\mid b\mid c)^\star\big)$ n'est pas rationnel.
+    Comme $\mathcal{L}\big(ab(a\mid b\mid c)^\star\big)$ est rationnel, on en déduit que $L$ n'est pas rationnel.
+
+  \item $L$ vérifie le lemme de l'étoile avec $N=3$.\\
+    Soit $u\in L$ tel que $|u|\ge 3$.
+    \begin{itemize}
+    \item Si $u$ ne commence pas par $a$, alors $u\in L_2$ (avec $k=0$). Poser $x=\varepsilon$, $y$ égal au premier symbole de $u$, $z$ le reste. Alors $\forall i,\ xy^iz\in L_2\subseteq L$.
+    \item Si $u$ commence par $aaa$, alors $u\in L_2$ (avec $k\ge 3$). Poser $x=\varepsilon$, $y=a$, $z$ le reste. Alors $\forall i,\ xy^iz\in L_2\subseteq L$.
+    \item Si $u$ commence par $aa$ et le troisième symbole n'est pas $a$, alors $u\in L_2$ (avec $k=2$). Poser $x=\varepsilon$, $y=aa$, $z$ le reste. Alors $\forall i,\ xy^iz\in L_2\subseteq L$.
+    \item Si $u$ commence par $a$ puis le deuxième symbole n'est pas $a$, alors $u$ commence par $ab$ ou $ac$.
+      \begin{itemize}
+      \item Si $u$ commence par $ac$, alors $u\in L_2$ (avec $k=1$ et $w$ commençant par $c$). Poser $x=\varepsilon$, $y=c$, $z$ le reste. Alors $\forall i,\ xy^iz\in L_2\subseteq L$.
+      \item Si $u$ commence par $ab$, alors $u\in L_1$. Écrire $u = ab^n c^n$ avec $n>0$.
+        Poser $x=\varepsilon$, $y=ab$, $z=b^{n-1}c^n$. Alors $|xy|=2\le 3$ et $\forall i\neq 1,\ xy^iz\in L_2\subseteq L$, et pour $i=1$, $xy^iz=u\in L_1\subseteq L$.
+      \end{itemize}
+    \end{itemize}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

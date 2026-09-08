@@ -30,5 +30,101 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item La figure suivante montre l'AST associé à la chaîne $a \times b \times c + a \times (b + c)$.
+    $$\begin{tikzpicture}[tree]
+    \tree{$+$}{
+      \tree{$\times$}{
+        \tree{$\times$}{
+          \tree{$a$}{}
+          \tree{$b$}{}
+        }
+        \tree{$c$}{}
+      }
+      \tree{$\times$}{
+        \tree{$a$}{}
+        \tree{$+$}{
+          \tree{$b$}{}
+          \tree{$c$}{}
+        }
+      }
+    }
+  \end{tikzpicture}$$
+    
+  \item La figure suivante montre l'arbre de dérivation associé à la chaîne $a \times b \times c + a \times (b + c)$.
+    $$\begin{tikzpicture}[tree]
+    \tree{$S$}{\tree{$\mathit{somme}$}{
+        \tree{$\mathit{somme}$}{\tree{$\mathit{produit}$}{
+            \tree{$\mathit{produit}$}{
+              \tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$a$}{}}}
+              }
+              \tree{$\times$}{}
+              \tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$b$}{}}}
+            }
+            \tree[xshift=-.5]{$\times$}{}
+            \tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$c$}{}}}
+        }}
+        \tree{$+$}{}
+        \tree{$\mathit{produit}$}{
+          \tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$a$}{}}}}
+          \tree[xshift=.5]{$\times$}{}
+          \tree{$\mathit{facteur}$}{
+            \tree[xshift=-.5]{$($}{}
+            \tree{$\mathit{somme}$}{
+              \tree{$\mathit{somme}$}{\tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree[xshift=-1]{$b$}{}}}}}
+              \tree[xshift=-1]{$+$}{}
+              \tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree[xshift=-1]{$c$}{}}}}
+            }
+            \tree[xshift=-1.5]{$)$}{}
+          }
+        }
+    }}
+  \end{tikzpicture}$$
+
+  \item La règle qui crée des parenthèses crée aussi le 
+    non terminal $somme$ qui ne peut pas résulter en $\varepsilon$.
+
+  \item
+  $\begin{array}[t]{ll}
+    G \eqdef  \langle &  \{a, b, c, +, \times, (, )\}, \{S, \mathit{somme}, \mathit{produit}, \mathit{facteur}, \mathit{terme}\}, S,\\
+    & \left\{ \begin{array}{lll}
+      S                &\rightarrow& \mathit{somme} \\
+      \mathit{somme}   &\rightarrow& \mathit{somme} + \mathit{produit} \mid \mathit{somme} - \mathit{produit} \mid \mathit{produit} \\
+      \mathit{produit} &\rightarrow& \mathit{produit} \times \mathit{facteur} \mid \mathit{produit} / \mathit{facteur} \mid \mathit{facteur} \\
+      \mathit{facteur} &\rightarrow& ( \mathit{somme} ) \mid \mathit{terme} \\
+      \mathit{terme}   &\rightarrow& a \mid  b \mid  c
+    \end{array} \right\}\;\rangle
+  \end{array}$
+
+    $$\begin{tikzpicture}[tree]
+    \tree{$S$}{\tree{$\mathit{somme}$}{\tree{$\mathit{produit}$}{
+          \tree{$\mathit{produit}$}{
+            \tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree[xshift=1]{$\mathit{a}$}{}}}
+          }
+          \tree[xshift=2.25]{$/$}{}
+          \tree{$\mathit{facteur}$}{
+            \tree[xshift=2]{$($}{}
+            \tree{$\mathit{somme}$}{
+              \tree{$\mathit{somme}$}{
+                \tree{$\mathit{somme}$}{\tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$e$}{}}}}}
+                \tree{$+$}{}
+                \tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$e$}{}}}}
+              }
+            \tree[xshift=-.5]{$-$}{}
+            \tree{$\mathit{produit}$}{\tree{$\mathit{facteur}$}{\tree{$\mathit{terme}$}{\tree{$f$}{}}}}
+            }
+            \tree[xshift=-1]{$)$}{}
+          }
+    }}}
+  \end{tikzpicture}$$
+
+    
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

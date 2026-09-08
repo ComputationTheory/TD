@@ -41,5 +41,78 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item 
+    \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
+      \state[initial]   (0) at (0,0) {$0$};
+      \state            (1) at (1,0) {$1$};
+      \state[accepting] (2) at (2,0) {$2$};
+      \state            (3) at (3,0) {$3$};
+
+      \path (0) edge             node {$a$} (1);
+      \path (1) edge             node {$b$} (2);
+      \path (2) edge[loop above] node {$b$} (2);
+      \path (2) edge             node {$a$} (3);
+      \path (3) edge[loop above] node {$a,b$} (3);
+    \end{tikzpicture}
+    
+    $\begin{array}[t]{c|cc}
+      &  a & b \\
+      \hline
+      0& 1 & \\
+      1&   & 2\\
+      2& 3 & 2\\
+      3& 3 & 3
+    \end{array}$
+
+  \item 
+    \begin{itemize}
+    \item $ab$ est accepté  : $\langle ab, 0 \rangle \leadsto \langle b, 1\rangle \leadsto \langle \varepsilon, 2\rangle.$
+    \item $abb$ est accepté : $\langle abb, 0 \rangle \leadsto \langle bb, 1\rangle \leadsto \langle b, 2\rangle \leadsto \langle \varepsilon, 2\rangle.$
+    \item $aab$ est rejeté : $\langle aab, 0 \rangle \leadsto \langle ab, 1\rangle.$
+    \item $\varepsilon$ est rejeté : $\langle \varepsilon, 0 \rangle.$
+    \end{itemize}
+
+  \item L'automate $A$ est déterministe mais pas complet.
+
+  \item $\mathcal{L}(A) = ab^+$.
+
+  \item
+    \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
+      \state[initial]   (0) at (0,0) {$0$};
+      \state            (1) at (1,0) {$1$};
+      \state            (2) at (2,0) {$2$};
+      \state[accepting] (3) at (3,0) {$3$};
+
+      \path (0) edge node {$a$} (1);
+      \path (0) edge[loop above] node       {$b$} (0);
+      \path (1) edge[loop above] node       {$a$} (1);
+      \path (1) edge             node       {$b$} (2);
+      \path (2) edge             node       {$a$} (3);
+      \path (2) edge[bend left]  node       {$b$} (0);
+      \path (3) edge[bend right] node[swap] {$a$} (1);
+      \path (3) edge[bend left]  node       {$b$} (2);
+    \end{tikzpicture}
+
+  \item
+    \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
+      \state[initial, accepting] (0) at (0,0) {$0$};
+      \state                     (1) at (1,0) {$1$};
+      \state                     (2) at (2,0) {$2$};
+
+      \path (0) edge[loop above] node {$a$} (0);
+      \path (0) edge[bend left]  node {$b$} (1);
+      \path (1) edge[bend left]  node {$a$} (0);
+      \path (1) edge             node {$b$} (2);
+      \path (2) edge[loop right] node {$a, b$} (2);
+    \end{tikzpicture}
+
+  \end{question}
+  
+\end{correction}
+
 \endgroup
 \endinput

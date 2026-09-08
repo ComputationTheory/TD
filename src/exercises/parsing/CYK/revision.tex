@@ -41,5 +41,53 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  Pour rappel, une grammaire sous forme de Chomsky possède uniquement des règles de la
+  forme $X\rightarrow a$ ou $X\rightarrow YZ$
+  (plus éventuellement la règle $S\rightarrow\varepsilon$)
+  \begin{question}
+  \item $G'_1\eqdef \left\langle\{a, b\}, \{S, A, B, C, D, A', B'\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& CB \mid  DA \\
+    A   &\rightarrow& CS \mid  DA' \mid  a \\
+    B   &\rightarrow& DS \mid  CB' \mid  b  \\
+    C   &\rightarrow& a \\
+    D   &\rightarrow& b \\
+    A' &\rightarrow& AA \\
+    B' &\rightarrow& BB
+    \end{array}\right\}\right\rangle$
+  \item $G'_2\eqdef \left\langle\{cha, bada\}, \{S, A, B, C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& B A \\
+    A   &\rightarrow& CA \mid  bada \\
+    B   &\rightarrow& cha \\
+    C   &\rightarrow& bada
+    \end{array}\right\}\right\rangle$
+  \item $G'_3\eqdef \left\langle\{a, b\}, \{S, S_1, A\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& \varepsilon \mid  AS_1 \mid  b \\
+    S_1 &\rightarrow& AS_1 \mid  b \\
+    A   &\rightarrow& a
+    \end{array}\right\}\right\rangle$
+  \item $G'_4\eqdef \left\langle\{a, b\}, \{S, A\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& AS \mid  b \\
+    A   &\rightarrow& a
+    \end{array}\right\}\right\rangle$
+  \item $G'_5\eqdef \left\langle\{a, b,c \}, \{S, A, B, C, A', B', C'\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& \varepsilon \mid  A'A \mid  B'B \mid  C'C \mid  c \\
+    A   &\rightarrow& A'A \mid  B'B \mid  C'C \mid  c \\
+    B   &\rightarrow& B'B \mid  C'C \mid  c \\
+    C   &\rightarrow& C'C \mid  c \\
+    A'  &\rightarrow& a \\
+    B'  &\rightarrow& b \\
+    C'  &\rightarrow& c \\
+    \end{array}\right\}\right\rangle$
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

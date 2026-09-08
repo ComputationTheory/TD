@@ -30,5 +30,70 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Soient $t, u, v, w \in \Sigma^\star$ tels que $t\cdot u = v\cdot w$.\\
+    \emph{Preuve d'existence}. Distinguons 2 cas :
+    \begin{description}
+    \item[Cas $|t| \le |v|$.] \emph{Preuve d'existence}. Posons $z = u[1]\cdots u[|v| - |t|]$ ($z=\varepsilon$ si $|t| = |v|$).
+      \begin{itemize}
+      \item Montrons que $v=t\cdot z$. Soit $i \in \llbracket v \rrbracket$. \\
+        Si $i \le |t|$, alors $v[i] = (v\cdot w)[i] = (t\cdot u)[i] = (t\cdot u)[i] = t[i]$. \\
+        Si $i > |t|$, alors $v[i] = (v\cdot w)[i] = (t\cdot u)[i] = (t\cdot u)[i] = u[i-|t|] = z[i-|t|]$.
+      \item Montrons que $u=z\cdot w$. Soit $i \in \llbracket u \rrbracket$. \\
+        Si $i \le |z|$, alors $u[i] = z[i]$. \\
+        Si $i > |z|$, alors $u[i] = (t\cdot u)[i+|t|] = (v\cdot w)[i+|t|] = (v\cdot w)[i+|z|-|v|] = w[i+|z|]$.
+      \end{itemize}
+      Donc $v=t\cdot z$ et $u=z\cdot w$. \\
+      \emph{Preuve d'unicité}. Soit $z'$ tel que $u = z'\cdot w \land v = t\cdot z' \lor t = v\cdot z'\land w = z'\cdot u$. \\
+      Montrons que $z'=z$. Il y a deux cas à considérer :
+      \begin{description}
+      \item[Cas $t = v\cdot z'$.] On a $|v| \ge |t| = |v\cdot z'| = |v| + |z'| > |v|$. Absurde. 
+      \item[Cas $u = z'\cdot w$.] On a $|z'| = |u| - |w| = |z|$.
+        De plus, pour tout $i \in \llbracket z \rrbracket$, $z'[i] = u[i] = z[i]$.
+      \end{description}
+    \item[Cas $|t| > |v|$.] On se ramène à l'autre cas en inversant les rôles de $t$ et $v$, et de $u$ et $w$.\\
+      L'unique $z$ est donc $w[1]\cdots w[|t| - |v|]$. 
+    \end{description}
+  \item \emph{Application directe du lemme de Levi}.\\
+    Si $u \in \mathit{Pref}(w)$ alors $\exists x \in \Sigma^\star$ tel que $w = u x$.
+    Si $v \in \mathit{Pref}(w)$ alors $\exists y \in \Sigma^\star$ tel que $w = v y$.\\
+    Donc $u x = v y$. D'après le lemme de Levi, il existe un unique $z$ tel que :
+    \begin{itemize}
+    \item soit $x = z y$ et $v = u z$, donc $u \in \mathit{Pref}(v)$,
+    \item soit $u = v z$ et $y = z x$, donc $v \in \mathit{Pref}(u)$.
+    \end{itemize}
+
+  \item
+    Soient $L$ et $M$ deux langages sans préfixe. \\
+    Supposons (par l'absurde), qu'il existe $w_1, w_2 \in L\cdot M$ tels que $w_1$ est préfixe propre de $w_2$.\\
+    Il existe $u_1, u_2 \in L$, $v_1, v_2 \in M$, et $x \in \Sigma^+$ tels que
+    $w_1 = u_1 \cdot v_1$, $w_2 = u_2 \cdot v_2$ et $w_2 = w_1\cdot x$. \\
+    D'après le lemme de Levi appliqué à $u_2\cdot v_2 = u_1\cdot (v_1 \cdot x)$, il existe un unique $z$ tel que :
+    \begin{itemize}
+    \item soit $v_2 = z \cdot v_1 \cdot x$ et $u_1 = u_2 \cdot z$, donc $u_2 \in \mathit{Pref}(u_1)$,
+    \item soit $u_2 = u_1 \cdot z$ et $v_1 \cdot x = z \cdot v_2$, donc $u_1 \in \mathit{Pref}(u_2)$.
+    \end{itemize}
+    Comme $L$ est un langage sans préfixe, $u_1 = u_2$ et l'égalité devient $u_1\cdot v_2 = u_1\cdot (v_1 \cdot x)$.\\
+    Par simplifiabilité à gauche, on a $v_2 = v_1 \cdot x$, donc $v_1 \in \mathit{Pref}(v_2)$.\\
+    Comme $M$ est un langage sans préfixe, $v_1 = v_2$, et $x=\varepsilon$. Absurde, car $x\in \Sigma^+$. \\
+    Donc $L \cdot M$ est un langage sans préfixe.
+  \item Considérons $P(n) \equiv \forall a, b \in \Sigma, \forall u \in \Sigma^n, u\cdot a = b\cdot u \Rightarrow a = b \land u \in \{a\}^\star$.
+    \begin{description}
+    \item[Initialisation.] Soient $a, b \in \Sigma$ et $u \in \Sigma^0$ tels que $u\cdot a = b\cdot u$. On a $u = \varepsilon$ donc $a = b$ et $u \in \{a\}^\star$.
+    \item[Hérédité.] Supposons $P(n)$ pour un $n \ge 0$, et soient $a, b \in \Sigma$ et $u \in \Sigma^{n+1}$ tels que $u\cdot a = b\cdot u$.\\
+      D'après le lemme de Levi, il existe un unique $z \in \Sigma^\star$ tel que 
+      \begin{itemize}
+      \item $b = uz$ et $a = zu$. Comme $|a| = |b| = 1$ et $|u| > 0$, $z = \varepsilon$ et $u = a = b$. Donc $P(n+1)$. 
+      \item $u = bz$ et $u = za$ donc $za = bz$. Or $|za| = n+1$, donc $|z| = n$
+        et on peut appliquer l'hypothèse
+        de récurrence qui dit que $a = b$ et $z \in \{a\}^\star$. Puisque $u = za$ alors $u \in \{a\}^\star$.
+      \end{itemize}
+    \end{description}
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

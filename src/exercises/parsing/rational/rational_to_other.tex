@@ -29,5 +29,91 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Pour $G_1$ :
+    \begin{itemize}
+    \item Grammaire rationnelle à droite :
+      \[
+        \left\langle\{cha,bada\},\{S,A,F\},S,
+        \left\{\begin{array}{rcl}
+          S &\rightarrow& cha\,F\\
+          F &\rightarrow& bada\,A\\
+          A &\rightarrow& bada\,A \mid bada
+        \end{array}\right\}\right\rangle
+        \]
+      \item Automate fini :
+          \begin{tikzpicture}[automaton, baseline=(S.base), x=20mm]
+            \state[initial]   (S) at (0,0) {$S$};
+            \state            (F) at (1,0) {$F$};
+            \state            (A) at (2,0) {$A$};
+            \state[accepting] (T) at (3,0) {$T$};
+
+            \path (S) edge node {$cha$} (F);
+            \path (F) edge node {$bada$} (A);
+            \path (A) edge[loop above] node {$bada$} (A);
+            \path (A) edge node {$bada$} (T);
+          \end{tikzpicture}
+      \item Expression rationnelle : $cha\;bada^+$.
+    \end{itemize}
+
+  \item Pour $G_2$ :
+    \begin{itemize}
+    \item Grammaire rationnelle à droite :
+      \[
+        \left\langle\{a,b\},\{S,F\},S,
+        \left\{\begin{array}{rcl}
+          S &\rightarrow& bT \mid \varepsilon \\
+          T &\rightarrow& aT \mid \varepsilon
+        \end{array}\right\}\right\rangle
+      \]
+    \item Automate fini :
+        \begin{tikzpicture}[automaton, baseline=(S.base)]
+          \state[initial, accepting] (S) at (0,0) {$S$};
+          \state[accepting]          (T) at (1,0) {$T$};
+
+          \path (S) edge node {$b$} (T);
+          \path (T) edge[loop above] node {$a$} (T);
+        \end{tikzpicture}
+    \item Expression rationnelle : $ba^\star\mid \varepsilon$.
+    \end{itemize}
+
+  \item Pour $G_3$ :
+    \begin{itemize}
+    \item Grammaire rationnelle à droite :
+      \[
+        \left\langle\{a,b,c\},\{S,A,B\},S,
+        \left\{\begin{array}{rcl}
+          S &\rightarrow& aA \mid bA \mid cA \mid cB \mid a \mid b \mid c \mid \varepsilon\\
+          A &\rightarrow& aA \mid bA \mid cA \mid cB \mid a \mid b \mid c\\
+          B &\rightarrow& cA \mid cB \mid c
+        \end{array}\right\}\right\rangle
+      \]
+    \item Automate fini :
+      \begin{tikzpicture}[automaton, baseline=(S.base), size=20mm]
+        \state[initial, accepting] (S) at (0,1) {$S$};
+        \state                     (A) at (2,2) {$A$};
+        \state                     (B) at (2,0) {$B$};
+        \state[accepting]          (F) at (1,1) {$F$};
+
+        \path (S) edge             node[sloped] {$a, b, c$} (A);
+        \path (S) edge             node[sloped] {$c$}       (B);
+        \path (S) edge             node[sloped] {$a, b, c$} (F);
+        \path (A) edge[loop above] node[sloped] {$a, b, c$} (A);
+        \path (A) edge[bend left]  node[sloped] {$c$} (B);
+        \path (A) edge             node[sloped] {$a, b, c$} (F);
+        \path (B) edge[loop below] node[sloped] {$c$} (B);
+        \path (B) edge[bend left]  node[sloped] {$c$} (A);
+        \path (B) edge             node[sloped] {$c$} (F);
+      \end{tikzpicture}
+    \item Expression rationnelle : $(a\mid b \mid c)^\star$.
+    \end{itemize}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

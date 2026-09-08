@@ -35,5 +35,49 @@
 
 \end{exercice}
 
+
+\begin{correction}
+  
+  Pour rappel, une grammaire sous forme de Chomsky possède uniquement des règles de la
+  forme $X\rightarrow a$ ou $X\rightarrow YZ$
+  (plus éventuellement la règle $S\rightarrow\varepsilon$)
+  \begin{question}
+  \item $G'_1 \eqdef \left\langle\{a, b, c\}, \{S,T, U, V, A,B,C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& AX \mid CU \mid  AB \mid c \mid \varepsilon \\
+    T   &\rightarrow& AX \mid CU \mid  AB \mid c \\
+    U   &\rightarrow& CU \mid  c \\
+    V   &\rightarrow& TB \\
+    A   &\rightarrow& a \\
+    B   &\rightarrow& b \\
+    C   &\rightarrow& c \\
+    \end{array}\right\}\right\rangle$
+  \item $G'_2 \eqdef \left\langle\{0, 1\}, \{S,A,B,C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& AC \mid  AB \\
+    A   &\rightarrow& 0 \\
+    C   &\rightarrow& SB \\
+    B   &\rightarrow& 1
+    \end{array}\right\}\right\rangle$
+  \item $G'_3 \eqdef \left\langle\{a, b\}, \{S, A, B, C, A', C'\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& AA' \mid  BA \\
+    B   &\rightarrow& BA \mid  BC' \mid  AA \mid  b \mid  AC\\
+    A   &\rightarrow& a \\
+    C   &\rightarrow& b \\
+    A' &\rightarrow& AB \\
+    C' &\rightarrow& CA
+    \end{array}\right\}\right\rangle$
+  \item $G'_4 \eqdef \left\langle \{a,b\}, \{S, T, A, B\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& AT \mid BT \mid a \mid b \mid \varepsilon \\
+    T   &\rightarrow& AT \mid BT \mid a \mid b \\
+    A   &\rightarrow& a\\
+    B   &\rightarrow& b
+    \end{array}\right\} \right\rangle$
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

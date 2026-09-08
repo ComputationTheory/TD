@@ -37,6 +37,56 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item
+      \begin{tikzpicture}[automaton, x=25mm, y=10mm, baseline=(a.base)]
+        \state[initial]   (a) at (0,1) {$0$}; 
+        \state            (b) at (1,0) {$02$}; 
+        \state            (c) at (1,2) {$01$}; 
+        \state[accepting] (d) at (2,1) {$03$}; 
+        \state[accepting] (e) at (3,0) {$023$}; 
+        \state[accepting] (f) at (3,2) {$013$}; 
+
+        \path (a) edge             node       {$a$} (c);
+        \path (a) edge             node       {$b$} (b);
+        \path (a) edge[loop above] node       {$c$} (a);
+        \path (b) edge             node       {$a$} (d);
+        \path (b) edge[loop below] node       {$b$} (b);
+        \path (b) edge[bend right] node       {$c$} (c);
+        \path (c) edge[loop above] node       {$a$} (c);
+        \path (c) edge             node       {$b$} (d);
+        \path (c) edge[bend right] node       {$c$} (b);
+        \path (d) edge[bend left]  node       {$a$} (f);
+        \path (d) edge[bend right] node[swap] {$b$} (e);
+        \path (d) edge[loop above] node       {$c$} (d);
+        \path (e) edge             node       {$a$} (d);
+        \path (e) edge[loop below] node       {$b$} (e);
+        \path (e) edge             node[swap] {$c$} (f);
+        \path (f) edge[loop above] node       {$a$} (f);
+        \path (f) edge             node[swap] {$b$} (d);
+        \path (f) edge[bend left]  node       {$c$} (e);
+      \end{tikzpicture}
+
+  \item
+    \begin{itemize}
+    \item[$(\Rightarrow)$] Si $L$ est reconnu par un AFD complet et émondé $A=(Q,\Sigma,\delta,q_0,F)$ :
+      \[
+      \forall u\in\Sigma^\star,\ \exists v\in\Sigma^\star,\ \delta(q_0,uv)\in F.
+      \]
+    \item[$(\Leftarrow)$] Si
+      \[
+      \forall u\in\Sigma^\star,\ \exists v\in\Sigma^\star,\ uv\in L,
+      \]
+      alors l'AFD minimal de $L$ est complet et émondé.
+    \end{itemize}
+    
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
 

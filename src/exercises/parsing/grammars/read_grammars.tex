@@ -28,5 +28,77 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Pour le mot $aabb$, on a la génération
+    $S \vdash aSb \vdash aaSbb \vdash aabb$
+    et la dérivation
+    $$\begin{tikzpicture}[tree,y=8mm]
+      \tree{$S$}{
+        \tree{$a$}{}
+        \tree{$S$}{
+          \tree{$a$}{}
+          \tree{$S$}{
+            \tree{$\varepsilon$}{}
+          }
+          \tree{$b$}{}
+        }
+        \tree{$b$}{}
+      }
+    \end{tikzpicture}$$
+    Le langage est $\{a^n b^n \mid n\in \mathbb{N}\}$. 
+
+  \item Pour le mot $aabb$, on a la génération
+    $S \vdash aS \vdash aaS \vdash aaSb \vdash aaSbb \vdash aabb$
+    correspondant à la dérivation
+    $$\begin{tikzpicture}[tree,y=8mm]
+      \tree{$S$}{
+        \tree{$a$}{}
+        \tree{$S$}{
+          \tree{$a$}{}
+          \tree{$S$}{
+            \tree{$S$}{
+              \tree{$S$}{
+                \tree{$\varepsilon$}{}
+              }
+              \tree{$b$}{}
+            }
+            \tree{$b$}{}
+          }
+        }
+      }
+    \end{tikzpicture}$$
+    Le langage est $\{a^m b^n \mid m, n\in \mathbb{N}\}$. 
+
+  \item Pour le mot $aabb$, on a la génération
+    $A \vdash aA \vdash aaA \vdash aaB \vdash aabB \vdash aabbB \vdash aabbC \vdash aabb $
+    et la dérivation
+    $$\begin{tikzpicture}[tree,y=8mm]
+      \tree{$A$}{
+        \tree{$a$}{}
+        \tree{$A$}{
+          \tree{$a$}{}
+          \tree{$A$}{
+            \tree{$B$}{
+              \tree{$b$}{}
+              \tree{$B$}{
+                \tree{$b$}{}
+                \tree{$B$}{
+                  \tree{$C$}{
+                    \tree{$\varepsilon$}{ }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    \end{tikzpicture}$$
+    Le langage est $\{a^m b^n c^p \mid m,n, p\in \mathbb{N}\}$. 
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

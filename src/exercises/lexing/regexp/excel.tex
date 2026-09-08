@@ -40,5 +40,21 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item $\begin{array}[t]{rcl}
+    \text{L} &\rightarrow& A\mid \ldots \mid Z \\
+    \text{C} &\rightarrow& 0 \mid \ldots \mid 9 \\
+    \text{Cellule} &\rightarrow& \text{L}^+\text{C}^+ \\
+    \text{Zone} &\rightarrow& \text{Cellule}:\text{Cellule} \\
+    \text{Colonne} &\rightarrow&  \text{L}^+:\;\text{L}^+ \\
+    \text{Ligne} &\rightarrow&  \text{C}^+:\;\text{C}^+ \\
+    \text{ZoneExcel} &\rightarrow& (\text{Cellule}\mid\text{Zone}\mid\text{Colonne}\mid\text{Ligne}) (; (\text{Cellule}\mid\text{Zone}\mid\text{Colonne}\mid\text{Ligne}))^\star  \\
+  \end{array}$
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

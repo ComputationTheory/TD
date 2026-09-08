@@ -29,5 +29,80 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Montrer que $\forall A, \forall B, \; A \subseteq A \cup B$.
+    \begin{itemize}
+    \item Soit $x \in A$. Par définition de $\cup$, $x \in A \cup B$. Donc $A \subseteq A \cup B$.
+    \end{itemize}
+
+  \item Montrer que $\forall A, \forall B, \; (A \setminus B) \cap B = \emptyset$.
+    \begin{itemize}
+    \item Raisonnons par l’absurde. Supposons qu’il existe $x \in (A \setminus B) \cap B$.
+    \item Alors $x \in A \setminus B$ et $x \in B$. Par définition de $\setminus$, $x \in A$ et $x \notin B$, contradiction avec $x \in B$.
+    \item Donc $(A \setminus B) \cap B = \emptyset$.
+    \end{itemize}
+
+  \item Montrer que $\forall A, \forall B, \forall C, \; A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+    \begin{itemize}
+    \item \textit{Sens $\subseteq$ :} Soit $x \in A \cup (B \cap C)$. Alors $x \in A$ ou $x \in B \cap C$.
+      \begin{itemize}
+      \item Si $x \in A$, alors $x \in A \cup B$ et $x \in A \cup C$, donc $x \in (A \cup B) \cap (A \cup C)$.
+      \item Si $x \in B \cap C$, alors $x \in B$ et $x \in C$, donc $x \in A \cup B$ et $x \in A \cup C$, donc $x \in (A \cup B) \cap (A \cup C)$.
+      \end{itemize}
+    \item \textit{Sens $\supseteq$ :} Soit $x \in (A \cup B) \cap (A \cup C)$. Alors $x \in A \cup B$ et $x \in A \cup C$.
+      \begin{itemize}
+      \item Si $x \in A$, alors $x \in A \cup (B \cap C)$.
+      \item Sinon $x \notin A$. Comme $x \in A \cup B$, on a $x \in B$. Comme $x \in A \cup C$, on a $x \in C$. Donc $x \in B \cap C$, donc $x \in A \cup (B \cap C)$.
+      \end{itemize}
+    \end{itemize}
+    Par double inclusion, $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$.
+
+  \item Preuve que $\forall n \in \mathbb{N}, \; \sum_{i=1}^n i = \frac{n(n+1)}{2}$.
+    \begin{description}
+    \item[Initialisation :] Pour $n=0$ : $0 = \frac{0 \times 1}{2}$.
+    \item[Hérédité :] Supposons la propriété vraie au rang $n$ : $\sum_{i=1}^n i = \frac{n(n+1)}{2}$.
+      Alors
+      $$
+      \sum_{i=1}^{n+1} i = \left(\sum_{i=1}^n i\right) + (n+1)
+      = \frac{n(n+1)}{2} + (n+1)
+      = (n+1)\left(\frac{n}{2}+1\right)
+      = \frac{(n+1)(n+2)}{2}.
+      $$
+    \item[Conclusion :] La propriété est vraie pour tout $n \in \mathbb{N}$.
+    \end{description}
+
+  \item Preuve que $\forall n \in \mathbb{N}, \; \sum_{i=0}^n 2^i = 2^{n+1} - 1$.
+    \begin{description}
+    \item[Initialisation :] Pour $n=0$ : $2^0 = 1 = 2^{1} - 1$.
+    \item[Hérédité :] Supposons la propriété vraie au rang $n$ : $\sum_{i=0}^n 2^i = 2^{n+1} - 1$.
+      Alors
+      $$
+      \sum_{i=0}^{n+1} 2^i = \left(\sum_{i=0}^{n} 2^i\right) + 2^{n+1}
+      = (2^{n+1}-1) + 2^{n+1}
+      = 2^{n+2} - 1.
+      $$
+    \item[Conclusion :] La propriété est vraie pour tout $n \in \mathbb{N}$.
+    \end{description}
+
+  \item Soit la suite définie par $u_0 = 1$ et $u_{n+1} = 3u_n + 2$. Montrer que $\forall n, \; u_n = 2 \cdot 3^n - 1$.
+    \begin{description}
+    \item[Initialisation :] Pour $n=0$ : $u_0 = 1$ et $2 \cdot 3^0 - 1 = 1$.
+    \item[Hérédité :] Supposons que $u_n = 2 \cdot 3^n - 1$ pour un certain $n$. Alors
+      $$
+      u_{n+1} = 3u_n + 2
+      = 3(2 \cdot 3^n - 1) + 2
+      = 2 \cdot 3^{n+1} - 3 + 2
+      = 2 \cdot 3^{n+1} - 1.
+      $$
+    \item[Conclusion :] La formule est vraie pour tout $n \in \mathbb{N}$.
+    \end{description}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

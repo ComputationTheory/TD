@@ -25,5 +25,105 @@
 
 \end{exercice}
 
+\begin{correction}
+  
+  \begin{question}
+
+  \item Automate déterministe reconnaissant $L_1 = \{ a^n b^{2n} \mid  n > 0\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state            (q) at (2,0) {$2$};
+      \state[accepting] (f) at (3,0) {$3$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}}                  (s);
+      \path (s) edge             node {\smPAtrans{b}{A}{\varepsilon}}                  (p);
+      \path (p) edge             node {\smPAtrans{b}{\varepsilon}{\varepsilon}}        (q);
+      \path (q) edge[bend left]  node {\smPAtrans{b}{A}{\varepsilon}}                  (p);
+      \path (q) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_2 = \{a^n b^m c^{n+m} \mid n, m  \in \mathbb{N}\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state            (q) at (2,0) {$2$};
+      \state[accepting] (f) at (3,0) {$3$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}}                  (s);
+      \path (s) edge             node {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node {\smPAtrans{b}{\varepsilon}{B}}                  (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (q);
+
+      \path (q) edge[loop above] node {\smPAtrans{c}{A}{\varepsilon}}                  (q);
+      \path (q) edge[loop below] node {\smPAtrans{c}{B}{\varepsilon}}                  (q);
+
+      \path (q) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate déterministe reconnaissant $L_3 = \{x c x^\textsc{r} \mid  x \in \{a, b\}^\star\}$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state[accepting] (f) at (2,0) {$2$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}}                  (s);
+      \path (s) edge[loop below] node {\smPAtrans{b}{\varepsilon}{B}}                  (s);
+      \path (s) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}}        (p);
+
+      \path (p) edge[loop above] node {\smPAtrans{a}{A}{\varepsilon}}                  (p);
+      \path (p) edge[loop below] node {\smPAtrans{b}{B}{\varepsilon}}                  (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+    
+  \item Automate non-déterministe reconnaissant
+    $\left\langle \{a, b\}, \{S\}, S, \{S \rightarrow aSbS \mid \varepsilon\} \right\rangle$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state[accepting] (f) at (1,0) {$1$};
+
+      \path (s) edge[loop above] node {\smAlign{
+          \smPAtrans{\varepsilon}{S}{aSbS}
+          \smPAtrans{\varepsilon}{S}{\varepsilon}
+          \smPAtrans{a}{a}{\varepsilon}
+          \smPAtrans{b}{b}{\varepsilon}
+      }}               (s);
+
+      \path (s) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \item Automate non-déterministe reconnaissant
+    $\left\langle \{a, b, c\}, \{S, T\}, S,
+    \left\{\begin{array}{rcl}
+    S &\rightarrow& aSb \mid T\\
+    T &\rightarrow& cT \mid c
+    \end{array}\right\}\right\rangle$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state[accepting] (f) at (1,0) {$1$};
+
+      \path (s) edge[loop above] node {\smAlign{
+          \smPAtrans{\varepsilon}{S}{aSb}
+          \smPAtrans{\varepsilon}{S}{T}
+          \smPAtrans{\varepsilon}{T}{cT}
+          \smPAtrans{\varepsilon}{T}{c}
+          \smPAtrans{a}{a}{\varepsilon}
+          \smPAtrans{b}{b}{\varepsilon}
+          \smPAtrans{c}{c}{\varepsilon}
+      }}               (s);
+
+      \path (s) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
+    \end{tikzpicture}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

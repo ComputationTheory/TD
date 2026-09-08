@@ -25,5 +25,64 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item On a par exemple le mot \og{} if(true) if(true) ; else ; \fg{}
+    qui peut être interprété comme
+    \begin{itemize}
+    \item \og{} if(true) \{if(true) ;\} else ; \fg{} ou comme 
+    \item \og{} if(true) \{if(true) ; else ;\} \fg.
+    \end{itemize}
+    
+    \begin{tikzpicture}[tree, x=17mm]
+      \tree{$S$}{\tree{Instruction}{
+          \tree{``if(''}{}
+          \tree{Condition}{\tree{``true''}{}}
+          \tree{``)''}{}
+          \tree{Instruction}{
+            \tree[xshift=-1]{``if(''}{}
+            \tree{Condition}{\tree[xshift=-1]{``true''}{}}
+            \tree[xshift=-1]{``)''}{}
+            \tree{Instruction}{\tree[xshift=-1]{``;''}{}}
+          }
+          \tree[xshift=-2]{``else''}{}
+          \tree{Instruction}{\tree[xshift=-2]{``;''}{}}
+      }}
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[tree, x=17mm]
+      \tree{$S$}{\tree{Instruction}{
+          \tree{``if(''}{}
+          \tree{Condition}{\tree{``true''}{}}
+          \tree{``)''}{}
+          \tree{Instruction}{
+            \tree[xshift=-1]{``if(''}{}
+            \tree{Condition}{\tree[xshift=-1]{``true''}{}}
+            \tree[xshift=-1]{``)''}{}
+            \tree{Instruction}{\tree[xshift=-1]{``;''}{}}
+            \tree[xshift=-1]{``else''}{}
+            \tree{Instruction}{\tree[xshift=-1]{``;''}{}}
+          }
+      }}
+    \end{tikzpicture}
+
+  \item If faut différencier les instructions associées à un else, et celle qui ne le sont pas :
+    $$\begin{array}{rrl}
+    \mathit{S} &\rightarrow& A \mid N \\
+    \mathit{A} & \rightarrow & \text{ ``if(''} C \text{ ``)'' } A \text{ ``else'' } A  \mid \text{ ``;''} \\
+    \mathit{N} & \rightarrow &  \text{ ``if(''} C \text{ ``)'' } N \mid \text{ ``if(''} C \text{ ``)'' } A \text{ ``else'' } N\\
+    \mathit{C} &\rightarrow& \text{``true''} \mid \text{``false''} \\
+  \end{array}$$
+
+  \item Cette grammaire force systématiquement le rattachement du else au if le plus proche,
+    et on peut montrer par induction structurale que toute chaîne dérive soit par $A$
+    (zéro else orphelin), soit par $N$ (exactement un chemin avec else orphelin),
+    ce qui élimine les dérivations concurrentes.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

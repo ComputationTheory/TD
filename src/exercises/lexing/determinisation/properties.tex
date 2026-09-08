@@ -108,6 +108,262 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \textbf{Rappels de vocabulaire.}
+  \begin{description}
+  \item[Unitaire] : un seul état initial.
+  \item[Standard] : unitaire sans transition entrante dans l'état initial.
+  \item[Normalisé] : standard + un seul état final sans transition sortante.
+  \item[$\varepsilon$-libre] : aucune $\varepsilon$-transition.
+  \item[Déterministe] : Unitaire, $\varepsilon$-libre, et au plus une transition par lettre et par état.
+  \item[Complet] : au moins une transition par lettre et par état.
+  \end{description}
+  
+  \begin{question}
+
+  \item
+    \begin{itemize}
+    \item L'automate est : unitaire, standard, $\varepsilon$-libre, déterministe.
+    \item L'automate n'est pas : normalisé, complet.
+    \item Complétion :
+      \begin{tikzpicture}[automaton, size=15mm, baseline=(0.base)]
+        \state[initial]   (0) at (0,1) {$0$}; 
+        \state            (1) at (1,1) {$1$}; 
+        \state[accepting] (2) at (2,1) {$2$}; 
+        \state            (3) at (1,0) {$\bot$}; 
+        \path (0) edge             node {$a$}   (1);
+        \path (1) edge             node {$b$}   (2);
+        \path (2) edge[loop above] node {$a$}   (2);
+        \path (0) edge             node {$b$}   (3);
+        \path (1) edge             node {$a$}   (3);
+        \path (2) edge             node {$b$}   (3);
+        \path (3) edge[loop below] node {$a,b$} (3);
+      \end{tikzpicture}
+    \end{itemize}
+
+  \item 
+    \begin{itemize}
+    \item L'automate est : unitaire, $\varepsilon$-libre, complet.
+    \item L'automate n'est pas : standard, normalisé, déterministe.
+    \item Déterminisation : On donne uniquement les détails de l'algorithme pour cette question.
+      
+      \emph{Phase 1.}
+      La construction de l'AFD équivalent commence par la détermination de l'état initial.
+      Celui-ci est construit à partir de l' $\varepsilon$-fermeture de tous les états initiaux.
+      Donc ici, $I'=\{0\}$. A partir de là, on construit la table des transitions.
+      
+      $$\begin{array}{| l | c | c|}
+        \hline
+        \  \mu & a & b \\
+        \hline
+        \  A = \{0\} = I' &  &  \\
+        \hline
+      \end{array}$$
+      
+      \emph{Phase 2.}
+      On regarde vers quels états l'automate se trouve pour chacun des symboles de l'alphabet à partir de $I'$.
+      Normalement, il faut faire l'$\varepsilon$-fermeture sur les états obtenus mais dans cet automate il n'y a aucune $\varepsilon$-transition.
+      On les ajoute à la table s'ils n'y sont pas déjà.
+      
+      $$\begin{array}{| l | c | c|}
+        \hline
+        \  \mu & a & b \\
+        \hline
+        \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+        \  B = \{0,1\} &  &  \\
+        \hline
+      \end{array}$$
+      
+      
+      \emph{Phase 3.}
+      Puis on fait la même chose pour chacun des états pas encore traités.
+      $$\begin{array}{| l | c | c|}
+        \hline
+        \  \mu & a & b \\
+        \hline
+        \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+        \  B = \{0,1\} &  \{0,1,2 \}& \{0,1\}  \\
+        \  C = \{0,1,2\} &  &  \\
+        \hline
+      \end{array}$$
+      
+      \emph{Phase 4.}
+      C contient l'état 2 qui est final dans l'automate de départ. Donc C est un état final dans l'AFD obtenu.
+      
+      $$\begin{array}{| l | c | c|}
+        \hline
+        \  \mu & a & b \\
+        \hline
+        \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+        \  B = \{0,1\} &  \{0,1,2 \} & \{0,1\}  \\
+        \  C = \{0,1,2\} \in F &  \{0,1,2 \} &  \{0,1,2 \} \\
+        \hline
+      \end{array}$$
+      
+      Finalement, le tableau est rempli, l'automate est terminé. On obtient l'automate suivant :
+      
+      \begin{center}
+        \begin{tikzpicture}[automaton]
+          \state[initial  ] (0) at (0,0) {$A$}; 
+          \state            (1) at (1,0) {$B$}; 
+          \state[accepting] (2) at (2,0) {$C$}; 
+          
+          \path (0) edge[loop above] node {$b$}    (0);
+          \path (1) edge[loop above] node {$b$}    (1);
+          \path (2) edge[loop above] node {$a, b$} (2);
+          \path (0) edge             node {$a$}    (1);
+          \path (1) edge             node {$a$}    (2);
+        \end{tikzpicture}
+      \end{center}
+    \end{itemize}
+    
+  \item
+    \begin{itemize}
+    \item L'automate est : unitaire, $\varepsilon$-libre, déterministe, complet.
+    \item L'automate n'est pas : standard, normalisé.
+    \end{itemize}
+
+  \item 
+    \begin{itemize}
+    \item L'automate est : unitaire, $\varepsilon$-libre.
+    \item L'automate n'est pas : standard, normalisé, déterministe, complet.
+    \item Automate déterministe et complet :
+
+      \begin{tikzpicture}[automaton, baseline=(a.base), x=20mm]
+        \state[accepting]          (a) at (0,3) {$14$};
+        \state                     (b) at (1,3) {$24$};
+        \state                     (c) at (2,3) {$34$};
+        \state[accepting]          (d) at (3,3) {$64$};
+        \state                     (e) at (4,3) {$345$};
+        \state                     (f) at (4,2) {$45$};
+        \state                     (g) at (2,2) {$4$};
+        \state[initial, accepting] (h) at (0,1) {$1$};
+        \state                     (i) at (1,1) {$2$};
+        \state                     (j) at (2,1) {$3$};
+        \state[accepting]          (k) at (3,1) {$6$};
+        \state                     (l) at (4,1) {$35$};
+        \state                     (m) at (4,0) {$5$};
+        \state                     (n) at (2,0) {$\bot$};
+        
+        \path (a) edge[loop left]  node {$a$}    (a);
+        \path (a) edge             node {$b$}    (b);
+        \path (b) edge             node {$a$}    (c);
+        \path (b) edge             node {$b$}    (g);
+        \path (c) edge             node {$a$}    (d);
+        \path (c) edge             node {$b$}    (g);
+        \path (d) edge[bend left]  node {$a$}    (e);
+        \path (d) edge             node {$b$}    (g);
+        \path (e) edge[bend left]  node {$a$}    (d);
+        \path (e) edge             node {$b$}    (f);
+        \path (f) edge             node {$a$}    (g);
+        \path (f) edge[loop right] node {$b$}    (f);
+        \path (g) edge[loop left]  node {$a, b$} (g);
+        \path (h) edge             node {$a$}    (a);
+        \path (h) edge             node {$b$}    (i);
+        \path (i) edge             node {$a$}    (j);
+        \path (i) edge             node {$b$}    (g);
+        \path (j) edge             node {$a$}    (k);
+        \path (j) edge             node {$b$}    (n);
+        \path (k) edge[bend left]  node {$a$}    (l);
+        \path (k) edge             node {$b$}    (n);
+        \path (l) edge[bend left]  node {$a$}    (k);
+        \path (l) edge             node {$b$}    (m);
+        \path (m) edge             node {$a$}    (n);
+        \path (m) edge[loop right] node {$b$}    (m);
+        \path (n) edge[loop left]  node {$a, b$} (n);
+
+      \end{tikzpicture}
+    \end{itemize}
+
+  \item
+    \begin{itemize}
+    \item L'automate n'est pas : unitaire, standard, normalisé, $\varepsilon$-libre, déterministe, complet.
+    \item On pose : 
+      \begin{itemize}
+      \item $A = \{1, 2, 3, 4, 6, 9, 10, 11\}$
+      \item $B = \{8, 11\}$
+      \item $C = \{4, 5, 6, 7, 11\}$
+      \item $D = \{4, 5, 6, 11\}$
+      \end{itemize}
+
+      \begin{tikzpicture}[automaton]
+        \state[accepting, initial] (A) at (0,1) {$A$}; 
+        \state[accepting]          (B) at (1,1) {$B$}; 
+        \state[accepting]          (C) at (0,0) {$C$}; 
+        \state[accepting]          (D) at (1,0) {$D$}; 
+
+        \path (D) edge[loop right] node {$a$}  (D);
+        \path (A) edge             node {$b$} (B);
+        \path (A) edge             node {$a$} (C);
+        \path (C) edge             node {$b$} (B);
+        \path (C) edge             node {$a$} (D);
+      \end{tikzpicture}
+    \end{itemize}
+
+  \end{question}
+
+\end{correction}
+
+\begin{correction}
+
+  \begin{question}
+  \item {\small
+    \begin{tabular}[t]{| l | c c c c |}
+      \hline
+      & A & B & C  & D \\
+      \hline
+      Accessible          & $\{1,2,3,4\}$ & $\{1, 2, 3, 4, 5, 7\}$  & $\{1, 2, 3, 4, 5, 6\}$  & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Inaccessible        & $\emptyset$   & $\{6\}$                 & $\emptyset$             & $\emptyset$                             \\
+      Co-accessible       & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Stérile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+      Utile               & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Inutile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+      Complet             & oui           & non                     & non                     & non                                     \\
+      Emondé              & oui           & non                     & non                     & oui                                     \\
+      Unitaire            & oui           & oui                     & oui                     & oui                                     \\
+      Standard            & non           & oui                     & non                     & oui                                     \\
+      Normalisé           & non           & non                     & non                     & non                                     \\
+      $\varepsilon$-libre & oui           & oui                     & oui                     & non                                     \\
+      Déterministe        & oui           & non                     & non                     & non                                     \\
+      \hline
+  \end{tabular}}
+  \item 
+    \begin{minipage}[t]{.4\textwidth}
+      $B$ sur l'alphabet $\{a,b,c,d\}$ :\\
+
+      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+          \node[state, accepting]                         (2) [right=of 1] {$2$}; 
+          \node[state, accepting]                         (5) [below=of 2] {$5$}; 
+
+          \path[-latex] (2) edge[loop above, looseness=5] node {$a$}    (2);
+          \path[-latex] (5) edge[loop below, looseness=5] node {$b, c$}    (5);
+          \path[-latex] (1) edge node {$a$} (2);
+          \path[-latex] (1) edge node[swap] {$b, c$} (5);
+          \path[-latex] (2) edge[bend left=6mm] node {$b$} (5);
+          \path[-latex] (5) edge[bend left=6mm] node {$a$} (2);
+      \end{tikzpicture}}
+    \end{minipage}%
+    \begin{minipage}[t]{.4\textwidth}
+      $C$ sur l'alphabet $\{0,1,2,3,4,5,6,7,8,9\}$ :\\
+      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+          \node[state]                                    (2) [right=of 1] {$2$}; 
+          \node[state]                                    (3) [right=of 2] {$3$}; 
+          \node[state, accepting]                         (6) [below=of 3] {$6$}; 
+
+          \path[-latex] (1) edge[loop above, looseness=5] node {$0$}    (1);
+          \path[-latex] (1) edge node {$1$} (2);
+          \path[-latex] (2) edge node {$0$} (3);
+          \path[-latex] (3) edge[bend left=6mm] node {$0$} (6);
+          \path[-latex] (6) edge[bend left=6mm] node {$0$} (3);
+      \end{tikzpicture}}
+    \end{minipage}
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
 

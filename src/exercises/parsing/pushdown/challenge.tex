@@ -25,5 +25,72 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Automate non-déterministe $A_F$ tel que $L=\mathcal{L}_F(A_F)$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,1) {$0$};
+      \state            (p) at (1,1) {$1$};
+      \state[accepting] (f) at (2,1) {$2$};
+      \state[accepting] (g) at (2,0) {$3$};
+
+      \path (s) edge[loop above] node         {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node         {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node         {\smPAtrans{b}{A}{\varepsilon}} (p);
+      \path (p) edge             node[sloped] {\smPAtrans{b}{\blank}{\blank}} (g);
+      \path (p) edge             node         {\smPAtrans{\varepsilon}{A}{A}} (f);
+      \path (g) edge[loop right] node         {\smPAtrans{b}{\varepsilon}{\varepsilon}} (g);
+    \end{tikzpicture}
+
+  \item Automate non-déterministe $A_\emptyset$ tel que $L=\mathcal{L}_\varepsilon(A_\emptyset)$ :
+
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,1) {$0$};
+      \state            (p) at (1,1) {$1$};
+      \state            (f) at (2,1) {$2$};
+      \state            (g) at (2,0) {$3$};
+
+      \path (s) edge[loop above] node         {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node         {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node         {\smPAtrans{b}{A}{\varepsilon}} (p);
+      \path (p) edge             node         {\smPAtrans{\varepsilon}{A}{\varepsilon}} (f);
+      \path (p) edge             node[sloped] {\smPAtrans{b}{\blank}{\varepsilon}} (g);
+      \path (g) edge[loop right] node         {\smPAtrans{b}{\varepsilon}{\varepsilon}} (g);
+      \path (f) edge[loop right] node         {\smAlign{\smPAtrans{\varepsilon}{A}{\varepsilon}\smPAtrans{\varepsilon}{\blank}{\varepsilon}}} (f);
+    \end{tikzpicture}
+    
+  \item Automate non-déterministe $A$ tel que $L=\mathcal{L}(A)$ :
+    
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,1) {$0$};
+      \state            (p) at (1,1) {$1$};
+      \state[accepting] (f) at (2,1) {$2$};
+      \state[accepting] (g) at (2,0) {$3$};
+
+      \path (s) edge[loop above] node         {\smPAtrans{a}{\varepsilon}{A}} (s);
+      \path (s) edge             node         {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node         {\smPAtrans{b}{A}{\varepsilon}} (p);
+      \path (p) edge             node         {\smPAtrans{\varepsilon}{A}{\varepsilon}} (f);
+      \path (p) edge             node[sloped] {\smPAtrans{b}{\blank}{\varepsilon}} (g);
+      \path (g) edge[loop right] node         {\smPAtrans{b}{\varepsilon}{\varepsilon}} (g);
+      \path (f) edge[loop right] node         {\smAlign{\smPAtrans{\varepsilon}{A}{\varepsilon}\smPAtrans{\varepsilon}{\blank}{\varepsilon}}} (f);
+    \end{tikzpicture}
+
+  \item \textbf{De $A$ (final) à $B$ (pile vide) avec $\mathcal{L}_\varepsilon(B)=\mathcal{L}_F(A)$.}\
+    Construction standard : on ajoute un nouvel état $v$ (non final) et, depuis chaque $f\in F$, une transition $\varepsilon$ « de vidange » vers $v$. Dans $v$, on dépile en boucle \emph{tous} les symboles de pile (y compris $\blank$) par transitions $\varepsilon$. On met $F_B=\emptyset$ (acceptation par pile vide). On ne permet ces transitions que lorsque l’entrée est consommée ; ainsi, $B$ accepte exactement quand $A$ finit dans $F$ en fin d’entrée.
+
+  \item \textbf{De $A$ (pile vide) à $C$ (pile vide \emph{et} final) avec $\mathcal{L}(C)=\mathcal{L}_\varepsilon(A)$.}\
+    Remplacer \emph{chaque} transition de $A$ qui dépile $\blank$ en fin d’entrée par une transition qui dépile $\blank$ et va dans un nouvel état $q_f$ \emph{final}. Aucun autre changement. Alors $C$ accepte exactement quand $A$ vide sa pile en fin d’entrée, et se retrouve de plus dans $q_f$ : $\mathcal{L}(C)=\mathcal{L}_\varepsilon(A)$.
+
+  \item \textbf{De $A$ (pile vide \emph{et} final) à $D$ (final) avec $\mathcal{L}_F(D)=\mathcal{L}(A)$.}\
+    Ajouter au démarrage un nouveau marqueur de fond $\square\notin \Gamma$ en empilant $\square$ sous $\blank$. Modifier la transition « finale » de $A$ (celle qui dépile $\blank$ et atteint un état final) pour qu’elle \emph{n}’exige plus de vider $\square$ : au moment où $A$ viderait la pile, $D$ va simplement dans un état final $f$ en laissant $\square$ en pile. On n’utilise plus la pile ensuite. Ainsi, $D$ accepte par état final exactement les mots pour lesquels $A$ atteignait simultanément un état final \emph{et} la pile vide : $\mathcal{L}_F(D)=\mathcal{L}(A)$.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

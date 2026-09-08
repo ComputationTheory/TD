@@ -16,5 +16,28 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item mots : $aabc$ et $cab$ ; simplification : $(a \mid  b \mid  c)^\star $
+    
+  \item mots : $abcb$ et $ccbc$ ;
+    
+    simplification :
+    
+    $\begin{array}{rcll}
+      && a^\star (b^\star  |  c^\star )(b^\star |  c^\star )(b^\star  |  c^\star ) \\
+      & \equiv & a^\star( b^\star b^\star b^\star |  b^\star b^\star c^\star |  b^\star c^\star b^\star |  b^\star c^\star c^\star  |  c^\star b^\star b^\star |  c^\star b^\star c^\star |  c^\star c^\star b^\star |  c^\star c^\star c^\star) & \text{par distribution}\\ 
+      & \equiv & a^\star (b^\star |  b^\star c^\star |  b^\star c^\star b^\star |  c^\star b^\star |  c^\star b^\star c^\star |  c^\star) & L^\star\cdot L^\star  \equiv L^\star\\ 
+      & \equiv & a^\star (b^\star c^\star b^\star |  c^\star b^\star c^\star) & \text{par inclusion}\\ 
+    \end{array}$
+
+  \item mots : $aabaac$ et $abccab$ ; simplification : $((a \mid  b \mid  c)(a \mid  b)(b \mid  c))^\star $ par factorisation
+    
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

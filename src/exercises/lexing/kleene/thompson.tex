@@ -16,5 +16,239 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  Le but de cet exercice \emph{n'est pas} d'obtenir des automates finis déterministes, mais d'appliquer l'algorithme de Thompson pour construire des AFN.
+  Deux variantes vues en cours sont autorisées :
+  (i) la version \emph{classique} qui ajoute une transition $\varepsilon$ dans les concaténations ;
+  (ii) la version \emph{fusion} qui identifie les états de jonction sans ajouter cette $\varepsilon$.
+  Les étudiants doivent choisir une seule variante par question et \emph{s'y tenir} :
+  il n'y aura donc que deux solutions canoniques acceptées (une par variante).
+  Dans cette correction, seule la variante (i) est détaillée. 
+  \emph{Détaillez toutes les étapes} et indiquez explicitement les transitions $\varepsilon$.
+  Aucune minimisation/simplification hors de la variante choisie n'est attendue.
+  
+  \begin{question}
+  \item 
+    \begin{itemize}
+    \item $\mathcal{L}(a)$ reconnu par
+      \begin{tikzpicture}[automaton, baseline=(0)]
+        \state[initial]   (0) at (0,0) {}; 
+        \state[accepting] (1) at (1,0) {}; 
+        \path (0) edge node {$a$} (1);
+      \end{tikzpicture}
+      et $\mathcal{L}(b)$ reconnu par
+      \begin{tikzpicture}[automaton, baseline=(0)]
+        \state[initial]   (0) at (0,0) {}; 
+        \state[accepting] (1) at (1,0) {}; 
+        \path (0) edge node {$b$} (1);
+      \end{tikzpicture}
+    \item $\mathcal{L}(a \cdot b)$ reconnu par
+      \begin{tikzpicture}[automaton, baseline=(0a)]
+        \state[initial]   (0a) at (0,0) {}; 
+        \state            (1a) at (1,0) {}; 
+        \state            (0b) at (2,0) {}; 
+        \state[accepting] (1b) at (3,0) {}; 
+        \path (0a) edge node {$a$}           (1a);
+        \path (1a) edge node {$\varepsilon$} (0b);
+        \path (0b) edge node {$b$}           (1b);
+      \end{tikzpicture}
+    \item Ou avec l'optimisation, $\mathcal{L}(a \cdot b)$ reconnu par
+      \begin{tikzpicture}[automaton, baseline=(0a)]
+        \state[initial]   (0) at (0,0) {}; 
+        \state            (1) at (1,0) {}; 
+        \state[accepting] (2) at (2,0) {}; 
+        \path (0) edge node {$a$} (1);
+        \path (1) edge node {$b$} (2);
+      \end{tikzpicture}
+    \item $\mathcal{L}(b \cdot a)$ reconnu par
+      \begin{tikzpicture}[automaton, baseline=(0b)]
+        \state[initial]   (0b) at (0,0) {}; 
+        \state            (1b) at (1,0) {}; 
+        \state            (0a) at (2,0) {}; 
+        \state[accepting] (1a) at (3,0) {}; 
+        \path (0b) edge node {$b$}           (1b);
+        \path (1b) edge node {$\varepsilon$} (0a);
+        \path (0a) edge node {$a$}           (1a);
+      \end{tikzpicture}
+    \item $\mathcal{L}(a \cdot b \mid b \cdot a)$ reconnu par
+      \begin{tikzpicture}[automaton, y=5mm, baseline=(0)]
+        \state[initial]   (0)    at (-1,1) {}; 
+        \state            (0aba) at (0,0) {}; 
+        \state            (1aba) at (1,0) {}; 
+        \state            (0abb) at (2,0) {}; 
+        \state            (1abb) at (3,0) {}; 
+        \state            (0bab) at (0,2) {}; 
+        \state            (1bab) at (1,2) {}; 
+        \state            (0baa) at (2,2) {}; 
+        \state            (1baa) at (3,2) {}; 
+        \state[accepting] (1)    at (4,1) {}; 
+        \path (0)    edge node[swap] {$\varepsilon$} (0aba);
+        \path (0)    edge node       {$\varepsilon$} (0bab);
+        \path (0aba) edge node[swap] {$a$}           (1aba);
+        \path (1aba) edge node[swap] {$\varepsilon$} (0abb);
+        \path (0abb) edge node[swap] {$b$}           (1abb);
+        \path (0bab) edge node       {$b$}           (1bab);
+        \path (1bab) edge node       {$\varepsilon$} (0baa);
+        \path (0baa) edge node       {$a$}           (1baa);
+        \path (1abb) edge node[swap] {$\varepsilon$} (1);
+        \path (1baa) edge node       {$\varepsilon$} (1);
+      \end{tikzpicture}
+    \item $\mathcal{L}(L_1)$ reconnu par
+      \begin{tikzpicture}[automaton, y=5mm, baseline=(0)]
+        \state[initial]   (x)    at (-2,2) {}; 
+        \state[accepting] (y)    at (-2,0) {}; 
+        \state            (0)    at (-1,1) {}; 
+        \state            (0aba) at (0,0) {}; 
+        \state            (1aba) at (1,0) {}; 
+        \state            (0abb) at (2,0) {}; 
+        \state            (1abb) at (3,0) {}; 
+        \state            (0bab) at (0,2) {}; 
+        \state            (1bab) at (1,2) {}; 
+        \state            (0baa) at (2,2) {}; 
+        \state            (1baa) at (3,2) {}; 
+        \state            (1)    at (4,1) {}; 
+        \path (x)    edge node       {$\varepsilon$} (0);
+        \path (0)    edge node       {$\varepsilon$} (y);
+        \path (0)    edge node[swap] {$\varepsilon$} (0aba);
+        \path (0)    edge node       {$\varepsilon$} (0bab);
+        \path (0aba) edge node[swap] {$a$}           (1aba);
+        \path (1aba) edge node[swap] {$\varepsilon$} (0abb);
+        \path (0abb) edge node[swap] {$b$}           (1abb);
+        \path (0bab) edge node       {$b$}           (1bab);
+        \path (1bab) edge node       {$\varepsilon$} (0baa);
+        \path (0baa) edge node       {$a$}           (1baa);
+        \path (1abb) edge node[swap] {$\varepsilon$} (1);
+        \path (1baa) edge node       {$\varepsilon$} (1);
+        \path (1)    edge node[swap] {$\varepsilon$} (0);
+      \end{tikzpicture}
+    \end{itemize}
+  \item On applique la même technique. $\mathcal{L}(L_2)$ reconnu par : \\
+    \begin{tikzpicture}[automaton, y=9mm]
+      \state[initial]   (0)  at (0,2) {}; 
+      \state            (1)  at (1,2) {}; 
+      \state            (2)  at (2,2) {}; 
+      \state            (3)  at (3,2) {}; 
+      \state            (4)  at (4,2) {}; 
+      \state            (5)  at (5,2) {}; 
+      \state            (6)  at (6,2) {}; 
+      \state            (7)  at (7,2) {}; 
+      \state            (8)  at (8,2) {}; 
+      \state[accepting] (9)  at (9,2) {};
+      \state            (10) at (0,1) {}; 
+      \state            (11) at (2,1) {}; 
+      \state            (12) at (0,0) {}; 
+      \state            (13) at (2,0) {}; 
+      \state            (14) at (1,0) {}; 
+      \state            (80) at (7,1) {}; 
+      \state            (81) at (9,1) {}; 
+      \state            (82) at (7,0) {}; 
+      \state            (83) at (9,0) {}; 
+      \state            (84) at (8,0) {}; 
+      
+      \path (0)  edge node {$\varepsilon$} (1);
+      \path (1)  edge node {$\varepsilon$} (2);
+      \path (2)  edge node {$\varepsilon$} (3);
+      \path (3)  edge node {$a$}           (4);
+      \path (4)  edge node {$\varepsilon$} (5);
+      \path (5)  edge node {$b$}           (6);
+      \path (6)  edge node {$\varepsilon$} (7);
+      \path (7)  edge node {$\varepsilon$} (8);
+      \path (8)  edge node {$\varepsilon$} (9);
+
+      \path (1)  edge node {$\varepsilon$} (10);
+      \path (1)  edge node {$\varepsilon$} (11);
+      \path (10) edge node {$a$}           (12);
+      \path (11) edge node {$b$}           (13);
+      \path (12) edge node {$\varepsilon$} (14);
+      \path (13) edge node {$\varepsilon$} (14);
+      \path (14) edge node {$\varepsilon$} (1);
+
+      \path (8)  edge node {$\varepsilon$} (80);
+      \path (8)  edge node {$\varepsilon$} (81);
+      \path (80) edge node {$a$}           (82);
+      \path (81) edge node {$b$}           (83);
+      \path (82) edge node {$\varepsilon$} (84);
+      \path (83) edge node {$\varepsilon$} (84);
+      \path (84) edge node {$\varepsilon$} (8);
+    \end{tikzpicture}
+    
+%    Autre réponse acceptée :
+%    \begin{tikzpicture}[automaton, baseline=(0), y=10mm]
+%      \state[initial]   (0)  at (0,2) {}; 
+%      \state            (1)  at (1,2) {}; 
+%      \state            (2)  at (2,2) {}; 
+%      \state            (4)  at (3,2) {}; 
+%      \state            (6)  at (4,2) {}; 
+%      \state            (8)  at (5,2) {}; 
+%      \state[accepting] (9)  at (6,2) {};
+%      \state            (10) at (0,1) {}; 
+%      \state            (11) at (2,1) {}; 
+%      \state            (12) at (0,0) {}; 
+%      \state            (13) at (2,0) {}; 
+%      \state            (14) at (1,0) {}; 
+%      \state            (80) at (4,1) {}; 
+%      \state            (81) at (6,1) {}; 
+%      \state            (82) at (4,0) {}; 
+%      \state            (83) at (6,0) {}; 
+%      \state            (84) at (5,0) {}; 
+%      
+%      \path (0)  edge node {$\varepsilon$} (1);
+%      \path (1)  edge node {$\varepsilon$} (2);
+%      \path (2)  edge node {$a$}           (4);
+%      \path (4)  edge node {$b$}           (6);
+%      \path (6)  edge node {$\varepsilon$} (8);
+%      \path (8)  edge node {$\varepsilon$} (9);
+% 
+%      \path (1)  edge node {$\varepsilon$} (10);
+%      \path (1)  edge node {$\varepsilon$} (11);
+%      \path (10) edge node {$a$}           (12);
+%      \path (11) edge node {$b$}           (13);
+%      \path (12) edge node {$\varepsilon$} (14);
+%      \path (13) edge node {$\varepsilon$} (14);
+%      \path (14) edge node {$\varepsilon$} (1);
+% 
+%      \path (8)  edge node {$\varepsilon$} (80);
+%      \path (8)  edge node {$\varepsilon$} (81);
+%      \path (80) edge node {$a$}           (82);
+%      \path (81) edge node {$b$}           (83);
+%      \path (82) edge node {$\varepsilon$} (84);
+%      \path (83) edge node {$\varepsilon$} (84);
+%      \path (84) edge node {$\varepsilon$} (8);
+%    \end{tikzpicture}
+  \item $\mathcal{L}(L_3)$ reconnu par 
+    \begin{tikzpicture}[automaton, baseline=(0), y=10mm]
+      \state[initial]   (0)  at (0,1) {}; 
+      \state            (1)  at (1,1) {}; 
+      \state            (2)  at (2,1) {}; 
+      \state            (3)  at (3,1) {}; 
+      \state            (4)  at (4,1) {}; 
+      \state            (5)  at (5,1) {}; 
+      \state            (6)  at (6,1) {}; 
+      \state[accepting] (7)  at (7,1) {};
+      \state            (11) at (1,0) {}; 
+      \state            (61) at (5,0) {}; 
+      \state            (62) at (6,0) {}; 
+      \state            (63) at (7,0) {}; 
+      
+      \path (0)  edge node {$\varepsilon$} (1);
+      \path (1)  edge node {$\varepsilon$} (2);
+      \path (2)  edge node {$b$}           (3);
+      \path (3)  edge node {$\varepsilon$} (4);
+      \path (4)  edge node {$\varepsilon$} (5);
+      \path (5)  edge node {$\varepsilon$} (6);
+      \path (6)  edge node {$\varepsilon$} (7);
+
+      \path (1)  edge[bend left] node {$a$} (11);
+      \path (11) edge[bend left] node {$\varepsilon$} (1);
+
+      \path (6)  edge node {$a$} (61);
+      \path (61) edge node[swap] {$\varepsilon$} (62);
+      \path (62) edge node[swap] {$b$} (63);
+      \path (63) edge node {$\varepsilon$} (6);
+    \end{tikzpicture}
+  \end{question}
+\end{correction}
+
 \endgroup
 \endinput

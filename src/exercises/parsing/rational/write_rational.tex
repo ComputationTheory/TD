@@ -56,5 +56,46 @@
 
 \end{exercice}
 
+\begin{correction}
+  
+  \begin{question}
+  \item $L_1 : \left\langle \{a, b\}, \{S, A, B\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a S \mid b S \mid a A\\
+    A   &\rightarrow& b B\\
+    B   &\rightarrow& a B \mid b B \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $L_2 : \left\langle \{a, b\}, \{S, A, B, C, D\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a A \mid b B \mid b C \mid a D\\
+    A   &\rightarrow& a A \mid b B\\
+    B   &\rightarrow& a \\
+    C   &\rightarrow& b C \mid a D\\
+    D   &\rightarrow& b B\\
+    \end{array}\right\}\right\rangle$
+
+  \item $L_3 : \left\langle \{a, b\}, \{S_1, S_2, S_3, S_4, S_5, S_6\}, S_1,
+    \left\{\begin{array}{lll}
+    S_1   &\rightarrow& a S_2 \mid b S_3\\
+    S_2   &\rightarrow& a S_2 \mid b S_4\\
+    S_3   &\rightarrow& a S_5 \mid b S_3\\
+    S_4   &\rightarrow& a S_6 \mid b S_4\\
+    S_5   &\rightarrow& a S_5 \mid b S_6\\
+    S_6   &\rightarrow& a S_6 \mid b S_6 \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $L_4 : \left\langle \{a, b\}, \{S_1, S_2, S_3, S_4\}, S_1,
+    \left\{\begin{array}{lll}
+    S_1   &\rightarrow& a S_2 \mid \varepsilon\\
+    S_2   &\rightarrow& a S_3 \mid b S_1 \mid b S_2\\
+    S_3   &\rightarrow& a S_4 \mid b S_1 \mid b S_3\\
+    S_4   &\rightarrow& a S_1 \mid b S_1 \mid b S_4 \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \end{question}
+  
+\end{correction}
+
 \endgroup
 \endinput

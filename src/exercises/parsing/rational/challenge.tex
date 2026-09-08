@@ -45,5 +45,84 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item
+    \begin{itemize}
+    \item $\textsc{rat}_\Sigma \subseteq \textsc{rec\_cpt}_\Sigma$ : tout automate fini se simule par un automate à compteur qui n'utilise jamais la pile (pile inchangée partout).
+    \item $\textsc{rec\_cpt}_\Sigma \subseteq \textsc{alg}_\Sigma$ : tout automate à compteur est un automate à pile, donc reconnaît un langage algébrique.
+    \end{itemize}
+
+  \item Automate à compteur reconnaissant $\{a^n b^n \mid n\in\mathbb{N}\}$ :
+    \begin{tikzpicture}[pushdown, baseline=(s.base)]
+      \state[initial]   (s) at (0,0) {$0$};
+      \state            (p) at (1,0) {$1$};
+      \state[accepting] (f) at (2,0) {$2$};
+
+      \path (s) edge[loop above] node {\smPAtrans{a}{\varepsilon}{X}}                      (s);
+      \path (s) edge             node {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (p);
+      \path (p) edge[loop above] node {\smPAtrans{b}{X}{\varepsilon}}                      (p);
+      \path (p) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}}     (f);
+    \end{tikzpicture}
+
+  \item $\textsc{rat}_\Sigma \neq \textsc{rec\_cpt}_\Sigma$ (car $\{a^n b^n \mid n\in\mathbb{N}\}$ n'est pas rationnel).
+
+  \end{question}
+
+  \begin{question}
+
+  \item En particulier, si $u\in L$ est engendré en appliquant $m$ fois une règle $aSb$ ou $cSd$,
+    alors $v$ est le mot des $m$ lettres choisies dans $\{a,c\}$ (dans l'ordre), et $\tilde v$ est le mot des $m$ lettres correspondantes
+    dans $\{b,d\}$ (dans l'ordre), avec la correspondance $a\leftrightarrow b$ et $c\leftrightarrow d$.
+
+  \item Pour $m\in\mathbb{N}$, $|L\cap \Sigma^{2m}| = 2^m$.
+
+  \item On fixe un automate à compteur $A=\langle \Sigma,\{X\},Q,I,F,\blank,\rightarrow\rangle$ reconnaissant $L$.
+    Pour $q,q'\in Q$ et $\sigma\in\Sigma$, on définit $k_{q,\sigma,q'}$ comme le minimum, sur tous les chemins de transitions
+    \[
+      q \xrightarrow{\varepsilon/\ast/\ast}\cdots\xrightarrow{\varepsilon/\ast/\ast} q'' \xrightarrow{\sigma/\ast/\ast} q'
+    \]
+    (suite d'$\varepsilon$-transitions puis une transition consommant $\sigma$), du nombre total de symboles $X$ \emph{ajoutés} à la pile le long du chemin,
+    si un tel chemin existe, et on pose $k_{q,\sigma,q'}=0$ sinon.
+    On pose ensuite
+    $k \eqdef \max\{k_{q,\sigma,q'} \mid q,q'\in Q,\ \sigma\in\Sigma\}$.
+    Alors :
+    $\forall u=v\cdot \tilde v\in L,\ \exists$ une exécution acceptante de $A$ passant par une configuration
+      $\langle \tilde v,\ q,\ X^n\blank\rangle$ avec $n\le k|v|$.
+    (On choisit une exécution acceptante et on considère l'instant où l'entrée restante devient $\tilde v$ ; le nombre de $X$ empilés pendant la lecture de $v$
+    est majoré par $k$ par symbole lu, donc par $k|v|$.)
+
+  \item Pour un $m$ donné, le nombre de configurations de la forme $\langle \varepsilon,\ q,\ X^n\blank\rangle$ telles que $n\le km$ est
+    \[
+      |Q|\,(km+1).
+    \]
+
+  \item Soit $m$ tel que $2^m > |Q|\,(km+1)$.
+    Pour chaque $v\in (a\mid c)^m$, il existe un unique $\tilde v\in (b\mid d)^m$ tel que $v\tilde v\in L$.
+    Donc il existe $2^m$ mots distincts $u=v\tilde v\in L\cap \Sigma^{2m}$.
+    Par la question précédente et la question 3, pour chaque tel $u$ il existe une exécution acceptante atteignant une configuration
+    $\langle \varepsilon,\ q,\ X^n\blank\rangle$ avec $n\le km$ après lecture complète de $u$.
+    Par le principe des tiroirs, il existe deux mots distincts $u_1=v_1\tilde v_1\neq u_2=v_2\tilde v_2$ et deux exécutions acceptantes atteignant
+    exactement la même configuration finale
+    \[
+      \langle \varepsilon,\ q,\ X^n\blank\rangle.
+    \]
+    Alors l'exécution de $u_1$ jusqu'à cette configuration, suivie de la \emph{fin} de l'exécution de $u_2$ (qui ne lit plus de symbole), donne une exécution
+    acceptante pour $v_1\tilde v_2$.
+    Donc
+    \[
+      v_1\tilde v_2 \in L.
+    \]
+    Or $u_1\neq u_2$ implique $v_1\neq v_2$, donc $\tilde v_1\neq \tilde v_2$ (unicité question 1), donc $v_1\tilde v_2\notin L$.
+    Absurde.
+
+  \item Donc $L\notin \textsc{rec\_cpt}_\Sigma$, donc $\textsc{rec\_cpt}_\Sigma \neq \textsc{alg}_\Sigma$.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

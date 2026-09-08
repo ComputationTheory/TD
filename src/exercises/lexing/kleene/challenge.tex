@@ -22,5 +22,96 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Deux états selon la parité du nombre de $a$ lus ; $b$ ne change pas la parité.
+    \begin{tikzpicture}[automaton, baseline=(E.base)]
+      \state[initial, accepting] (E) at (0,1) {E};
+      \state                     (O) at (0,0) {O};
+      \path (E) edge[loop right] node       {$b$} (E);
+      \path (O) edge[loop right] node       {$b$} (O);
+      \path (E) edge[bend right] node[swap] {$a$} (O);
+      \path (O) edge[bend right] node[swap] {$a$} (E);
+    \end{tikzpicture}
+
+  \item
+    \begin{tikzpicture}[automaton, baseline=(R0.base)]
+      \state[initial, accepting] (R0) at (0,0) {$0$};
+      \state                     (R1) at (1,0) {$1$};
+      \state                     (R2) at (2,0) {$2$};
+      \path (R0) edge[loop above] node {$a$} (R0);
+      \path (R1) edge[loop above] node {$a$} (R1);
+      \path (R2) edge[loop above] node {$a$} (R2);
+      \path (R0) edge             node {$b$} (R1);
+      \path (R1) edge             node {$b$} (R2);
+      \path (R2) edge[bend left]  node {$b$} (R0);
+    \end{tikzpicture}
+
+  \item
+    \begin{tikzpicture}[automaton, baseline=(E0.base), x=20mm, y=20mm]
+      \state[initial, accepting] (E0) at (0,1) {$E,0$};
+      \state                     (O0) at (0,0) {$O,0$};
+      \state                     (E1) at (1,1) {$E,1$};
+      \state                     (O1) at (1,0) {$O,1$};
+      \state                     (E2) at (2,1) {$E,2$};
+      \state                     (O2) at (2,0) {$O,2$};
+
+      \path (E0) edge[bend left]  node       {$a$} (O0);
+      \path (O0) edge[bend left]  node       {$a$} (E0);
+      \path (E1) edge[bend left]  node       {$a$} (O1);
+      \path (O1) edge[bend left]  node       {$a$} (E1);
+      \path (E2) edge[bend left]  node       {$a$} (O2);
+      \path (O2) edge[bend left]  node       {$a$} (E2);
+
+      \path (E0) edge             node[swap] {$b$} (E1);
+      \path (E1) edge             node[swap] {$b$} (E2);
+      \path (E2) edge[bend right] node[swap] {$b$} (E0);
+      \path (O0) edge             node       {$b$} (O1);
+      \path (O1) edge             node       {$b$} (O2);
+      \path (O2) edge[bend left]  node       {$b$} (O0);
+    \end{tikzpicture}
+
+  \item En notant $L_{E0}$, $L_{O0}$, $L_{E1}$, $L_{O1}$, $L_{E2}$, $L_{O2}$
+    les langages droits des états $(E,0)$, $(O,0)$, $(E,1)$, $(O,1)$, $(E,2)$, $(O,2)$ :
+    $$
+    \left\{
+    \begin{array}{rcl}
+      L_{E0} &=& aL_{O0} \mid bL_{E1} \mid \varepsilon\\
+      L_{O0} &=& aL_{E0} \mid bL_{O1}\\
+      L_{E1} &=& aL_{O1} \mid bL_{E2}\\
+      L_{O1} &=& aL_{E1} \mid bL_{O2}\\
+      L_{E2} &=& aL_{O2} \mid bL_{E0}\\
+      L_{O2} &=& aL_{E2} \mid bL_{O0}
+    \end{array}
+    \right.
+    $$
+
+  \item Une expression rationnelle pour $L$ (langage droit de l’état initial $(E,0)$) :
+    $$
+    L = \Big( \big((tU)^\star\, tV\, Q^\star\, R\big)^\star\, (tU)^\star\, t \Big)
+    $$
+    avec
+    \[
+    t \eqdef \big(a(bbb)^\star a\big)^\star
+    \]
+    \[
+    Q \eqdef t\,(b \mid ab(bbb)^\star a)\,t\,a(bbb)^\star b^2 a
+    \]
+    \[
+    R \eqdef t\Big((b \mid ab(bbb)^\star a)\,t\,(b \mid a(bbb)^\star b a)\ \mid\ ab^2(bbb)^\star a\Big)
+    \]
+    \[
+    U \eqdef ab^2(bbb)^\star a\;t\,(b \mid a(bbb)^\star b a)
+    \]
+    \[
+    V \eqdef (b \mid aba \mid ab^4(bbb)^\star a)\ \mid\ ab^2(bbb)^\star a\;t\;a(bbb)^\star b^2 a
+    \]
+    
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

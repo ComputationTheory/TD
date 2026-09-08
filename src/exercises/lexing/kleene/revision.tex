@@ -117,5 +117,146 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item 
+    \begin{itemize}
+    \item $\mathcal{S}(a)$ reconnu par
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=] (0)              {}; 
+          \node[state, accepting]              (1) [right=of 0] {}; 
+          \path[-latex] (0) edge node {$a$} (1);
+      \end{tikzpicture}}
+      et $\mathcal{S}(b)$ reconnu par
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=] (0)              {}; 
+          \node[state, accepting]              (1) [right=of 0] {}; 
+          \path[-latex] (0) edge node {$b$} (1);
+      \end{tikzpicture}}
+    \item $\mathcal{S}(a | b)$ reconnu par\\
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=] (0)              {}; 
+          \node[state]              (1) [above right=of 0] {}; 
+          \node[state]              (2) [right=of 1] {}; 
+          \node[state]              (3) [below right=of 0] {}; 
+          \node[state]              (4) [right=of 3] {}; 
+          \node[state, accepting]   (5) [above right=of 4] {}; 
+          \path[-latex] (0) edge node {$\varepsilon$} (1);
+          \path[-latex] (0) edge node {$\varepsilon$} (3);
+          \path[-latex] (1) edge node {$a$} (2);
+          \path[-latex] (3) edge node {$b$} (4);
+          \path[-latex] (2) edge node {$\varepsilon$} (5);
+          \path[-latex] (4) edge node {$\varepsilon$} (5);
+      \end{tikzpicture}}
+    \item $\mathcal{S}((a|b)^\star)$ reconnu par\\
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state]                         (0)              {}; 
+          \node[state]                         (1) [above right=of 0] {}; 
+          \node[state]                         (2) [right=of 1] {}; 
+          \node[state]                         (3) [below right=of 0] {}; 
+          \node[state]                         (4) [right=of 3] {}; 
+          \node[state]                         (5) [above right=of 4] {}; 
+          \node[state, initial, initial text=] (6) [above left=of 0] {}; 
+          \node[state, accepting]              (7) [below left=of 0] {}; 
+          \path[-latex] (0) edge node {$\varepsilon$} (1);
+          \path[-latex] (0) edge node {$\varepsilon$} (3);
+          \path[-latex] (1) edge node {$a$} (2);
+          \path[-latex] (3) edge node {$b$} (4);
+          \path[-latex] (2) edge node {$\varepsilon$} (5);
+          \path[-latex] (4) edge node {$\varepsilon$} (5);
+          \path[-latex] (5) edge node {$\varepsilon$} (0);
+          \path[-latex] (6) edge node {$\varepsilon$} (0);
+          \path[-latex] (0) edge node {$\varepsilon$} (7);
+      \end{tikzpicture}}
+    \item $\mathcal{S}(L_1)$ reconnu par\\
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=] (0) {}; 
+          \node[state]                         (1) [right=of 0] {}; 
+          \node[state]                         (2) [right=of 1] {}; 
+          \node[state]                         (3) [right=of 2] {}; 
+          \node[state]                         (4) [right=of 3] {}; 
+          \node[state]                         (5) [right=of 4] {}; 
+          \node[state]                         (6) [right=of 5] {}; 
+          \node[state]                         (7) [right=of 6] {}; 
+          \node[state]                         (8) [right=of 7] {}; 
+          \node[state, accepting]              (9) [right=of 8] {};
+
+          \node[state]                         (10) [below left=of 1]   {}; 
+          \node[state]                         (11) [below right=of 1]  {}; 
+          \node[state]                         (12) [below=of 10]       {}; 
+          \node[state]                         (13) [below=of 11]       {}; 
+          \node[state]                         (14) [below right=of 12] {}; 
+
+          \node[state]                         (80) [below left=of 8]   {}; 
+          \node[state]                         (81) [below right=of 8]  {}; 
+          \node[state]                         (82) [below=of 80]       {}; 
+          \node[state]                         (83) [below=of 81]       {}; 
+          \node[state]                         (84) [below right=of 82] {}; 
+          
+          \path[-latex] (0) edge node {$\varepsilon$} (1);
+          \path[-latex] (1) edge node {$\varepsilon$} (2);
+          \path[-latex] (2) edge node {$\varepsilon$} (3);
+          \path[-latex] (3) edge node {$a$} (4);
+          \path[-latex] (4) edge node {$\varepsilon$} (5);
+          \path[-latex] (5) edge node {$b$} (6);
+          \path[-latex] (6) edge node {$\varepsilon$} (7);
+          \path[-latex] (7) edge node {$\varepsilon$} (8);
+          \path[-latex] (8) edge node {$\varepsilon$} (9);
+
+          \path[-latex] (1) edge node {$\varepsilon$} (10);
+          \path[-latex] (1) edge node {$\varepsilon$} (11);
+          \path[-latex] (10) edge node {$a$} (12);
+          \path[-latex] (11) edge node {$b$} (13);
+          \path[-latex] (12) edge node {$\varepsilon$} (14);
+          \path[-latex] (13) edge node {$\varepsilon$} (14);
+          \path[-latex] (14) edge node {$\varepsilon$} (1);
+
+          \path[-latex] (8) edge node {$\varepsilon$} (80);
+          \path[-latex] (8) edge node {$\varepsilon$} (81);
+          \path[-latex] (80) edge node {$a$} (82);
+          \path[-latex] (81) edge node {$b$} (83);
+          \path[-latex] (82) edge node {$\varepsilon$} (84);
+          \path[-latex] (83) edge node {$\varepsilon$} (84);
+          \path[-latex] (84) edge node {$\varepsilon$} (8);
+      \end{tikzpicture}}
+    \end{itemize}
+  \item Même technique que pour $L_1$... 
+  \item Il faut passer par le système d'équations rationnelles, puis utiliser le lemme d'Arden. \\
+    On détaille ici la technique seulement pour l'automate en bas à gauche. 
+    
+    $\left\{\begin{array}{lllllllll}
+    L_1 & = & a L_2 \mid b L_1 \mid\varepsilon &=& b^\star a L_2 \mid b^\star &=& b^\star a^+ b L_3 \mid b^\star\\
+    L_2 & = & a L_2 \mid b L_3  &=& a^\star b L_3 \\
+    L_3 & = & a L_4 \mid b L_1 \\
+    L_4 & = & a L_2 \mid b L_3 \mid\varepsilon &&&=& a a^\star b L_3 \mid b L_3 \mid\varepsilon &=& a^\star b L_3 \mid \varepsilon\\
+    \end{array}\right.$
+
+    $L_3 = a L_4 \mid b L_1 = a^+ b L_3 \mid a \mid b^+ a^+ b L_3 \mid b^+ = b^\star a^+ b L_3 \mid a \mid b^+  = (b^\star a^+ b)^\star (a \mid b^+)$
+    
+    $\left\{\begin{array}{lllllllll}
+    L_1 & = & b^\star a^+ b L_3 \mid b^\star     & = & (b^\star a^+ b)^+ (a \mid b^+) \mid b^\star \\     
+    L_2 & = & a^\star b L_3                     & = & a^\star b (b^\star a^+ b)^\star (a \mid b^+)\\                       
+    L_3 & = & (b^\star a^+ b)^\star (a \mid b^+) & = & (b^\star a^+ b)^\star (a \mid b^+) \\ 
+    L_4 & = & a^\star b L_3 \mid \varepsilon    & = & a^\star b (b^\star a^+ b)^\star (a \mid b^+) \mid \varepsilon\\      
+    \end{array}\right.$
+    
+  \item Réponses :
+  \end{question}
+  
+  $\begin{array}[t]{cccc}
+    aa\mid ba      &
+    \varepsilon &
+    (b\mid ab)^\star &
+    (a\mid b)^\star ab (a\mid b)^\star\\
+    (b^\star a^+ b)^+ (a \mid b^+) \mid b^\star&
+    (a b^\star (a b^\star (a b^\star (a \mid b) \mid b) \mid b))^\star a b^\star a b^\star a&
+    (aaaaa)^\star &
+    ab^\star a\mid b a^+ \mid b b^+ a\\
+  \end{array}$
+  
+
+\end{correction}
+
 \endgroup
 \endinput

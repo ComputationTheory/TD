@@ -34,5 +34,64 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item $|x| = 5$, \quad $|x|_a = 2$, \quad $|x|_c = 2$ \quad (pour $x = bacca$).
+
+  \item $\mathit{Pref}(x) = \{\varepsilon,\ b,\ ba,\ bac,\ bacc,\ bacca\}$ \\
+        $\mathit{Suff}(x) = \{\varepsilon,\ a,\ ca,\ cca,\ acca,\ bacca\}$
+
+  \item Les facteurs de longueur $2$ de $x$ (sous-mots contigus) sont :\\
+        $\{\,ba,\ ac,\ cc,\ ca\,\}$
+
+  \item 
+    $$
+    \begin{aligned}
+      L_1 \cup L_2 \;&=\; \{a,ba,ca,\ \varepsilon,b,ac\} \\
+      L_1 \cap L_2 \;&=\; \emptyset \\
+      L_1 \cdot L_2 \;&=\; \{a,ab,aac,\ ba,bab,baac,\ ca,cab,caac\} \\
+      L_2 \cdot L_1 \;&=\; \{a,ba,ca,\ bba,bca,\ aca,acba,acca\} \\
+      L_1^2 \;&=\; \{aa,aba,aca,\ baa,baba,baca,\ caa,caba,caca\}
+    \end{aligned}
+    $$
+
+  \item $\Sigma^\star \setminus L_1$ est \textit{l’ensemble de tous les mots sur $\{a,b,c\}$ qui ne sont pas $a$, $ba$ ou $ca$}, c’est-à-dire
+        tous les mots de $\Sigma^\star$ sauf ces trois-là.
+
+  \item 
+    \begin{description}
+    \item[Preuve de $L^\star \subseteq L^\star \times L^\star$ :] Soit $u \in L^\star$. On a $u \in L^\star$ et $\varepsilon \in L^\star$, donc
+      $u = u \cdot \varepsilon \in L^\star \times L^\star$
+    \item[Preuve de $L^\star \times L^\star \subseteq L^\star$ :] Soit $u \in L^\star \times L^\star$.\\
+      Par définition de la concaténation de langages, il existe $v \in L^\star$ et $w \in L^\star$ tels que $u=v\cdot w$.\\
+      Par définition de la fermeture de Kleene, il existe $n$ et $m$ tels que $v \in L^n$ et $w \in L^m$.\\
+      On a donc $u=v\cdot w \in L^n \times L^m = L^{n+m}$, donc $u\in L^\star$.
+    \item[Conclusion :] On a $L^\star \subseteq L^\star \times L^\star$ et $L^\star \times L^\star \subseteq L^\star$,
+      donc par double inclusion, $L^\star \times L^\star = L^\star$. 
+    \end{description}
+  \item Posons le prédicat $P(n) \eqdef (L^\star)^n = L^\star$.
+    \begin{description}
+    \item[Initialisation :] Pour $n = 1$, on a $(L^\star)^1 = L^\star$, donc $P(1)$.  
+    \item[Hérédité :] Soit $n \ge 1$ tel que $P(n)$. Montrons $P(n+1)$. On a:
+      $$\begin{array}{rcll}
+      (L^\star)^{n+1} &=& (L^\star)^{n} \cdot (L^\star) & \text{Par définition de $(L^\star)^{n+1}$}\\
+      &=& L^\star \cdot L^\star & \text{Par $P(n)$}\\
+      &=& L^\star & \text{D'après la question 1}\\
+      \end{array}$$
+    \item[Conclusion :] Par le principe de récurrence, nous avons montré $P(n)$ pour tout $n\ge 1$.
+    \end{description}
+  \item On a :
+      $$\begin{array}{rcll}
+      (L^\star)^+ &=& \bigcup_{n\ge 1} (L^\star)^{n} & \text{Par définition de $(L^\star)^+$}\\
+      &=& \bigcup_{n\ge 1} L^\star & \text{D'après la question 2}\\
+      &=& L^\star & \text{Par idempotence de l'union}\\
+      \end{array}$$
+  \item On a $(L^\star)^\star = \{\varepsilon\} \cup (L^\star)^+ = \{\varepsilon\} \cup L^\star = L^\star$ car $\varepsilon\in L^\star$.
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

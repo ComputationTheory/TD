@@ -21,5 +21,122 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item $\overline{L} = (a\mid b\mid c)^\star\;abc\;(a\mid b\mid c)^\star$.
+
+  \item On utilise la version optimisée :
+    
+    \begin{tikzpicture}[automaton, y=10mm]
+      \state[initial]   (0)  at (0,2)  {}; 
+      \state            (1)  at (1,2)  {}; 
+      \state            (3)  at (2,2)  {}; 
+      \state            (4)  at (3,2)  {}; 
+      \state            (5)  at (4,2)  {}; 
+      \state            (7)  at (5,2)  {}; 
+      \state            (8)  at (6,2)  {}; 
+      \state[accepting] (9)  at (7,2)  {};
+
+      \state            (10) at (0,1)  {}; 
+      \state            (15) at (1,1)  {}; 
+      \state            (11) at (2,1)  {}; 
+      \state            (12) at (0,0)  {}; 
+      \state            (16) at (1,0)  {}; 
+      \state            (13) at (2,0)  {}; 
+      \state            (14) at (1,-1) {}; 
+
+      \state            (80) at (5,1)  {}; 
+      \state            (85) at (6,1)  {}; 
+      \state            (81) at (7,1)  {}; 
+      \state            (82) at (5,0)  {}; 
+      \state            (86) at (6,0)  {}; 
+      \state            (83) at (7,0)  {}; 
+      \state            (84) at (6,-1) {}; 
+      
+      \path (0)  edge node {$\varepsilon$} (1);
+      \path (1)  edge node {$\varepsilon$} (3);
+      \path (3)  edge node {$a$}           (4);
+      \path (4)  edge node {$b$}           (5);
+      \path (5)  edge node {$c$}           (7);
+      \path (7)  edge node {$\varepsilon$} (8);
+      \path (8)  edge node {$\varepsilon$} (9);
+
+      \path (1)  edge            node[swap] {$\varepsilon$} (10);
+      \path (1)  edge            node       {$\varepsilon$} (11);
+      \path (1)  edge            node       {$\varepsilon$} (15);
+      \path (10) edge            node       {$a$}           (12);
+      \path (15) edge            node       {$b$}           (16);
+      \path (11) edge            node       {$c$}           (13);
+      \path (12) edge            node[swap] {$\varepsilon$} (14);
+      \path (16) edge            node       {$\varepsilon$} (14);
+      \path (13) edge            node       {$\varepsilon$} (14);
+      \path (14) edge[bend left] node       {$\varepsilon$} (1);
+      
+      \path (8)  edge            node[swap] {$\varepsilon$} (80);
+      \path (8)  edge            node       {$\varepsilon$} (81);
+      \path (8)  edge            node       {$\varepsilon$} (85);
+      \path (80) edge            node       {$a$}           (82);
+      \path (85) edge            node       {$b$}           (86);
+      \path (81) edge            node       {$c$}           (83);
+      \path (82) edge            node[swap] {$\varepsilon$} (84);
+      \path (86) edge            node       {$\varepsilon$} (84);
+      \path (83) edge            node       {$\varepsilon$} (84);
+      \path (84) edge[bend left] node       {$\varepsilon$} (8);
+    \end{tikzpicture}
+
+  \item Automate complet, déterminisé et minimisé :
+      \begin{tikzpicture}[automaton, baseline=(0.base), x=20mm]
+        \state[initial]   (0) at (0,0) {$0$};
+        \state            (1) at (1,0) {$1$};
+        \state            (2) at (2,0) {$2$};
+        \state[accepting] (3) at (3,0) {$3$};
+
+        \path (0) edge[loop above] node {$b,c$} (0);
+        \path (0) edge             node {$a$}   (1);
+        \path (1) edge[loop above] node {$a$}   (1);
+        \path (1) edge             node {$b$}   (2);
+        \path (1) edge[bend right] node[swap] {$c$}   (0);
+        \path (2) edge[bend right] node[swap] {$a$}   (1);
+        \path (2) edge[bend left]  node {$b$}   (0);
+        \path (2) edge             node {$c$}   (3);
+        \path (3) edge[loop above] node {$a,b,c$} (3);
+      \end{tikzpicture}
+
+  \item
+    \begin{tikzpicture}[automaton, baseline=(0.base), x=20mm]
+      \state[initial, accepting] (0) at (0,0) {$0$};
+      \state[accepting]          (1) at (1,0) {$1$};
+      \state[accepting]          (2) at (2,0) {$2$};
+      \state                     (3) at (3,0) {$3$};
+
+      \path (0) edge[loop above] node {$b,c$} (0);
+      \path (0) edge             node {$a$}   (1);
+      \path (1) edge[loop above] node {$a$}   (1);
+      \path (1) edge             node {$b$}   (2);
+      \path (1) edge[bend right] node[swap] {$c$}   (0);
+      \path (2) edge[bend right] node[swap] {$a$}   (1);
+      \path (2) edge[bend left]  node {$b$}   (0);
+      \path (2) edge             node {$c$}   (3);
+      \path (3) edge[loop above] node {$a,b,c$} (3);
+    \end{tikzpicture}
+
+  \item Minimisation : l'automate précédent est déjà minimal.
+
+  \item Définitions rationnelles pour $L$ :
+    $$
+    \left\{\begin{array}{rcl}
+    P &\rightarrow& (b\mid c)^\star\ a\ (a^\star b a)^\star\ a^\star\\
+    L &\rightarrow& \big(P\,(bb\mid c)\big)^\star\ \big(P\,(b\mid \varepsilon)\ \mid\ (b\mid c)^\star\big)
+    \end{array}\right.
+    $$
+
+  \item On peut toujours suivre les étapes ci-dessus. 
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

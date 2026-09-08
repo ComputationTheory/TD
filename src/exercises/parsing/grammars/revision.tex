@@ -34,5 +34,58 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Le langage est rationnel : $\mathcal{L}(cha (bada)^\star bada)$
+
+  \item Le langage est rationnel : $\mathcal{L}(aba^\star \mid\varepsilon)$
+
+  \item $\left\langle \{a, b, c\}, \{S, C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a S b \mid C\\
+    C   &\rightarrow& c C \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b\}, \{S\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a S a \mid b S b \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b, c\}, \{S, A, C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& A C\\
+    A   &\rightarrow& a A b \mid ab\\
+    C   &\rightarrow& c C \mid c\\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b, c\}, \{S, T\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a S c \mid T\\
+    T   &\rightarrow& b T c \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b, c\}, \{S, A, C\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& A C\\
+    A   &\rightarrow& a A b \mid \varepsilon\\
+    C   &\rightarrow& b C c \mid \varepsilon\\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b\}, \{S\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& a S b b \mid \varepsilon \\
+    \end{array}\right\}\right\rangle$
+
+  \item $\left\langle \{a, b\}, \{S\}, S,
+    \left\{\begin{array}{lll}
+    S   &\rightarrow& S S \mid a S b \mid \varepsilon
+    \end{array}\right\}\right\rangle$
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

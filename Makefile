@@ -23,10 +23,6 @@ LATEX_LIBS_DIR       := latex-libs
 LATEX_LIBS_SSH_URL   := git@github.com:MatthieuPerrin/Latex-libs.git
 LATEX_LIBS_HTTPS_URL := https://github.com/MatthieuPerrin/Latex-libs.git
 
-# Corrections library (local clone + TEXINPUTS)
-CORRECTIONS_REPO := git@github.com:LangagesEtAutomates/Corrections.git
-CORRECTIONS_DIR  ?= src/corrections
-
 # Path separator (Windows vs Unix)
 ifeq ($(OS),Windows_NT)
   PATHSEP := ;
@@ -48,11 +44,11 @@ CORR := $(MAIN:%=%-correction)
 # Main targets
 # -------------------------------
 
-.PHONY: main corr all deps depscorr update clean cleanall help FORCE configure list check-course
+.PHONY: main corr all deps update clean cleanall help FORCE configure list check-course
 
+all: 			main corr
 main:			$(MAIN:%=$(DOCSDIR)/$(PREFIX)-%.pdf)
 corr: 			$(MAIN:%=$(DOCSDIR)/$(PREFIXCORR)-%.pdf)
-all: 			main corr
 
 $(MAIN): %:	    	$(DOCSDIR)/$(PREFIX)-%.pdf
 $(CORR): %-correction:	$(DOCSDIR)/$(PREFIXCORR)-%.pdf
@@ -68,7 +64,7 @@ $(DOCSDIR)/$(PREFIX)-%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps 
 	@mv -f "$(BUILDDIR)/$(PREFIX)-$*.pdf" "$@"
 
 # Correction
-$(DOCSDIR)/$(PREFIXCORR)-%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps depscorr check-course
+$(DOCSDIR)/$(PREFIXCORR)-%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps check-course
 	@printf '\\def\\CORRECTION{}\\input{%s}\n' "$(SRCDIR)/$*.tex" > "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
 	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIXCORR)-$* "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
 	$(PDFLATEX) $(PDFLATEX_FLAGS) -jobname=$(PREFIXCORR)-$* "$(BUILDDIR)/$(PREFIXCORR)-$*.tex"
@@ -88,14 +84,6 @@ deps:
 	    || git clone --depth 1 "$(LATEX_LIBS_HTTPS_URL)" "$(LATEX_LIBS_DIR)" ); \
 	fi
 
-# Ensure local clone of Corrections exists (used as a prerequisite by build rules)
-depscorr:
-	@if [ ! -d "$(CORRECTIONS_DIR)/.git" ]; then \
-	  echo ">>> Cloning Corrections into $(CORRECTIONS_DIR)"; \
-	  git clone --depth 1 $(CORRECTIONS_REPO) $(CORRECTIONS_DIR) || { \
-	    echo ">>> ERROR: impossible to clone Corrections (SSH key/token ?)"; exit 1; }; \
-	fi
-
 # Update both the main repo and the local dependency clone
 update:
 	@echo ">>> Updating main repository"; \
@@ -106,11 +94,6 @@ update:
 	else \
 	  echo ">>> latex-libs not present; run 'make deps' when online."; \
 	fi; \
-	if [ -d "$(CORRECTIONS_DIR)/.git" ]; then \
-	  echo ">>> Updating $(CORRECTIONS_DIR)"; \
-	  git -C "$(CORRECTIONS_DIR)" fetch -q --depth 1 origin; \
-	  git -C "$(CORRECTIONS_DIR)" reset -q --hard FETCH_HEAD; \
-	fi
 
 # -------------------------------
 # Course selection

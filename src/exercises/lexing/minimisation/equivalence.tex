@@ -19,5 +19,90 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item \begin{tikzpicture}[automaton, baseline=(0.base)]
+    \state[initial]   (0)  at (0,3) {$0$}; 
+    \state            (1)  at (1,2) {$1$}; 
+    \state            (2)  at (2,3) {$2$}; 
+    \state            (3)  at (3,3) {$3$}; 
+    \state            (4)  at (3,4) {$4$}; 
+    \state            (5)  at (4,3) {$5$}; 
+    \state            (6)  at (2,1) {$6$}; 
+    \state            (7)  at (3,1) {$7$};
+    \state            (8)  at (3,0) {$8$};
+    \state            (9)  at (4,1) {$9$};
+    \state            (10) at (5,2) {$10$};
+    \state[accepting] (11) at (0,1) {$11$}; 
+    
+    \path (0) edge                 node       {$\varepsilon$} (1);
+    \path (1) edge                 node       {$\varepsilon$} (11);
+    \path (1) edge                 node       {$\varepsilon$} (2);
+    \path (1) edge                 node       {$\varepsilon$} (6);
+    \path (2) edge                 node       {$\varepsilon$} (3);
+    \path (3) edge                 node       {$\varepsilon$} (5);
+    \path (6) edge                 node       {$\varepsilon$} (7);
+    \path (7) edge                 node       {$\varepsilon$} (9);
+    \path (5) edge                 node       {$\varepsilon$} (10);
+    \path (9) edge                 node       {$\varepsilon$} (10);
+    \path (10)edge                 node       {$\varepsilon$} (1);
+    \path (3) edge[bend left=8mm]  node       {$a$} (4);
+    \path (4) edge[bend left=8mm]  node       {$\varepsilon$} (3);
+    \path (7) edge[bend right=8mm] node[swap] {$b$} (8);
+    \path (8) edge[bend right=8mm] node[swap] {$\varepsilon$} (7);
+  \end{tikzpicture}
+
+  \item \begin{tikzpicture}[automaton, baseline=(A.base)]
+    \state[initial, accepting] (A) at (1,1) {$A$}; 
+    \state[accepting]          (B) at (0,0) {$B$}; 
+    \state[accepting]          (C) at (2,0) {$C$}; 
+    
+    \path (A) edge                 node[swap] {$a$} (B);
+    \path (A) edge                 node       {$b$} (C);
+    \path (C) edge[bend left=3mm]  node       {$a$} (B);
+    \path (B) edge[bend left=3mm]  node       {$b$} (C);
+    \path (B) edge[loop left]      node       {$a$} (B);
+    \path (C) edge[loop right]     node       {$b$} (C);
+  \end{tikzpicture}
+
+  \item \begin{tikzpicture}[automaton, baseline=(q.base)]
+    \state[initial, accepting] (q) {$q$}; 
+    \path                      (q) edge[loop right] node {$a, b$}   (q);
+  \end{tikzpicture}
+
+  \item L'automate non-déterministe est le suivant. L'automate déterminisé et l'automate minimal sont les mêmes que dans le cas précédent.
+    \begin{tikzpicture}[automaton, baseline=(0.base)]
+      \state[initial]   (0)  at (0,2) {$0$}; 
+      \state            (1)  at (1,1) {$1$}; 
+      \state            (2)  at (2,2) {$2$}; 
+      \state            (5)  at (3,2) {$3$}; 
+      \state            (6)  at (2,0) {$4$}; 
+      \state            (9)  at (3,0) {$5$};
+      \state            (10) at (4,1) {$6$};
+      \state[accepting] (11) at (0,0) {$7$}; 
+      
+      \path (0)  edge node {$\varepsilon$} (1);
+      \path (1)  edge node {$\varepsilon$} (11);
+      \path (1)  edge node {$\varepsilon$} (2);
+      \path (1)  edge node {$\varepsilon$} (6);
+      \path (5)  edge node {$\varepsilon$} (10);
+      \path (9)  edge node {$\varepsilon$} (10);
+      \path (10) edge node {$\varepsilon$} (1);
+      \path (2)  edge node {$a$} (5);
+      \path (6)  edge node {$b$} (9);
+    \end{tikzpicture}
+
+  \item Les langages décrits par les deux expressions rationnelles ont le même automate minimal, donc ils sont égaux. 
+
+  \item En général, on utilise le théorème d’unicité de l’automate minimal :
+  on calcule les automates finis minimaux associés aux deux expressions rationnelles.
+  Elles reconnaissent le même langage si, et seulement si, ces automates minimaux sont isomorphes.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

@@ -18,5 +18,35 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item $\emptyset, \{a\}, \{b\}, \{c\}, \{a, b\}, \{a, c\}, \{b, c\}, \{a, b, c\}$
+  \item La fonction $\left\{\begin{array}{rcl}
+        a & \longmapsto & b\\
+        b & \longmapsto & c
+      \end{array}\right\}$ est une bijection de $\{a, b\}$ vers $\{b, c\}$, donc $\{a, b\} \sim \{b, c\}$.
+  \item Il faut montrer les trois propriétés des relations d'équivalence :
+    \begin{description}
+    \item[Réflexivité :] Soit $A \in \mathscr{P}(E)$.  
+      La fonction identité $\left\{\begin{array}{rcl}
+        A & \longmapsto & A\\
+        x & \longmapsto & x
+      \end{array}\right\}$ est bijective, donc $A \sim A$.
+    \item[Symétrie :] Soient $A, B \in \mathscr{P}(E)$ tels que $A \sim B$.  
+      Il existe une bijection $f$ de $A$ dans $B$. Sa réciproque $f^{-1}$ est une bijection de $B$ dans $A$, donc $B \sim A$.
+    \item[Transitivité :] Soient $A, B, C \in \mathscr{P}(E)$ tels que $A \sim B$ et $B \sim C$.  
+      Il existe deux bijections $f : A \to B$ et $g : B \to C$.  
+      Posons $h = g\circ f = \left\{\begin{array}{rcl}
+        A & \longmapsto & C \\
+        x & \longmapsto & g(f(x))
+      \end{array}\right\}$.  
+      $h$ est bijective, donc $A \sim C$.
+    \end{description}
+  \item $\big\{\{\emptyset\},\ \{\{a\}, \{b\}, \{c\}\},\ \{\{a, b\}, \{a, c\}, \{b, c\}\},\ \{\{a, b, c\}\}\big\}$
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

@@ -31,5 +31,80 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{itemize}
+  \item Pour $G_1$, le langage est $\{a^nb^n \mid  n > 0\}$ (de type 2).
+    L'analyse CYK de aabb:
+    $$\begin{array}{|c|c|c|c|c|}
+      \hline
+      & T[...,1] & T[...,2] & T[...,3] & T[...,4]\\
+      \hline
+      T[1,...] & A & A & B & B \\
+      \cline{1-5}
+      T[2,...] & \emptyset  & S  & \emptyset \\
+      \cline{1-4}
+      T[3,...] & \emptyset & X  \\
+      \cline{1-3}
+      T[4,...]   & S \\
+      \cline{1-2}
+    \end{array}$$
+    $aabb$ appartient au langage.
+    L'analyse CYK de aaabb:
+    $$\begin{array}{|c|c|c|c|c|c|}
+      \hline
+      & T[...,1] & T[...,2] & T[...,3] & T[...,4] & T[...,5]\\
+      \hline
+      T[1,...] & A & A & A & B & B \\
+      \cline{1-6}
+      T[2,...] & \emptyset  & \emptyset  & S  & \emptyset \\
+      \cline{1-5}
+      T[3,...] & \emptyset  & \emptyset & X  \\
+      \cline{1-4}
+      T[4,...]   & \emptyset  & S \\
+      \cline{1-3}
+      T[5,...]   & \emptyset  \\
+      \cline{1-2}
+    \end{array}$$
+    $aaabb$ n'appartient pas au langage.
+
+  \item
+    Pour $G_2$, le langage est $\{a^nb^m \mid  n > 0, m > 0\}$  (de type 3)
+    L'analyse CYK de aabb:
+    $$\begin{array}{|c|c|c|c|c|}
+      \hline
+      & T[...,1] & T[...,2] & T[...,3] & T[...,4]\\
+      \hline
+      T[1,...] & A & A & B,X & B,X \\
+      \cline{1-5}
+      T[2,...] & \emptyset  & S  & X \\
+      \cline{1-4}
+      T[3,...] & S & S  \\
+      \cline{1-3}
+      T[4,...]   & S \\
+      \cline{1-2}
+    \end{array}$$
+    $aabb$ appartient au langage.
+    L'analyse CYK de aaabb:
+    $$\begin{array}{|c|c|c|c|c|c|}
+      \hline
+      & T[...,1] & T[...,2] & T[...,3] & T[...,4] & T[...,5]\\
+      \hline
+      T[1,...] & A & A & A & B,X & B,X \\
+      \cline{1-6}
+      T[2,...] & \emptyset  & \emptyset  & S  & X \\
+      \cline{1-5}
+      T[3,...] & \emptyset  & S & S  \\
+      \cline{1-4}
+      T[4,...]   & S  & S \\
+      \cline{1-3}
+      T[5,...]   & S  \\
+      \cline{1-2}
+    \end{array}$$
+    $aaabb$ appartient au langage.
+  \end{itemize}
+
+\end{correction}
+
 \endgroup
 \endinput

@@ -51,5 +51,61 @@
 
 \end{exercice}
 
+
+\begin{correction}
+
+  \begin{question}
+
+  \item $G_1$ engendre $a^\star b^\star$, $G_2$ engendre $b a^+$ et $G_3$ engendre $a b^+$. Ces langages sont reconnus par les grammaires suivantes sous forme normale de Greibach. 
+    \begin{itemize}
+
+    \item $G_1 \eqdef \left\langle \{a,b\}, \{S,T\}, S,
+      \left\{\begin{array}{l}
+      S \rightarrow a S \mid b T \mid \varepsilon\\
+      T \rightarrow b T \mid b
+      \end{array}\right\}\right\rangle$
+
+    \item $G_2 \eqdef \left\langle \{a,b\}, \{S,A\}, S,
+      \left\{\begin{array}{l}
+      S \rightarrow b S \mid a
+      \end{array}\right\}\right\rangle$
+
+    \item $G_3 \eqdef \left\langle \{a,b\}, \{S\}, S,
+      \left\{\begin{array}{rcl}
+      S &\rightarrow& a T b \\
+      T &\rightarrow& b T
+      \end{array}\right\}\right\rangle$
+
+    \end{itemize}
+    
+  \item Esquisse d'algorithme vers la FNG.
+    \begin{enumerate}
+    \item \emph{Prétraitements.} Éliminer les symboles inutiles, les $\varepsilon$-productions,
+      les règles unitaires ($A\rightarrow B$ avec $A\neq B$),
+      et introduire des règles $T_a\rightarrow a$ pour chaque terminal $a\in\Sigma$, 
+      comme pour la mise sous forme normale de Chosky.
+    \item On élimine chaque chaque non-terminal $A$ en début de membre gauche de règle, un par un : 
+      \begin{enumerate}
+      \item \emph{Élimination de la récursion gauche.}
+        Les règles de la forme $A \rightarrow A\alpha \mid \beta$ sont remplacées par $A \rightarrow \beta A'$ et $A' \rightarrow \alpha A' \mid \alpha$
+      \item \emph{Poussée vers l'avant.} Remplacer $A$ par sa définition dans les règles $B \rightarrow A \gamma$.
+      \end{enumerate}
+    \end{enumerate}
+    
+  \item On obtient la grammaire suivante :
+    $$\left\langle \{a,b,c\}, \{A,B,C, A', B', C'\}, A,
+    \left\{\begin{array}{rcl}
+    A & \rightarrow & a A'\\
+    B & \rightarrow & b B'\\
+    C & \rightarrow & c C'\\
+    A' & \rightarrow & b B'A' \mid b B' \\
+    B' & \rightarrow & c C'B' \mid c C' \\
+    C' & \rightarrow & a A'C' \mid a A' \\
+    \end{array}\right\}\right\rangle$$
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

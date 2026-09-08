@@ -30,5 +30,52 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  On note $F(X) \eqdef A\cdot X \mid B$.
+
+  \begin{question}
+
+  \item \textbf{$\Sigma^\star$ est solution.}
+    On a $A\cdot \Sigma^\star = \Sigma^\star$ et $B \subseteq \Sigma^\star$, donc
+    $F(\Sigma^\star) = \Sigma^\star \mid B = \Sigma^\star$.
+
+  \item \textbf{$A^\star(L \mid B)$ est toujours solution.}
+    Comme $\varepsilon \in A$, on a $A\cdot A^\star = A^\star$.
+    Alors, pour tout $L$ :
+    \[
+    F\big(A^\star(L \mid B)\big) 
+    = A\cdot A^\star(L \mid B) \mid B
+    = A^\star(L \mid B) \mid B
+    = A^\star(L \mid B),
+    \]
+    car $B \subseteq A^\star(L \mid B)$.
+
+  \item \textbf{$M \subseteq A^\star(M \mid B)$.}
+    Comme $M \subseteq M \mid B$ et $\varepsilon \in A^\star$, on a $M \subseteq A^\star(M \mid B)$.
+
+  \item \textbf{Récurrence sur $n$.}
+    Initialisation ($n=0$) : $A^0(M \mid B) = M \mid B \subseteq M$ car $M = A\cdot M \mid B$ implique $B \subseteq M$.
+    Hérédité : si $A^n(M \mid B) \subseteq M$, alors
+    \[
+    A^{n+1}(M \mid B) = A \cdot \big(A^n(M \mid B)\big) \subseteq A \cdot M \subseteq M,
+    \]
+    puisque $M = A\cdot M \mid B$.
+
+  \item \textbf{$M = A^\star(M \mid B)$.}
+    Par 3, $M \subseteq A^\star(M \mid B)$.
+    Par 4, pour tout $n$, $A^n(M \mid B) \subseteq M$, donc $\bigcup_{n\ge 0} A^n(M \mid B) \subseteq M$.
+    Or $A^\star(M \mid B)=\bigcup_{n\ge 0} A^n(M \mid B)$. D’où l’égalité.
+
+  \item \textbf{Caractérisation.}
+    ($\Rightarrow$) Si $X$ est solution, prendre $L \eqdef X$ et utiliser le point 5 appliqué à $M=X$ :
+    $X = A^\star(X \mid B) = A^\star(L \mid B)$.
+
+    ($\Leftarrow$) Réciproquement, le point 2 montre que tout $X$ de la forme $A^\star(L \mid B)$ est solution.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

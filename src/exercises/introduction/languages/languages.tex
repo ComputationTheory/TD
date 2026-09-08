@@ -48,5 +48,46 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item
+    \begin{itemize}
+    \item $L_3$ est l'ensemble des mots qui contiennent autant de $a$ que de $b$.
+    \item $L_4$ est l'ensemble des mots de longueur impaire.
+    \item $L_5$ est l'ensemble de mots constitués d'une suite de $a$, éventuellement
+      vide, suivie d'une suite de $b$, éventuellement vide.
+    \end{itemize}
+  \item
+    $\begin{array}[t]{rll}
+    L_1 \cup L_2                &=& \{\varepsilon, a, b, ab, ba\}   \\ 
+    L_1 \cap L_2                &=& \{ab\}   \\ 
+    L_3 \cap L_4                &=& \emptyset   \\ 
+    L_3 \cap L_5                &=& \{a^n b^n \mid n\in \mathbb{N}\}   \\ 
+    \Sigma^\star \setminus L_5   &=& \{u \cdot ba \cdot v | u , v \in \Sigma^\star\}   \\ 
+    L_1 \cdot L_2               &=& \{a, ab, ba, abb, bab, aab, abab, baab\}   \\ 
+    L_2 \cdot L_1               &=& \{a, ba, aba, ab, bab, abab, bba, abba\}  \\ 
+    L_1^2                       &=& \{aa, aab, aba, abab, abba, baa, baab, baba\}\\
+    L_2^3                       &=& \{\varepsilon, b, ab, bb, bab, abb, abab\} \cdot \{\varepsilon, b, ab\}\\
+    &=& \{\varepsilon, b, ab, bb, bab, abb, abab, bbb, babb, abbb, ababb, bbab, babab, abbab, ababab\}\\
+  \end{array}$
+
+    $$\begin{array}[t]{rll@{\quad\quad\quad}rll@{\quad\quad\quad}rll}
+    L_3^\star                    &=& L_3             &
+    L_1 \cup \emptyset          &=& L_1             & 
+    L_1 \cup \{\varepsilon\}    &=& L_1             \\ 
+    L_1 \cap \emptyset          &=& \emptyset       & 
+    L_1 \cap \{\varepsilon\}    &=& \{\varepsilon\} & 
+    L_1 \cdot \emptyset         &=& \emptyset       \\ 
+    \emptyset \cdot L_1         &=& \emptyset       & 
+    L_1 \cdot\{\varepsilon\}    &=& L_1             & 
+    \{\varepsilon\}\cdot L_1    &=& L_1             \\ 
+  \end{array}$$
+  \item $L = \{\varepsilon\}$ et $M = \{\varepsilon\}$.
+  \item $L = \emptyset$ ou $M = \emptyset$.
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

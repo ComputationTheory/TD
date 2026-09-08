@@ -44,7 +44,636 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \textbf{Rappels de vocabulaire.}
+  \begin{description}
+  \item[Unitaire] : un seul état initial.
+  \item[Standard] : unitaire sans transition entrante dans l'état initial.
+  \item[Normalisé] : standard + un seul état final sans transition sortante.
+  \item[$\varepsilon$-libre] : aucune $\varepsilon$-transition.
+  \item[Déterministe] : Unitaire, $\varepsilon$-libre, et au plus une transition par lettre et par état.
+  \item[Complet] : au moins une transition par lettre et par état.
+  \end{description}
+  
+  \begin{question}
+  \item 
+
+    \underline{Propriétés.}
+    \begin{itemize}
+    \item Unitaire : \textbf{non} (états finaux $\{1,6\}$).
+    \item Standard : \textbf{oui} (un seul initial $1$, aucune entrée vers $1$).
+    \item Normalisé : \textbf{non} (plusieurs finaux et transitions sortantes depuis $1$).
+    \item $\varepsilon$-libre : \textbf{oui}.
+    \item Déterministe : \textbf{non} (depuis $6$ deux transitions en $0$; depuis $1$ deux sorties en $0$ : boucle et $1\to4$).
+    \item Complet : \textbf{non} (p.ex. $3$ n’a pas de $1$; $5$ n’a pas de $0$; $6$ n’a pas de $1$).
+    \end{itemize}
+
+    \underline{Complétion.}
+    Ajouter un puits $\bot$ bouclé sur $0,1$, et compléter :
+    \[
+    3 \xrightarrow{1} \bot,\quad
+    5 \xrightarrow{0} \bot,\quad
+    6 \xrightarrow{1} \bot.
+    \]
+    (Tous les autres états ont déjà au moins une sortie sur chaque lettre.)
+
+    \underline{Déterminisation (méthode des sous-ensembles).}
+    États AFD = sous-ensembles d’états; initial $\{1\}$; finaux = sous-ensembles contenant $1$ ou $6$.
+    Table (transitions $0/1$) — on ne liste que les ensembles atteignables :
+    \[
+    \renewcommand{\arraystretch}{1.2}
+    \begin{array}{c|c|c}
+      X & \delta(X,0) & \delta(X,1)\\\hline
+      \{1\}     & \{1,4\} & \{2\}\\
+      \{1,4\}   & \{1,4\} & \{2,4\}\\
+      \{2\}     & \{3\}   & \{4\}\\
+      \{2,4\}   & \{3,4\} & \{4\}\\
+      \{3\}     & \{6\}   & \emptyset\\
+      \{4\}     & \{4\}   & \{4\}\\
+      \{3,4\}   & \{4,6\} & \{4\}\\
+      \{6\}     & \{3,5\} & \emptyset\\
+      \{4,6\}   & \{3,4,5\} & \{4\}\\
+      \{3,5\}   & \{6\}   & \{5\}\\
+      \{5\}     & \emptyset & \{5\}\\
+      \{3,4,5\} & \{4,6\} & \{4,5\}\\
+      \{4,5\}   & \{4\}   & \{4,5\}
+    \end{array}
+    \]
+    (On ajoute l’état puits $\emptyset$ si l’on souhaite un DFA complet.)
+    États \textit{acceptants} : ceux qui contiennent $1$ ou $6$ (ex. $\{1\},\{1,4\},\{6\},\{4,6\},\{3,5\}$…).
+
+    \medskip
+
+    % ===========================
+    % (2)
+    % ===========================
+  \item \textbf{Automate (2) — alphabet $\{a,b\}$.}
+
+    \underline{Propriétés.}
+    \begin{itemize}
+    \item Unitaire : \textbf{oui} (un seul final $4$).
+    \item Standard : \textbf{non} (des entrées vers l’état initial $1$ : $2\xrightarrow{a}1$, $3\xrightarrow{b}1$).
+    \item Normalisé : \textbf{non} (l’état final $4$ a des sorties).
+    \item $\varepsilon$-libre : \textbf{oui}.
+    \item Déterministe : \textbf{oui}.
+    \item Complet : \textbf{oui} (chaque état a une sortie en $a$ et en $b$).
+    \end{itemize}
+
+    \underline{Complétion.} Aucune (déjà complet).
+    \underline{Déterminisation.} Inutile (déjà DFA).
+
+    \medskip
+
+    % ===========================
+    % (3)
+    % ===========================
+  \item \textbf{Automate (3) — alphabet $\{a,b\}$.}
+
+    \underline{Propriétés.}
+    \begin{itemize}
+    \item Unitaire : \textbf{oui} (final $\{2\}$).
+    \item Standard : \textbf{non} (boucle sur l’état initial $0$).
+    \item Normalisé : \textbf{non} (final $2$ a des sorties).
+    \item $\varepsilon$-libre : \textbf{oui}.
+    \item Déterministe : \textbf{non} (depuis $0$: deux sorties en $a$ — boucle et $0\to1$; idem $1$ en $a$).
+    \item Complet : \textbf{oui} (chaque état a au moins une sortie sur $a$ et sur $b$).
+    \end{itemize}
+
+    \underline{Complétion.} Aucune (déjà complet).
+
+    \underline{Déterminisation (sous-ensembles).}
+    Initial $\{0\}$; finaux = sous-ensembles contenant $2$.
+    \[
+    \renewcommand{\arraystretch}{1.2}
+    \begin{array}{c|c|c}
+      X & \delta(X,a) & \delta(X,b)\\\hline
+      \{0\}     & \{0,1\}   & \{0\}\\
+      \{0,1\}   & \{0,1,2\} & \{0,1\}\\
+      \{0,1,2\} & \{0,1,2\} & \{0,1,2\}
+    \end{array}
+    \]
+    DFA obtenu (équivalent) : états $\{0\}$, $\{0,1\}$, $\{0,1,2\}$; seul $\{0,1,2\}$ est acceptant.
+
+    \medskip
+
+    % ===========================
+    % (4)
+    % ===========================
+  \item \textbf{Automate (4) — alphabet $\{a,b\}$.}
+
+    \underline{Propriétés.}
+    \begin{itemize}
+    \item Unitaire : \textbf{oui} (final $2$).
+    \item Standard : \textbf{oui} (un seul initial $0$, pas d’entrée vers $0$).
+    \item Normalisé : \textbf{non} (le final $2$ a une boucle sortante).
+    \item $\varepsilon$-libre : \textbf{oui}.
+    \item Déterministe : \textbf{oui}.
+    \item Complet : \textbf{non} ($0$ n’a pas de $b$, $1$ n’a pas de $a$, $2$ n’a pas de $b$).
+    \end{itemize}
+
+    \underline{Complétion.}
+    Ajouter un puits $\bot$ bouclé en $a,b$, et compléter :
+    \[
+    0 \xrightarrow{b} \bot,\qquad
+    1 \xrightarrow{a} \bot,\qquad
+    2 \xrightarrow{b} \bot.
+    \]
+    \underline{Déterminisation.} Inutile (déjà DFA).
+
+  \end{question}
+
+\end{correction}
+
+
+
+\begin{correction}
+
+  \begin{question}
+    
+  \item Correction détaillée pour l'automate A.
+    
+    \textbf{Phase 1.}
+    La construction de l'AFD équivalent commence par la détermination de l'état initial.
+    Celui-ci est construit à partir de l' $\varepsilon$-fermeture de tous les états initiaux.
+    Donc ici, $I'=\{0\}$. A partir de là, on construit la table des transitions.
+    
+    $$\begin{array}{| l | c | c|}
+      \hline
+      \  \mu & a & b \\
+      \hline
+      \  A = \{0\} = I' &  &  \\
+      \hline
+    \end{array}$$
+
+    \textbf{Phase 2.}
+    On regarde vers quels états l'automate se trouve pour chacun des symboles de l'alphabet à partir de $I'$.
+    Normalement, il faut faire l'$\varepsilon$-fermeture sur les états obtenus mais dans cet automate il n'y a aucune $\varepsilon$-transition.
+    On les ajoute à la table s'ils n'y sont pas déjà.
+
+    $$\begin{array}{| l | c | c|}
+      \hline
+      \  \mu & a & b \\
+      \hline
+      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+      \  B = \{0,1\} &  &  \\
+      \hline
+    \end{array}$$
+
+
+    \textbf{Phase 3.}
+    Puis on fait la même chose pour chacun des états pas encore traités.
+    $$\begin{array}{| l | c | c|}
+      \hline
+      \  \mu & a & b \\
+      \hline
+      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+      \  B = \{0,1\} &  \{0,1,2 \}& \{0,1\}  \\
+      \  C = \{0,1,2\} &  &  \\
+      \hline
+    \end{array}$$
+
+    \textbf{Phase 4.}
+    C contient l'état 2 qui est final dans l'automate de départ. Donc C est un état final dans l'AFD obtenu.
+
+    $$\begin{array}{| l | c | c|}
+      \hline
+      \  \mu & a & b \\
+      \hline
+      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+      \  B = \{0,1\} &  \{0,1,2 \} & \{0,1\}  \\
+      \  C = \{0,1,2\} \in F &  \{0,1,2 \} &  \{0,1,2 \} \\
+      \hline
+    \end{array}$$
+
+    Finalement, le tableau est rempli, l'automate est terminé. On obtient l'automate suivant :
+
+    \begin{center}
+      \begin{tikzpicture}[automaton]
+        \state[initial  ] (0) at (0,0) {$A$}; 
+        \state            (1) at (1,0) {$B$}; 
+        \state[accepting] (2) at (2,0) {$C$}; 
+
+        \path (0) edge[loop above] node {$b$}    (0);
+        \path (1) edge[loop above] node {$b$}    (1);
+        \path (2) edge[loop above] node {$a, b$} (2);
+        \path (0) edge             node {$a$}    (1);
+        \path (1) edge             node {$a$}    (2);
+      \end{tikzpicture}
+    \end{center}
+
+  \item Automate $B$ déterminisé :\\
+    \begin{minipage}[t]{.4\textwidth}
+      \begin{itemize}
+      \item $A = \{1, 2, 3, 4, 6, 9, 10, 11\}$
+      \item $B = \{8, 11\}$
+      \item $C = \{4, 5, 6, 7, 11\}$
+      \item $D = \{4, 5, 6, 11\}$
+      \end{itemize}
+    \end{minipage}%
+    \begin{minipage}[t]{.3\textwidth}
+      \begin{tikzpicture}[automaton]
+        \state[accepting, initial] (A) at (0,1) {$A$}; 
+        \state[accepting]          (B) at (1,1) {$B$}; 
+        \state[accepting]          (C) at (0,0) {$C$}; 
+        \state[accepting]          (D) at (1,0) {$D$}; 
+
+        \path (D) edge[loop right] node {$a$}  (D);
+        \path (A) edge             node {$b$} (B);
+        \path (A) edge             node {$a$} (C);
+        \path (C) edge             node {$b$} (B);
+        \path (C) edge             node {$a$} (D);
+      \end{tikzpicture}
+    \end{minipage}
+
+  \end{question}
+
+\end{correction}
+
+\begin{correction}
+
+  \begin{question}
+  \item {\small
+    \begin{tabular}[t]{| l | c c c c |}
+      \hline
+      & A & B & C  & D \\
+      \hline
+      Accessible          & $\{1,2,3,4\}$ & $\{1, 2, 3, 4, 5, 7\}$  & $\{1, 2, 3, 4, 5, 6\}$  & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Inaccessible        & $\emptyset$   & $\{6\}$                 & $\emptyset$             & $\emptyset$                             \\
+      Co-accessible       & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Stérile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+      Utile               & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+      Inutile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+      Complet             & oui           & non                     & non                     & non                                     \\
+      Emondé              & oui           & non                     & non                     & oui                                     \\
+      Unitaire            & oui           & oui                     & oui                     & oui                                     \\
+      Standard            & non           & oui                     & non                     & oui                                     \\
+      Normalisé           & non           & non                     & non                     & non                                     \\
+      $\varepsilon$-libre & oui           & oui                     & oui                     & non                                     \\
+      Déterministe        & oui           & non                     & non                     & non                                     \\
+      \hline
+  \end{tabular}}
+  \item 
+    \begin{minipage}[t]{.4\textwidth}
+      $B$ sur l'alphabet $\{a,b,c,d\}$ :\\
+
+      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+          \node[state, accepting]                         (2) [right=of 1] {$2$}; 
+          \node[state, accepting]                         (5) [below=of 2] {$5$}; 
+
+          \path[-latex] (2) edge[loop above, looseness=5] node {$a$}    (2);
+          \path[-latex] (5) edge[loop below, looseness=5] node {$b, c$}    (5);
+          \path[-latex] (1) edge node {$a$} (2);
+          \path[-latex] (1) edge node[swap] {$b, c$} (5);
+          \path[-latex] (2) edge[bend left=6mm] node {$b$} (5);
+          \path[-latex] (5) edge[bend left=6mm] node {$a$} (2);
+      \end{tikzpicture}}
+    \end{minipage}%
+    \begin{minipage}[t]{.4\textwidth}
+      $C$ sur l'alphabet $\{0,1,2,3,4,5,6,7,8,9\}$ :\\
+      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+          \node[state]                                    (2) [right=of 1] {$2$}; 
+          \node[state]                                    (3) [right=of 2] {$3$}; 
+          \node[state, accepting]                         (6) [below=of 3] {$6$}; 
+
+          \path[-latex] (1) edge[loop above, looseness=5] node {$0$}    (1);
+          \path[-latex] (1) edge node {$1$} (2);
+          \path[-latex] (2) edge node {$0$} (3);
+          \path[-latex] (3) edge[bend left=6mm] node {$0$} (6);
+          \path[-latex] (6) edge[bend left=6mm] node {$0$} (3);
+      \end{tikzpicture}}
+    \end{minipage}
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
 
-\end{tikzpicture}
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+% 
+%\begin{correction}
+% 
+%  \textbf{Rappels de vocabulaire.}
+%  \begin{description}
+%  \item[Unitaire] : un seul état initial.
+%  \item[Standard] : unitaire sans transition entrante dans l'état initial.
+%  \item[Normalisé] : standard + un seul état final sans transition sortante.
+%  \item[$\varepsilon$-libre] : aucune $\varepsilon$-transition.
+%  \item[Déterministe] : Unitaire, $\varepsilon$-libre, et au plus une transition par lettre et par état.
+%  \item[Complet] : au moins une transition par lettre et par état.
+%  \end{description}
+%  
+%  \begin{question}
+%  \item 
+% 
+%    \underline{Propriétés.}
+%    \begin{itemize}
+%    \item Unitaire : \textbf{non} (états finaux $\{1,6\}$).
+%    \item Standard : \textbf{oui} (un seul initial $1$, aucune entrée vers $1$).
+%    \item Normalisé : \textbf{non} (plusieurs finaux et transitions sortantes depuis $1$).
+%    \item $\varepsilon$-libre : \textbf{oui}.
+%    \item Déterministe : \textbf{non} (depuis $6$ deux transitions en $0$; depuis $1$ deux sorties en $0$ : boucle et $1\to4$).
+%    \item Complet : \textbf{non} (p.ex. $3$ n’a pas de $1$; $5$ n’a pas de $0$; $6$ n’a pas de $1$).
+%    \end{itemize}
+% 
+%    \underline{Complétion.}
+%    Ajouter un puits $\bot$ bouclé sur $0,1$, et compléter :
+%    \[
+%    3 \xrightarrow{1} \bot,\quad
+%    5 \xrightarrow{0} \bot,\quad
+%    6 \xrightarrow{1} \bot.
+%    \]
+%    (Tous les autres états ont déjà au moins une sortie sur chaque lettre.)
+% 
+%    \underline{Déterminisation (méthode des sous-ensembles).}
+%    États AFD = sous-ensembles d’états; initial $\{1\}$; finaux = sous-ensembles contenant $1$ ou $6$.
+%    Table (transitions $0/1$) — on ne liste que les ensembles atteignables :
+%    \[
+%    \renewcommand{\arraystretch}{1.2}
+%    \begin{array}{c|c|c}
+%      X & \delta(X,0) & \delta(X,1)\\\hline
+%      \{1\}     & \{1,4\} & \{2\}\\
+%      \{1,4\}   & \{1,4\} & \{2,4\}\\
+%      \{2\}     & \{3\}   & \{4\}\\
+%      \{2,4\}   & \{3,4\} & \{4\}\\
+%      \{3\}     & \{6\}   & \emptyset\\
+%      \{4\}     & \{4\}   & \{4\}\\
+%      \{3,4\}   & \{4,6\} & \{4\}\\
+%      \{6\}     & \{3,5\} & \emptyset\\
+%      \{4,6\}   & \{3,4,5\} & \{4\}\\
+%      \{3,5\}   & \{6\}   & \{5\}\\
+%      \{5\}     & \emptyset & \{5\}\\
+%      \{3,4,5\} & \{4,6\} & \{4,5\}\\
+%      \{4,5\}   & \{4\}   & \{4,5\}
+%    \end{array}
+%    \]
+%    (On ajoute l’état puits $\emptyset$ si l’on souhaite un DFA complet.)
+%    États \textit{acceptants} : ceux qui contiennent $1$ ou $6$ (ex. $\{1\},\{1,4\},\{6\},\{4,6\},\{3,5\}$…).
+% 
+%    \medskip
+% 
+%    % ===========================
+%    % (2)
+%    % ===========================
+%  \item \textbf{Automate (2) — alphabet $\{a,b\}$.}
+% 
+%    \underline{Propriétés.}
+%    \begin{itemize}
+%    \item Unitaire : \textbf{oui} (un seul final $4$).
+%    \item Standard : \textbf{non} (des entrées vers l’état initial $1$ : $2\xrightarrow{a}1$, $3\xrightarrow{b}1$).
+%    \item Normalisé : \textbf{non} (l’état final $4$ a des sorties).
+%    \item $\varepsilon$-libre : \textbf{oui}.
+%    \item Déterministe : \textbf{oui}.
+%    \item Complet : \textbf{oui} (chaque état a une sortie en $a$ et en $b$).
+%    \end{itemize}
+% 
+%    \underline{Complétion.} Aucune (déjà complet).
+%    \underline{Déterminisation.} Inutile (déjà DFA).
+% 
+%    \medskip
+% 
+%    % ===========================
+%    % (3)
+%    % ===========================
+%  \item \textbf{Automate (3) — alphabet $\{a,b\}$.}
+% 
+%    \underline{Propriétés.}
+%    \begin{itemize}
+%    \item Unitaire : \textbf{oui} (final $\{2\}$).
+%    \item Standard : \textbf{non} (boucle sur l’état initial $0$).
+%    \item Normalisé : \textbf{non} (final $2$ a des sorties).
+%    \item $\varepsilon$-libre : \textbf{oui}.
+%    \item Déterministe : \textbf{non} (depuis $0$: deux sorties en $a$ — boucle et $0\to1$; idem $1$ en $a$).
+%    \item Complet : \textbf{oui} (chaque état a au moins une sortie sur $a$ et sur $b$).
+%    \end{itemize}
+% 
+%    \underline{Complétion.} Aucune (déjà complet).
+% 
+%    \underline{Déterminisation (sous-ensembles).}
+%    Initial $\{0\}$; finaux = sous-ensembles contenant $2$.
+%    \[
+%    \renewcommand{\arraystretch}{1.2}
+%    \begin{array}{c|c|c}
+%      X & \delta(X,a) & \delta(X,b)\\\hline
+%      \{0\}     & \{0,1\}   & \{0\}\\
+%      \{0,1\}   & \{0,1,2\} & \{0,1\}\\
+%      \{0,1,2\} & \{0,1,2\} & \{0,1,2\}
+%    \end{array}
+%    \]
+%    DFA obtenu (équivalent) : états $\{0\}$, $\{0,1\}$, $\{0,1,2\}$; seul $\{0,1,2\}$ est acceptant.
+% 
+%    \medskip
+% 
+%    % ===========================
+%    % (4)
+%    % ===========================
+%  \item \textbf{Automate (4) — alphabet $\{a,b\}$.}
+% 
+%    \underline{Propriétés.}
+%    \begin{itemize}
+%    \item Unitaire : \textbf{oui} (final $2$).
+%    \item Standard : \textbf{oui} (un seul initial $0$, pas d’entrée vers $0$).
+%    \item Normalisé : \textbf{non} (le final $2$ a une boucle sortante).
+%    \item $\varepsilon$-libre : \textbf{oui}.
+%    \item Déterministe : \textbf{oui}.
+%    \item Complet : \textbf{non} ($0$ n’a pas de $b$, $1$ n’a pas de $a$, $2$ n’a pas de $b$).
+%    \end{itemize}
+% 
+%    \underline{Complétion.}
+%    Ajouter un puits $\bot$ bouclé en $a,b$, et compléter :
+%    \[
+%    0 \xrightarrow{b} \bot,\qquad
+%    1 \xrightarrow{a} \bot,\qquad
+%    2 \xrightarrow{b} \bot.
+%    \]
+%    \underline{Déterminisation.} Inutile (déjà DFA).
+% 
+%  \end{question}
+% 
+%\end{correction}
+% 
+% 
+% 
+%\begin{correction}
+% 
+%  \begin{question}
+%    
+%  \item Correction détaillée pour l'automate A.
+%    
+%    \textbf{Phase 1.}
+%    La construction de l'AFD équivalent commence par la détermination de l'état initial.
+%    Celui-ci est construit à partir de l' $\varepsilon$-fermeture de tous les états initiaux.
+%    Donc ici, $I'=\{0\}$. A partir de là, on construit la table des transitions.
+%    
+%    $$\begin{array}{| l | c | c|}
+%      \hline
+%      \  \mu & a & b \\
+%      \hline
+%      \  A = \{0\} = I' &  &  \\
+%      \hline
+%    \end{array}$$
+% 
+%    \textbf{Phase 2.}
+%    On regarde vers quels états l'automate se trouve pour chacun des symboles de l'alphabet à partir de $I'$.
+%    Normalement, il faut faire l'$\varepsilon$-fermeture sur les états obtenus mais dans cet automate il n'y a aucune $\varepsilon$-transition.
+%    On les ajoute à la table s'ils n'y sont pas déjà.
+% 
+%    $$\begin{array}{| l | c | c|}
+%      \hline
+%      \  \mu & a & b \\
+%      \hline
+%      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+%      \  B = \{0,1\} &  &  \\
+%      \hline
+%    \end{array}$$
+% 
+% 
+%    \textbf{Phase 3.}
+%    Puis on fait la même chose pour chacun des états pas encore traités.
+%    $$\begin{array}{| l | c | c|}
+%      \hline
+%      \  \mu & a & b \\
+%      \hline
+%      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+%      \  B = \{0,1\} &  \{0,1,2 \}& \{0,1\}  \\
+%      \  C = \{0,1,2\} &  &  \\
+%      \hline
+%    \end{array}$$
+% 
+%    \textbf{Phase 4.}
+%    C contient l'état 2 qui est final dans l'automate de départ. Donc C est un état final dans l'AFD obtenu.
+% 
+%    $$\begin{array}{| l | c | c|}
+%      \hline
+%      \  \mu & a & b \\
+%      \hline
+%      \  A = \{0\} = I' & \{0,1\} & \{0\} \\
+%      \  B = \{0,1\} &  \{0,1,2 \} & \{0,1\}  \\
+%      \  C = \{0,1,2\} \in F &  \{0,1,2 \} &  \{0,1,2 \} \\
+%      \hline
+%    \end{array}$$
+% 
+%    Finalement, le tableau est rempli, l'automate est terminé. On obtient l'automate suivant :
+% 
+%    \begin{center}
+%      \begin{tikzpicture}[automaton]
+%        \state[initial  ] (0) at (0,0) {$A$}; 
+%        \state            (1) at (1,0) {$B$}; 
+%        \state[accepting] (2) at (2,0) {$C$}; 
+% 
+%        \path (0) edge[loop above] node {$b$}    (0);
+%        \path (1) edge[loop above] node {$b$}    (1);
+%        \path (2) edge[loop above] node {$a, b$} (2);
+%        \path (0) edge             node {$a$}    (1);
+%        \path (1) edge             node {$a$}    (2);
+%      \end{tikzpicture}
+%    \end{center}
+% 
+%  \item Automate $B$ déterminisé :\\
+%    \begin{minipage}[t]{.4\textwidth}
+%      \begin{itemize}
+%      \item $A = \{1, 2, 3, 4, 6, 9, 10, 11\}$
+%      \item $B = \{8, 11\}$
+%      \item $C = \{4, 5, 6, 7, 11\}$
+%      \item $D = \{4, 5, 6, 11\}$
+%      \end{itemize}
+%    \end{minipage}%
+%    \begin{minipage}[t]{.3\textwidth}
+%      \begin{tikzpicture}[automaton]
+%        \state[accepting, initial] (A) at (0,1) {$A$}; 
+%        \state[accepting]          (B) at (1,1) {$B$}; 
+%        \state[accepting]          (C) at (0,0) {$C$}; 
+%        \state[accepting]          (D) at (1,0) {$D$}; 
+% 
+%        \path (D) edge[loop right] node {$a$}  (D);
+%        \path (A) edge             node {$b$} (B);
+%        \path (A) edge             node {$a$} (C);
+%        \path (C) edge             node {$b$} (B);
+%        \path (C) edge             node {$a$} (D);
+%      \end{tikzpicture}
+%    \end{minipage}
+% 
+%  \end{question}
+% 
+%\end{correction}
+% 
+%\begin{correction}
+% 
+%  \begin{question}
+%  \item {\small
+%    \begin{tabular}[t]{| l | c c c c |}
+%      \hline
+%      & A & B & C  & D \\
+%      \hline
+%      Accessible          & $\{1,2,3,4\}$ & $\{1, 2, 3, 4, 5, 7\}$  & $\{1, 2, 3, 4, 5, 6\}$  & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+%      Inaccessible        & $\emptyset$   & $\{6\}$                 & $\emptyset$             & $\emptyset$                             \\
+%      Co-accessible       & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+%      Stérile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+%      Utile               & $\{1,2,3,4\}$ & $\{1, 2, 5\}$           & $\{1, 2, 3, 6\}$        & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$ \\
+%      Inutile             & $\emptyset$   & $\{3, 4, 6, 7\}$        & $\{4, 5\}$              & $\emptyset$                             \\
+%      Complet             & oui           & non                     & non                     & non                                     \\
+%      Emondé              & oui           & non                     & non                     & oui                                     \\
+%      Unitaire            & oui           & oui                     & oui                     & oui                                     \\
+%      Standard            & non           & oui                     & non                     & oui                                     \\
+%      Normalisé           & non           & non                     & non                     & non                                     \\
+%      $\varepsilon$-libre & oui           & oui                     & oui                     & non                                     \\
+%      Déterministe        & oui           & non                     & non                     & non                                     \\
+%      \hline
+%  \end{tabular}}
+%  \item 
+%    \begin{minipage}[t]{.4\textwidth}
+%      $B$ sur l'alphabet $\{a,b,c,d\}$ :\\
+% 
+%      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+%          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+%          \node[state, accepting]                         (2) [right=of 1] {$2$}; 
+%          \node[state, accepting]                         (5) [below=of 2] {$5$}; 
+% 
+%          \path[-latex] (2) edge[loop above, looseness=5] node {$a$}    (2);
+%          \path[-latex] (5) edge[loop below, looseness=5] node {$b, c$}    (5);
+%          \path[-latex] (1) edge node {$a$} (2);
+%          \path[-latex] (1) edge node[swap] {$b, c$} (5);
+%          \path[-latex] (2) edge[bend left=6mm] node {$b$} (5);
+%          \path[-latex] (5) edge[bend left=6mm] node {$a$} (2);
+%      \end{tikzpicture}}
+%    \end{minipage}%
+%    \begin{minipage}[t]{.4\textwidth}
+%      $C$ sur l'alphabet $\{0,1,2,3,4,5,6,7,8,9\}$ :\\
+%      \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.7cm,on grid,auto]
+%          \node[state, initial, initial text=, accepting] (1)              {$1$}; 
+%          \node[state]                                    (2) [right=of 1] {$2$}; 
+%          \node[state]                                    (3) [right=of 2] {$3$}; 
+%          \node[state, accepting]                         (6) [below=of 3] {$6$}; 
+% 
+%          \path[-latex] (1) edge[loop above, looseness=5] node {$0$}    (1);
+%          \path[-latex] (1) edge node {$1$} (2);
+%          \path[-latex] (2) edge node {$0$} (3);
+%          \path[-latex] (3) edge[bend left=6mm] node {$0$} (6);
+%          \path[-latex] (6) edge[bend left=6mm] node {$0$} (3);
+%      \end{tikzpicture}}
+%    \end{minipage}
+%  \end{question}
+% 
+%\end{correction}
+% 
+%\endgroup
+%\endinput

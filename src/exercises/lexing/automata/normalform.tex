@@ -38,5 +38,67 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Automate standard
+    \begin{center}
+      \begin{tikzpicture}[automaton, size=20mm]
+          \state[initial]   (1) at (0,1) {$1$}; 
+          \state            (2) at (1,1) {$2$}; 
+          \state[accepting] (3) at (2,1) {$3$}; 
+          \state            (4) at (0,0) {$4$}; 
+          \state            (5) at (1,0) {$5$}; 
+          \state[accepting] (6) at (2,0) {$6$}; 
+
+          \path (6) edge[loop right] node {$a$} (6);
+          \path (1) edge             node {$a$} (2);
+          \path (1) edge             node {$a$} (4);
+          \path (2) edge             node {$b$} (5);
+          \path (4) edge             node {$b$} (5);
+          \path (5) edge             node {$c$} (3);
+          \path (1) edge             node {$b$} (5);
+
+          \path (2) edge[bend left] node {$c$} (3);
+          \path (3) edge[bend left] node {$a$} (2);
+          \path (5) edge[bend left] node {$c$} (6);
+          \path (6) edge[bend left] node {$b$} (5);
+      \end{tikzpicture}
+    \end{center}
+  \item Automate normalisé
+    \begin{center}
+      \begin{tikzpicture}[automaton, size=20mm]
+          \state[initial]   (1) at (0,1) {$1$}; 
+          \state            (2) at (1,1) {$2$}; 
+          \state            (3) at (2,1) {$3$}; 
+          \state            (4) at (0,0) {$4$}; 
+          \state            (5) at (1,0) {$5$}; 
+          \state            (6) at (2,0) {$6$}; 
+          \state[accepting] (F) at (3,1) {$F$}; 
+
+          \path (6) edge[loop right]      node       {$a$} (6);
+          \path (1) edge                  node       {$a$} (2);
+          \path (1) edge                  node       {$a$} (4);
+          \path (2) edge                  node       {$b$} (5);
+          \path (4) edge                  node       {$b$} (5);
+          \path (5) edge                  node       {$c$} (3);
+          \path (1) edge                  node       {$b$} (5);
+          \path (2) edge[bend left]       node[swap] {$c$} (3);
+          \path (3) edge[bend left]       node       {$a$} (2);
+          \path (5) edge[bend left]       node       {$c$} (6);
+          \path (6) edge[bend left]       node[swap] {$b$} (5);
+          \path (5) edge[bend right=25mm] node[swap] {$c$} (F);
+          \path (2) edge[bend left=12mm]  node       {$c$} (F);
+          \path (6) edge                  node       {$a$} (F);
+
+      \end{tikzpicture}
+    \end{center}
+  \item Un automate normalisé a un et un sel état final, dont aucune transition ne doit partir de l'état final.
+    Par contre, pour un automate complet, tout état (y compris les états finaux) doit posséder une transition sur chacun des symboles de l'alphabet. 
+    Ces deux contraintes sont donc totalement incompatibles.
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

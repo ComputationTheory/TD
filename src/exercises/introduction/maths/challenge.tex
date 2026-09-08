@@ -67,5 +67,53 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Il y a à chaque fois deux choses à vérifier :
+    \begin{itemize}
+    \item $[\frac{3}{4} , 1] \subseteq \mathbb{R} \subseteq \mathbb{R}$, et $\forall x \in \mathbb{R}, \frac{x}{2} \in \mathbb{R}$.
+    \item $[\frac{3}{4} , 1] \subseteq [0, 1] \subseteq \mathbb{R}$, et $\forall x \in [0, 1], \frac{x}{2} \in [0, 1]$.
+    \item $[\frac{3}{4} , 1] \subseteq [0, \frac{1}{2}] \cup [\frac{3}{4} , 1] \subseteq \mathbb{R}$, et $\forall x \in [0, \frac{1}{2}] \cup [\frac{3}{4} , 1], \frac{x}{2} \in [0, \frac{1}{2}] \subseteq [0, \frac{1}{2}] \cup [\frac{3}{4} , 1]$.
+    \end{itemize}
+  \item Soient $X, X' \in \mathcal{S}$.
+    \begin{itemize}
+    \item $X \in \mathscr{P}(\mathbb{R})$ et $X' \in \mathscr{P}(\mathbb{R})$, donc $X \cap X' \in \mathscr{P}(\mathbb{R})$.
+    \item Soit $x \in [\frac{3}{4} , 1]$. On a $x\in X$ et $x \in X'$, donc $x \in X\cap X'$.
+    \item Soit $x \in X\cap X'$. Montrons que $\frac{x}{2} \in X \cap X'$.\\
+      Comme $x \in X$ et $X \in \mathcal{S}$, $\frac{x}{2} \in X$. De même, $\frac{x}{2} \in X'$. Donc $\frac{x}{2} \in X \cap X'$. 
+    \end{itemize}
+    Finalement, $X \cap X' \in \mathcal{S}$.
+  \item On revient à la définition $x \in \mathbb{R} \land (\forall X \in \mathcal{S}, x \in X) \Rightarrow x \in E$. 
+    \begin{itemize}
+    \item Soit $X \in \mathcal{S}$. On a $1 \in [\frac{3}{4} , 1] \subseteq X$. On a donc, $1 \in \mathbb{R} \land \forall X \in \mathcal{S}, x \in X$, donc $1\in E$. 
+    \item Pour tout $X \in \mathcal{S}$, $1 \in X$, donc $\frac{1}{2} \in X$. Donc $\frac{1}{2} \in E$.
+    \end{itemize}
+  \item Par définition, $x \in E \Rightarrow \forall X \in \mathcal{S}, x \in X$. On prend la contraposée $(\exists X \in \mathcal{S}, x \notin X) \Rightarrow x\notin E$. 
+    \begin{itemize}
+    \item $[0,1] \in \mathcal{S}$ et $2\notin [0,1]$, donc $2 \notin E$. 
+    \item $[0, \frac{1}{2}] \cup [\frac{3}{4} , 1] \in \mathcal{S}$ et $\frac{2}{3}\notin [0, \frac{1}{2}] \cup [\frac{3}{4} , 1]$, donc $\frac{2}{3} \notin E$. 
+    \end{itemize}
+  \item Supposons, (par l'absurde), qu'il existe $x<1$ tel que $x\notin E$ et $\frac{x}{2} \in E$.
+    Posons $F = E \setminus \{\frac{x}{2}\}$.  
+    \begin{enumerate}
+    \item Montrons que $F \in \mathcal{S}$. 
+      \begin{itemize}
+      \item On a bien $F \subseteq E \subseteq \mathbb{R}$.
+      \item Soit $y \in [\frac{3}{4}, 1]$. On a bien $y\in E$. De plus, $y > \frac{1}{2}$, donc $y \neq \frac{x}{2}$, donc $y\in F$. 
+      \item Soit $y \in F$. Alors $y\in E$, donc $\frac{y}{2} \in E$. De plus, $\frac{y}{2} \neq \frac{x}{2}$ puisque $x\notin E$. Donc $\frac{y}{2}\in F$. 
+      \end{itemize}
+    \item $F \in \mathcal{S}$ et $\frac{x}{2} \notin F$, donc $\frac{x}{2} \notin E$. Absurde. 
+    \end{enumerate}
+  \item Soit $x \in \left[\frac{3}{4}, 1\right]$. On a $0 < \frac{2}{3} < x$ et $\frac{2}{3} \notin E$. 
+  \item Soit $x \in E$ tel que $P(x)$, et soit $y$ donné par $P(x)$, tel que $0 < y < x$ et $y\notin E$.
+    On a $0 < \frac{y}{2} < \frac{x}{2}$ et $\frac{y}{2}\notin E$. 
+  \item Posons $X \eqdef \{x\in E | P(x)\}$. D'après les deux points précédents,
+    on a $X\in \mathcal{S}$, donc $E \subseteq X$. \\
+    Soit $x \in E$. On a $x\in X$, donc $P(x)$.  
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

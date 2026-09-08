@@ -24,5 +24,34 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Supposons (par l'absurde), que $L_1$ est rationnel.\\
+    Alors $L_1$ vérifie le lemme de l'étoile, donc il existe $N \in \mathbb{N}$ tel que pour tout mot $u$ tel que $|u|\ge N$,
+    il existe $x, y, z \in \Sigma^\star$ tels que $u=xyz$, $y\neq \emptyset$, $|xy| \le N$ et pour tout $i\in \mathbb{N}$, $xy^i z\in L_1$. \\
+    \textbf{Posons $u = a^Nb^N$. } Clairement, on a $|u| = 2N \ge N$ et $u\in L_1$.\\
+    Comme $|xy| \le N$, $xy$ n'est composé que de $a$, donc on a $x = a^{|x|}$, $y = a^{|y|} \neq \varepsilon$  et $z=a^{N-|x|-|y|}b^N$. \\
+    \textbf{Posons $i = 0$. } On a $x y^i z = a^{N-|y|}b^N \in L_1$ d'après le lemme de l'étoile.\\
+    Absurde (car $n = N-|y| \not\ge N = p$) donc $L_1$ n'est pas rationnel. 
+  \item $L_2 = \mathcal{S}((aa)^\star \cdot (bb)^\star \mid a(aa)^\star \cdot b(bb)^\star )$ est rationnel.
+  \item Supposons (par l'absurde), que $L_3$ est rationnel.\\
+    Soit $N$ donné par le lemme de l'étoile. \\
+    Posons $u = a^{{(N+1)}^2}$. On a bien $u \in L_3$, et $|u| \ge N$. \\
+    Soit $x\cdot y \cdot z$ la décomposition donnée par le lemme de l'étoile. \\
+    Comme $y\neq \varepsilon$ et $|y| \le |xy|\le N < N+1$, on a:
+    $$\begin{array}{rcccl}
+      0 &<& |y| &<& N+1\\
+      (N+1)^2 &<& (N+1)^2 + |y| & < & (N+1)^2 + N+1\\
+      (N+1)^2 &<& (N+1)^2 + |y| & < &  (N+1)(N+2)\\
+      (N+1)^2 &<& |x\cdot y^2 \cdot z| & < & (N+2)^2\\
+    \end{array}$$
+
+    $(N+1)^2$ et $(N+2)^2$ sont deux carrés parfaits consécutifs, donc $|x\cdot y^2 \cdot z|$ n'est pas un carré parfait.
+    Donc $x\cdot y^2 \cdot z \notin L_3$. Absurde, donc $L_3$ n'est pas rationnel. 
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

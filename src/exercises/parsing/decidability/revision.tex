@@ -46,5 +46,194 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+    
+  \item
+    \begin{itemize}
+    \item Automate sous-jacent :
+
+      \begin{tikzpicture}[automaton, baseline=(0.base), x=40mm, y=20mm]
+        \state[initial, rectangle] (0) at (1,2) {
+          $0=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow&\bullet A\$\\
+          A &\rightarrow&\bullet Aa \mid \bullet B\\
+          B &\rightarrow&\bullet Bb \mid \bullet \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (1) at (1,1) {
+          $1=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\bullet\$\\
+          A &\rightarrow& A\bullet a \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (2) at (2,1) {
+          $2=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa \mid B\bullet\\
+          B &\rightarrow& B\bullet b \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[accepting, rectangle] (3) at (0,1) {
+          $3=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\bullet\\
+          A &\rightarrow& Aa \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (4) at (1,0) {
+          $4=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa\bullet \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (5) at (2,0) {
+          $5=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa \mid B\\
+          B &\rightarrow& Bb\bullet \mid \varepsilon
+          \end{array}\right.$};
+        
+        \path (0) edge node       {$A$}  (1);
+        \path (0) edge node       {$B$}  (2);
+        \path (1) edge node       {$\$$} (3);
+        \path (1) edge node       {$a$}  (4);
+        \path (2) edge node       {$b$}  (5);
+      \end{tikzpicture}
+      
+    \item Automate à pile (un conflit par décallage/réduction dans l'état $2$) :
+
+      \begin{tikzpicture}[pushdown, baseline=(0.base), x=40mm, y=20mm, initial text=$0$]
+        \state[initial above, rectangle] (0) at (1,2) {
+          $0=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow&\bullet A\$\\
+          A &\rightarrow&\bullet Aa \mid \bullet B\\
+          B &\rightarrow&\bullet Bb \mid \bullet \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (1) at (1,1) {
+          $1=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\bullet\$\\
+          A &\rightarrow& A\bullet a \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (2) at (2,1) {
+          $2=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa \mid B\bullet\\
+          B &\rightarrow& B\bullet b \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[accepting, rectangle] (3) at (0,1) {
+          $3=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\bullet\\
+          A &\rightarrow& Aa \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (4) at (1,0) {
+          $4=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa\bullet \mid B\\
+          B &\rightarrow& Bb \mid \varepsilon
+          \end{array}\right.$};
+        
+        \state[rectangle] (5) at (2,0) {
+          $5=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+          S &\rightarrow& A\$\\
+          A &\rightarrow& Aa \mid B\\
+          B &\rightarrow& Bb\bullet \mid \varepsilon
+          \end{array}\right.$};
+        
+        \path (1) edge            node {\smPAtrans{\$}{\varepsilon}{3}}   (3);
+        \path (1) edge[bend left] node {\smPAtrans{a}{\varepsilon}{4}}    (4);
+        \path (2) edge[bend left] node {\smPAtrans{b}{\varepsilon}{5}}    (5);
+        \path (0) edge            node {\smPAtrans{\varepsilon}{0}{02}}   (2);
+        \path (2) edge            node {\smPAtrans{\varepsilon}{02}{01}}  (1);
+        \path (4) edge[bend left] node {\smPAtrans{\varepsilon}{014}{01}} (1);
+        \path (5) edge[bend left] node {\smPAtrans{\varepsilon}{025}{02}} (2);
+
+      \end{tikzpicture}
+    \end{itemize}
+
+  \item Ici, le conflit par décalage/réduction de l'état $3$ ne peut pas être résolu par une simple fusion de transitions :
+    il faut observer le symbole $\$$ sans le consommer, ce qui ne peut pas être représenté directement dans le formalisme
+    des automates à pile adopté ici, mais se met naturellement en \oe uvre dans l'implémentation d'un analyseur SLR.
+
+    \begin{tikzpicture}[pushdown, baseline=(0.base), x=50mm, y=20mm, initial text=$0$]
+      \state[initial above, rectangle] (0) at (0,3) {
+        $0=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow&\bullet A\$\\
+        A &\rightarrow&\bullet B + A \mid \bullet B\\
+        B &\rightarrow&\bullet 1
+        \end{array}\right.$};
+      
+      \state[rectangle] (1) at (0,0) {
+        $1=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\bullet\$\\
+        A &\rightarrow& B + A \mid  B\\
+        B &\rightarrow& 1
+        \end{array}\right.$};
+      
+      \state[rectangle] (2) at (0,2) {
+        $2=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\$\\
+        A &\rightarrow& B + A \mid  B\\
+        B &\rightarrow& 1\bullet
+        \end{array}\right.$};
+      
+      \state[rectangle] (3) at (0,1) {
+        $3=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\$\\
+        A &\rightarrow& B\bullet + A \mid  B\bullet\\
+        B &\rightarrow& 1
+        \end{array}\right.$};
+      
+      \state[accepting, rectangle] (4) at (1,0) {
+        $4=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\$\bullet\\
+        A &\rightarrow& B + A \mid  B\\
+        B &\rightarrow& 1
+        \end{array}\right.$};
+      
+      \state[rectangle] (5) at (1,2) {
+        $5=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\$\\
+        A &\rightarrow& \bullet B + \bullet A \mid \bullet B\\
+        B &\rightarrow& \bullet 1
+        \end{array}\right.$};
+
+      \state[rectangle] (6) at (1,1) {
+        $6=\left\{\begin{array}{@{}r@{}c@{}l@{}}
+        S &\rightarrow& A\$\\
+        A &\rightarrow& B + A \bullet\mid  B\\
+        B &\rightarrow& 1
+        \end{array}\right.$};
+
+      \path (0) edge             node         {\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path (5) edge             node         {\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path (3) edge             node[sloped] {\smPAtrans{+}{\varepsilon}{5}}     (5);
+      \path (1) edge             node         {\smPAtrans{\$}{\varepsilon}{4}}    (4);
+      
+      \path (2) edge             node         {\smAlign{\smPAtrans{\varepsilon}{02}{03}\smPAtrans{\varepsilon}{52}{53}}}   (3);
+      \path (3) edge             node         {\smPAtrans{\varepsilon}{03}{01}}   (1);
+      \path (3) edge             node         {\smPAtrans{\varepsilon}{53}{56}}   (6);
+      \path (6) edge             node[sloped] {\smPAtrans{\varepsilon}{5356}{56}} (1);
+      \path (6) edge[loop right] node         {\smPAtrans{\varepsilon}{0356}{01}} (6);
+
+    \end{tikzpicture}
+
+  \item Même technique...
+    
+  \item Même technique...
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

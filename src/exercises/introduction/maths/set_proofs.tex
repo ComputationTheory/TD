@@ -15,5 +15,40 @@
 
 \end{exercice}
 
+\begin{correction}
+  
+  Le but de cet exercice est de faire travailler les étudiants sur le raisonnement logique.
+  On portera une attention particulière à la précision du raisonnement, en explicitant
+  ce qu'on sait à chaque étape, quelles règles logiques sont utilisées, et quelles sont les définitions. 
+
+  \begin{question}
+  \item Montrons que $\forall A, \forall B, A\cap B \subseteq A$.
+    \begin{itemize}
+    \item Soient $A$ et $B$ deux ensembles. Montrons que $A\cap B \subseteq A$.
+    \item D'après la définition de $\subseteq$, on doit montrer $\forall x, x \in A\cap B \Rightarrow x\in A$.
+    \item Soit $x$. Montrons $x \in A\cap B \Rightarrow x\in A$. 
+    \item Supposons $x \in A\cap B$. Montrons $x\in A$.
+    \item Par définition de $\cap$, on sait que $x \in A$ et $x\in B$.
+    \end{itemize}
+    Donc $x\in A$. Donc $x \in A\cap B \Rightarrow x\in A$. Donc $\forall x, x \in A\cap B \Rightarrow x\in A$.
+    Donc $A\cap B \subseteq A$. Donc $\forall A, \forall B, A\cap B \subseteq A$. CQFD
+  \item Montrons que $\forall A, \forall B, \forall C, A\subseteq B \Rightarrow A\cup C \subseteq B \cup C$
+    \begin{itemize}
+    \item Soient $A$, $B$ et $C$ trois ensembles, tels que $A\subseteq B$. Montrons que $A\cup C \subseteq B \cup C$
+    \item D'après la définition de $\subseteq$, on doit montrer $\forall x \in A\cup C, x\in B \cup C$. Soit $x \in A\cup C$.  
+    \item D'après la définition de $\cup$, $x \in A$ ou $x\in C$. Il faut distinguer deux cas. 
+      \begin{enumerate}
+      \item Supposons $x \in A$. \\
+        D'après la définition de $\subseteq$, on sait que $\forall y \in A, y\in B$. \\
+        En particulier pour $y=x$, $x \in A \implies x\in B$. \\
+        On en déduit $x\in B$. Donc $x\in B \lor x\in C$. Donc $x\in B \cup C$.
+      \item Supposons $x \in C$. Alors $x\in B \lor x\in C$. Donc $x\in B \cup C$.
+      \end{enumerate}
+    \item Dans les deux cas, $x\in B \cup C$. Donc $\forall x \in A\cup C, x\in B \cup C$. Soit $x \in A\cup C$.  Donc $A\cup C \subseteq B \cup C$. Donc $\forall A, \forall B, \forall C, A\subseteq B \Rightarrow A\cup C \subseteq B \cup C$. CQFD
+    \end{itemize}
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

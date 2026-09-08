@@ -24,6 +24,37 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item On pose $A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ avec :
+    \begin{itemize}
+    \item $\Sigma = \{a, b\}$
+    \item $Q = \{0, ..., n\}$
+    \item $I = \{0\}$
+    \item $F = \{n\}$
+    \item $\rightarrow = \{\langle 0, a, 1\rangle\} \cup \{\langle k, a, k+1\rangle, \langle k, b, k+1\rangle \mid 0 < k < n \}  \cup \{\langle k, a, 0\rangle, \langle k, b, 0\rangle \mid 0 \le k \le n \}$ 
+    \end{itemize}
+
+  \item L'automate déterminisé est $A' = \langle \Sigma, Q', I', F', \rightarrow' \rangle$ avec :
+    \begin{itemize}
+    \item $Q' = \{ P \subseteq Q \mid 0\in P\}$
+    \item $I = \{\{0\}\}$
+    \item $F = \{P \in Q' \mid n \in P\}$
+    \item $\rightarrow = \{\langle P, a, f(P) \mid P \in Q' \rangle\} \cup \{\langle P, b, f(P) \setminus \{1\}\rangle \mid P \in Q' \}$
+    \item $f(P) = \{0\} \cup \{q \in \{1, ..., n\} \mid q-1 \in P\}$
+    \end{itemize}
+
+  \item Comme l'automate est émondé, la méthode de Moore donne l'automate minimal. Or, la méthode de Moore laisse l'automate inchangé.
+    On en déduit que l'automate est déjà minimal.
+
+  \item L'automate a $2^n$ états. 
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
 

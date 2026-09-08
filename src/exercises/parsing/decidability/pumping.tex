@@ -15,5 +15,30 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+  \item Supposons (par l'absurde), que $L_1$ est algébrique.\\
+    Alors $L_1$ vérifie le lemme de pompage, donc il existe $N \in \mathbb{N}$ tel que pour tout mot $u$ tel que $|u|\ge N$,
+    il existe $v, w, x, y, z \in \Sigma^\star$ tels que $u=vwxyz$, $wy\neq \emptyset$, $|wxy| \le N$ et pour tout $i\in \mathbb{N}$, $vw^ixy^i z\in L_1$. \\
+    \textbf{Posons $u = a^Nb^Nc^N$. } Clairement, on a $|u| = 3N \ge N$ et $u\in L_1$.\\
+    Comme $wy\neq\varepsilon$, il existe $\alpha \in \{a, b, c\}$ tel que $|wy|_\alpha \neq 0$.\\
+    Comme $|wxy| \le N$, il existe $\beta \in \{a, b, c\}$ tel que $|wy|_\beta = 0$.\\
+    \textbf{Posons $i = 2$. } On a $v w^2 x y^2 z \in L_1$ d'après le lemme de pompage.\\
+    Or $|v w^2 x y^2 z|_\alpha > |v w x y z|_\alpha = |v w x y z|_\beta = |v w^2 x y^2 z|_\beta$.
+    Absurde, donc $L_1$ n'est pas algébrique. 
+  \item Supposons que $L_2$ est algébrique. Il vérifie le lemme de pompage. Soit $N$ donné par le lemme. \\
+    Posons $u = a^N b^N c^N$. On a $u \in L_2$ et $|u| \ge N$. Soit $v \cdot  w\cdot x\cdot y\cdot z$ la décomposition de $u$. \\
+    %   Posons $i=3N$. %Comme ci-dessus, il existe $\alpha$ et $\beta$ tels que $|wy|_\alpha \neq 0$ et $|wy|_\beta = 0$.\\
+    Il y a deux cas à considérer :
+    \begin{itemize}
+    \item Si $w y$ contient au moins un $c$, alors $w y$ ne contient pas de $a$, donc \\ $|v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_c \ge 3N > N = |v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_a$. Absurde.
+    \item Sinon $w y$ contient au moins un $\alpha\in \{a, b\}$, donc \\ $|v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_c = N < 2N \le  3N = |v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_\alpha$. Absurde.
+    \end{itemize}
+    Le langage $L_2$ n'est donc pas algébrique.
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

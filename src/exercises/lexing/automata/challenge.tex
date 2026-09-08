@@ -42,6 +42,50 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Posons $m = \mathcal{N}(w)$. Si $m\equiv r \pmod n$, alors il existe $k \in \mathbb{N}$ tel que
+    $m = k n + r$. On a alors $\mathcal{N}(wd) = 2m+d = 2kn + 2r + d \equiv 2r+d \pmod n$.
+
+  \item 
+    $\begin{array}[t]{c|cc}
+      &     d=0 & d=1 \\ \hline
+      r=0 & 0 & 1 \\
+      r=1 & 2 & 0 \\
+      r=2 & 1 & 2
+    \end{array}$
+    
+  \item 
+    \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
+      \state[initial,accepting]   (0) at (0,0) {$0$};
+      \state                      (1) at (1,0) {$1$};
+      \state                      (2) at (2,0) {$2$};
+
+      \path (0) edge[loop above] node {$0$} (0);
+      \path (0) edge[bend left ] node {$1$} (1);
+      \path (1) edge[bend left ] node {$0$} (2);
+      \path (1) edge[bend left ] node {$1$} (0);
+      \path (2) edge[bend left ] node {$0$} (1);
+      \path (2) edge[loop above] node {$1$} (2);
+    \end{tikzpicture}
+
+  \item
+    Pour tout $n$, l'AFD :
+    $\langle \{0,1\}, \{0, ..., n-1\}, \{0\}, \{0\}, \{ \langle r, d, q \rangle \mid 2r + d \equiv q \pmod n\} \rangle$
+    reconnaît $L_n$. Donc $L_n$ est rationnel.
+
+  \item $L_4 = (0\mid 1)^\star 00$.
+
+  \item $L_3 = (0 \mid 1 (0 1^\star 0)^\star 1)^\star$.
+    
+  \end{question}
+
+\end{correction}
+
+\endgroup
+\endinput
 
 
 %\begin{exercice}[Mini-défi -- Le jeu de Fizz-buzz]\label{exo:lexing/automata/challenge}
@@ -77,5 +121,26 @@
 % 
 %\end{exercice}
 
-\endgroup
-\endinput
+%  \item On représente l'automate comme un tableau
+%    
+%  \begin{tabular}{|c|c|c|c|}
+%    \hline
+%    état & catégorie & 0 & 1 \\
+%    \hline
+%    0  & fizz-buzz & 0  & 1  \\ 
+%    1  &           & 2  & 3  \\ 
+%    2  &           & 4  & 5  \\ 
+%    3  & fizz      & 6  & 7  \\ 
+%    4  &           & 8  & 9  \\ 
+%    5  & buzz      & 10 & 11 \\ 
+%    6  & fizz      & 12 & 13 \\ 
+%    7  &           & 14 & 0  \\ 
+%    8  &           & 1  & 2  \\ 
+%    9  & fizz      & 3  & 4  \\ 
+%    10 & buzz      & 5  & 6  \\ 
+%    11 &           & 7  & 8  \\ 
+%    12 & fizz      & 9  & 10 \\ 
+%    13 &           & 11 & 12 \\ 
+%    14 &           & 13 & 14 \\ 
+%    \hline
+%  \end{tabular}

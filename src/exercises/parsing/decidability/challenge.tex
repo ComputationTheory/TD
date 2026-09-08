@@ -19,21 +19,67 @@
 
 \end{exercice}
 
-%\begin{exercice}[Stabilité des langages algébriques]\label{exo:parsing/expressiveness/stability}
-% 
-%  Soient $L_1$ et $L_2$ deux langages algébriques sur un alphabet $\Sigma$.
-%  \begin{question}
-%  \item Montrer que $ L_1 \cup L_2 $, $ L_1 \cdot L_2 $ et $ L_1^\star $ sont algébriques.
-%  \item Montrer que $ L_1^{\textsc{r}} $, le langage miroir de $L_1$, est algébrique.
-%  \item Démontrer que l’intersection d’un langage rationnel et d’un langage algébrique est algébrique.
-%  \item Soit $L_3 \eqdef \{a^n b^n a^k \mid n, k \in \mathbb{N}\}$. 
-%        Les langages $L_3$ et $L_3^{\textsc{r}}$ sont-ils algébriques ? 
-%        Leur intersection $L_3 \cap L_3^{\textsc{r}}$ est-il algébrique ?
-%  \item Démontrer que le langage $L_4 = \{ a^i b^j c^k \mid i, j, k \in \mathbb{N},\ (i \neq j \lor j \neq k) \}$ est algébrique.
-%  \item Le complémentaire de $L_4$ est-il algébrique ?
-%  \end{question}
-% 
-%\end{exercice}
+
+\begin{correction}
+  
+  Il existe deux grammaires algébriques $G_1 = \langle \Sigma, \Gamma_1, S_1, R_1\rangle$ et $G_2 = \langle \Sigma, \Gamma_2, S_2, R_2\rangle$ engendrant
+  respectivement $L_1$ et $L_2$, avec $\Gamma_1 \cap \Gamma_2 = \emptyset$. 
+  \begin{question}
+  \item Soit $S \notin \Gamma_1 \cup \Gamma_2$. 
+    \begin{itemize}
+    \item $L_1 \cup L_2$ est engendré par $\langle \Sigma, \Gamma_1 \cup \Gamma_2 \cup \{S\}, S, R_1 \cup R_2 \cup \{S \rightarrow S_1 | S_2\} \rangle$.
+    \item $L_1 \cdot L_2$ est engendré par $\langle \Sigma, \Gamma_1 \cup \Gamma_2 \cup \{S\}, S, R_1 \cup R_2 \cup \{S \rightarrow S_1 S_2\} \rangle$.
+    \item $L_1 ^\star$ est engendré par $\langle \Sigma, \Gamma_1 \cup \{S\}, S, R_1 \cup \{S \rightarrow S_1 S | \varepsilon\} \rangle$.
+    \end{itemize}
+
+  \item Supposons que $L_1$ est rationnel. Il existe un automate fini $\varepsilon$-libre $\langle \Sigma, Q_1, I_1, F_1, \mu_1 \rangle$
+    qui reconnaît $L_1$ et un automate à pile $\langle \Sigma, \Gamma, \blank, Q_2, I_2, F_2, \mu_2 \rangle$ qui reconnaît $L_2$. 
+ 
+    Le langage $L_1 \cap L_2$ est reconnu par l'automate à pile
+    $\langle \Sigma, \Gamma, \blank, Q_1 \times Q_2, I_1 \times I_2, F_1 \times F_2, \mu_3 \rangle$,
+    avec
+    $$\begin{array}{@{~}r@{~}l@{~}c@{~}l@{~}c@{~}l@{~}l@{~}}
+      \mu_3 = \{&
+      \langle \langle \langle q_1, q_2\rangle, a, \pi \rangle, \langle \langle q'_1, q'_2\rangle, \pi' \rangle \rangle  &\mid&
+      \langle q_1, a, q'_1 \rangle \in \mu_1                                                                            &\land&
+      \langle \langle q_2, a, \pi \rangle, \langle q'_2, \pi' \rangle \rangle \in \mu_2                                 &\}\\
+      \cup\, \{&
+      \langle \langle \langle q_1, q_2\rangle, \varepsilon, \pi \rangle, \langle \langle q_1, q'_2\rangle, \pi' \rangle \rangle  &\mid&
+      q_1 \in Q_1                                                                                                               &\land&
+      \langle \langle q_2, \varepsilon, \pi \rangle, \langle q'_2, \pi' \rangle \rangle \in \mu_2                                &\}\\
+    \end{array}
+    $$
+    
+  \item $L_1^\textsc{r}$ est engendré par $\langle \Sigma, \Gamma_1, S_1, \bigcup_{A \rightarrow B \in R_1}\{ A \rightarrow B^\textsc{r} \} \rangle$.
+
+  \item On a $L_3^{\textsc{r}} = \{a^k b^n a^n \mid n, k \geq 0\}$, et $L_3 \cap L_3^{\textsc{r}} = \{a^n b^n a^n \mid n \geq 0\}$, qui n'est pas algébrique.
+    On en déduit que les langages algébriques ne sont pas stables par intersection.
+    
+  \item On a $L_4 = L_5 \cup L_6 \cup L_7 \cup L_8$, avec :
+    \begin{itemize}
+    \item $L_5 = \{a^i b^j c^k \mid i < j\}$.
+    \item $L_6 = \{a^i b^j c^k \mid i > j\}$.
+    \item $L_7 = \{a^i b^j c^k \mid j < k\}$.
+    \item $L_8 = \{a^i b^j c^k \mid j > k\}$.
+    \end{itemize}
+    L'union de langages algébriques est un langage algébrique. Il suffit donc de démontrer que chaque langage est algébrique.
+    $L_5 = \mathcal{L}\left(\left\langle\{a, b, c\}, \{S, A, C\}, S,
+    \left\{\begin{array}{lll}
+    S &\rightarrow& AC \\
+    A &\rightarrow& aAb \mid Ab \mid b \\
+    C &\rightarrow& cC \mid \varepsilon
+    \end{array}\right\}\right\rangle\right)$
+ 
+    De même pour les autres trois langages, $L_4$ est donc algébrique.
+ 
+  \item Soit $\overline{L_4} = \mathcal{S}((a|b|c)^\star) \setminus L_4$.
+    On remarque que $\overline{L_4} \cap \mathcal{S}(a^\star b^\star c^\star) = \{a^n b^n c^n \mid n\in \mathbb{N}\}$.
+    Comme $\mathcal{S}(a^\star b^\star c^\star)$ est rationnel, si $\overline{L_4}$ était algébrique, $\{a^n b^n c^n\}$ serait algébrique, or ce n’est pas le cas.
+    Donc, $\overline{L_4}$ n'est pas algébrique.
+
+  \end{question}
+
+\end{correction}
 
 \endgroup
 \endinput

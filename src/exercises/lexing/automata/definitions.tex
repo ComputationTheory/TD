@@ -43,5 +43,81 @@
 
 \end{exercice}
 
+\usetikzlibrary{decorations.pathmorphing}
+
+\begin{correction}
+
+  \begin{question}
+
+  \item $\langle \Sigma, Q, I, F, \rightarrow \rangle$, avec $\Sigma = \{a, b\}$,  $Q = \{1, 2, 3, 4, 5, 6\}$,  $I = \{1\}$,  $F = \{3, 6\}$ et 
+    $$\rightarrow = \left\{\begin{array}{lllll}
+    \langle 1, a, 1\rangle, &
+    \langle 1, a, 4\rangle, &
+    \langle 1, b, 2\rangle, &
+    \langle 2, a, 3\rangle, &
+    \langle 2, b, 2\rangle, \\
+    \langle 2, b, 6\rangle, &
+    \langle 3, a, 3\rangle, &
+    \langle 4, b, 5\rangle, &
+    \langle 4, b, 2\rangle, &
+    \langle 5, b, 2\rangle\,
+  \end{array}\right\}$$
+
+  \item Ni $2$ ni $4$ n'est un état final, donc $ab$ est rejeté par $A$. 
+    \begin{center}
+      \begin{tikzpicture}[x=15mm]
+        \node (1) at (0,1) {$\langle ab, 1 \rangle$}; 
+        \node (2) at (1,1) {$\langle a, 1 \rangle$}; 
+        \node (3) at (1,0) {$\langle a, 4 \rangle$}; 
+        \node (4) at (2,1) {$\langle \varepsilon, 2 \rangle$}; 
+        \node (5) at (2,0) {$\langle \varepsilon, 5 \rangle$}; 
+
+        \path (1) edge[leadsto] (2);
+        \path (1) edge[leadsto] (3);
+        \path (2) edge[leadsto] (4);
+        \path (3) edge[leadsto] (4);
+        \path (3) edge[leadsto] (5);
+      \end{tikzpicture}
+    \end{center}
+
+  \item Mot $\varepsilon$. $\langle \varepsilon, 1\rangle$ est une configuration initiale et une configuration d'arrêt mais ce n'est pas une configuration finale.
+    Donc $\varepsilon$ est rejeté par $A$.
+
+  \item Mot $aabbaa$.  On a $\langle aabbaa, 1 \rangle \leadsto^\star \langle \varepsilon, 3 \rangle$, avec $3\in F$, donc $aabbaa$ est accepté. 
+    \begin{center}
+      \begin{tikzpicture}[x=20mm]
+        \node (01) at (-.1,1) {$\langle aabbaa,      1 \rangle$}; 
+        \node (11) at (1  ,1) {$\langle abbaa,       1 \rangle$}; 
+        \node (10) at (1  ,0) {$\langle abbaa,       4 \rangle$}; 
+        \node (21) at (2  ,1) {$\langle bbaa,        1 \rangle$}; 
+        \node (20) at (2  ,0) {$\langle bbaa,        4 \rangle$}; 
+        \node (31) at (3  ,1) {$\langle baa,         2 \rangle$}; 
+        \node (30) at (3  ,0) {$\langle baa,         5 \rangle$}; 
+        \node (41) at (4  ,1) {$\langle aa,          6 \rangle$}; 
+        \node (40) at (4  ,0) {$\langle aa,          2 \rangle$}; 
+        \node (50) at (5  ,0) {$\langle a,           3 \rangle$}; 
+        \node (60) at (6  ,0) {$\langle \varepsilon, 3 \rangle$}; 
+
+        \path (01) edge[leadsto] (11);
+        \path (01) edge[leadsto] (10);
+        \path (11) edge[leadsto] (21);
+        \path (11) edge[leadsto] (20);
+        \path (21) edge[leadsto] (31);
+        \path (20) edge[leadsto] (31);
+        \path (20) edge[leadsto] (30);
+        \path (31) edge[leadsto] (41);
+        \path (31) edge[leadsto] (40);
+        \path (30) edge[leadsto] (40);
+        \path (40) edge[leadsto] (50);
+        \path (50) edge[leadsto] (60);
+      \end{tikzpicture}
+    \end{center}
+
+  \item Le langage est $a^\star b^+ (a^+ \mid b)$.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

@@ -20,5 +20,52 @@
 
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Supposons (par l'absurde), que $L_1 \eqdef \{a^n b^p \mid n\ge p\}$ est rationnel.\\
+    Soit $N$ donné par le lemme de l'étoile.\\
+    \textbf{Posons $u=a^N b^N$.} On a $u\in L_1$ et $|u|=2N\ge N$.\\
+    Soit $u=xyz$ la décomposition donnée par le lemme de l'étoile.\\
+    Comme $|xy|\le N$, $xy$ n'est composé que de $a$, donc $x=a^{|x|}$, $y=a^{|y|}\neq\varepsilon$ et $z=a^{N-|x|-|y|}b^N$.\\
+    \textbf{Posons $i=0$.} On a $xy^iz=a^{N-|y|}b^N$.\\
+    Donc $n'=N-|y| < N=p'$, donc $xy^iz \notin L_1$. Absurde, donc $L_1$ n'est pas rationnel.
+
+  \item Supposons (par l'absurde), que $L_2 \eqdef \{a^n b a^n \mid n\in\mathbb{N}\}$ est rationnel.\\
+    Soit $N$ donné par le lemme de l'étoile.\\
+    \textbf{Posons $u=a^N b a^N$.} On a $u\in L_2$ et $|u|=2N+1\ge N$.\\
+    Soit $u=xyz$ la décomposition donnée par le lemme de l'étoile.\\
+    Comme $|xy|\le N$, $xy$ n'est composé que de $a$, donc $x=a^{|x|}$, $y=a^{|y|}\neq\varepsilon$ et $z=a^{N-|x|-|y|} b a^N$.\\
+    \textbf{Posons $i=0$.} On a $xy^iz=a^{N-|y|} b a^N$.\\
+    Donc $xy^iz \notin L_2$. Absurde, donc $L_2$ n'est pas rationnel.
+
+  \item $L_3 \eqdef \{a^n a^n \mid n\in\mathbb{N}\} = \{a^{2n}\mid n\in\mathbb{N}\} = (aa)^\star$ est rationnel.
+
+  \item $L_4 \eqdef \{a^n b^p \mid n\equiv p \!\!\!\pmod 2\}$ est rationnel :
+    \[
+      L_4 = (aa)^\star (bb)^\star \ \mid\ a(aa)^\star\, b(bb)^\star.
+    \]
+
+  \item Supposons (par l'absurde), que $L_5 \eqdef \{a^{n^2}\mid n\in\mathbb{N}\}$ est rationnel.\\
+    Soit $N$ donné par le lemme de l'étoile. \\
+    \textbf{Posons $u=a^{(N+1)^2}$.} On a $u\in L_5$ et $|u|=(N+1)^2\ge N$.\\
+    Soit $u=xyz$ la décomposition donnée par le lemme de l'étoile.\\
+    Comme $y\neq\varepsilon$ et $|xy|\le N$, on a $1\le |y|\le N$.\\
+    \textbf{Posons $i=2$.} On a $|xy^2z| = (N+1)^2 + |y|$.
+    Or :
+    $$\begin{array}{rcccl}
+      0 &<& |y| &<& N+1\\
+      (N+1)^2 &<& (N+1)^2 + |y| & < & (N+1)^2 + N+1\\
+      (N+1)^2 &<& (N+1)^2 + |y| & < &  (N+1)(N+2)\\
+      (N+1)^2 &<& |x\cdot y^2 \cdot z| & < & (N+2)^2\\
+    \end{array}$$
+    Donc $|xy^2z|$ est strictement entre deux carrés parfaits consécutifs, donc n'est pas un carré parfait.\\
+    Donc $xy^2z \notin L_5$. Absurde, donc $L_5$ n'est pas rationnel.
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput

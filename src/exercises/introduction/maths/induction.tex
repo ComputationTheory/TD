@@ -22,5 +22,35 @@
   
 \end{exercice}
 
+\begin{correction}
+
+  \begin{question}
+
+  \item Preuve que $\forall n\in \mathbb{N}, \sum_{i=1}^n (2i-1) = n^2$.
+    \begin{description}
+    \item[Initialisation :] L'équation est vraie pour $n = 0$ : $0 = 0^2$.  
+    \item[Hérédité :] Supposons que la propriété est vraie pour un certain entier $n$. Montrons la propriété pour $n+1$. 
+      $$\sum_{i=1}^{n+1} 2i-1 = \sum_{i=1}^{n} 2i-1 + 2(n+1)-1 = n^2  + 2n + 1 = (n+1)^2$$
+    \item[Conclusion :] Par le principe de récurrence, nous avons montré que la somme des $n$ premiers nombres impairs est égale à $n^2$ pour tout entier naturel $n$.
+    \end{description}
+
+  \item Preuve que $\forall n\in \mathbb{N}, \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$.
+    \begin{description}
+    \item[Initialisation :] L'équation est vraie pour $n = 0$ : $0 = \frac{0\times 1\times 3}{6}$.
+    \item[Hérédité :] Supposons que la propriété est vraie pour un certain entier $n$. Montrons la propriété pour $n+1$. 
+      $$\begin{array}{rcl}
+      \sum_{i=1}^{n+1} i^2 &=& \sum_{i=1}^{n} i^2 + (n+1)^2 \\
+      &=& \frac{n(n+1)(2n+1)}{6} + (n+1)^2\\
+      &=& (n+1) \frac{n(2n+1) + 6(n+1)}{6}\\
+      &=& (n+1) \frac{2n^2 + 7n + 6}{6}\\
+      &=& \frac{(n+1)((n+1)+1)(2(n+1)+1)}{6}
+      \end{array}$$
+    \item[Conclusion :] Par le principe de récurrence, nous avons montré que $\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}$.
+    \end{description}
+
+  \end{question}
+
+\end{correction}
+
 \endgroup
 \endinput
