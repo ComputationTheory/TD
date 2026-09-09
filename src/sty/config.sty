@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config}[2026/09/09 Configuration of the Languages and Automate exercise booklet]
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{amsmath,amssymb, mathrsfs, stmaryrd}
+\RequirePackage{pdfpages}
+\usetikzlibrary{decorations.pathmorphing}
+
+\PassOptionsToPackage{vlined}{algorithm2e}
+\RequirePackage{algos}\AlgoFrench
+\RequirePackage{statemachines}
+\RequirePackage{trees}
+
+\newcommand\eqdef{\stackrel{\text{def}}{=}}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Théorème}
+
+\codeUE{XLG4IU020}
+\intituleUE{Langages et Automates}
+\institution{Nantes Université}
+\logo{src/img/logoUN.png}
+
+\author[Matthieu \textsc{Perrin}]{
+  Matthieu \textsc{Perrin}\\
+  Laboratoire des Sciences du Numérique de Nantes \\
+  UMR CNRS 6004\\
+  Bureau 410, bâtiment 34 \\
+  \url{matthieu.perrin@univ-nantes.fr}\\
+}
+
+\cursus[L2 Informatique]{
+  \begin{tabular}[b]{@{}l@{}}
+    UFR Sciences et Techniques\\
+    Licence Informatique\\
+    2\ieme{} année\\
+  \end{tabular}
+}
+
+\endinput
