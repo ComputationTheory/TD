@@ -1,0 +1,98 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+
+\documentclass[livret]{td}
+
+\usepackage{src/courses/cec/config}
+
+\typeTD
+
+
+
+\hypersetup{
+  pdftitle  = {Calculabilité et Complexité -- Livret de TD},
+  pdfauthor = {Matthieu Perrin},
+  pdfsubject  = {Livret de TD de L3 sur la théorie de la calculabilité et la complexité},
+  pdfkeywords = {machines de Turing, réductions, décision, P versus NP}
+}
+
+\begin{document}
+
+\maketitlepage
+\maketitlepage
+
+
+\session{Automates finis}
+\input{languages/automata/determinisation}
+\input{languages/automata/write_automata}
+\input{languages/automata/complexity}
+ 
+ 
+\session{Automates à pile}
+\input{languages/pushdown/definitions}
+\input{languages/pushdown/write_pushdown}
+ 
+ 
+\session{Analyse des grammaires contextuelles}
+\input{languages/grammars/brute_force}
+\input{languages/grammars/general}
+ 
+ 
+\session{La hiérarchie de Chomsky}
+\input{languages/chomsky/copy}
+\input{languages/chomsky/types}
+ 
+ 
+\session{Encodage des problèmes}
+\input{languages/encoding/encoding}
+ 
+ 
+\session{Machines de Turing déterministes}
+\input{turingmachines/definitions/executions}
+\input{turingmachines/definitions/languages}
+\input{turingmachines/definitions/exploration}
+ 
+ 
+\session{Expressivité des machines de Turing}
+\input{turingmachines/expressiveness/at}
+\input{turingmachines/expressiveness/models}
+ 
+ 
+\session{Thèse de Church-Turing}
+\input{turingmachines/church/imp}
+ 
+ 
+\session{Machines de Turing non déterministes}
+\input{turingmachines/nondeterministic/executions}
+\input{turingmachines/nondeterministic/mtnd}
+ 
+\ifnotcorrection{\newpage}~
+\session{Confluence d'un système de réécriture}
+\input{reductions/computability/confluence} 
+ 
+ 
+\session{Intersection de langages algébriques}
+\input{reductions/computability/intersection}
+ 
+ 
+\session{Introduction à la complexité}
+\input{reductions/complexity/definitions}
+\newpage
+\input{reductions/complexity/complexity_algo}
+ 
+ 
+\session{Le problème de correspondance de Post borné}
+\input{turingmachines/nondeterministic/pcp}
+ 
+ 
+\ifnotcorrection{\newpage}~
+\session{Le problème des circuits hamiltoniens}
+\input{reductions/complexity/hamiltonian}
+ 
+ 
+\session{Ensembles stables d'un graphe}
+\input{reductions/complexity/independant}
+
+\end{document}
+
+\endinput
