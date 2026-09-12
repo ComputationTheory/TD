@@ -1,7 +1,5 @@
 % SPDX-License-Identifier: CC-BY-SA-4.0
-% Part: Lexical Analysis
-% Section: Finite state automata
-% Challenge exercise: Fizz–Buzz automaton
+% Author: Matthieu Perrin
 
 \begingroup
 
@@ -86,61 +84,3 @@
 
 \endgroup
 \endinput
-
-
-%\begin{exercice}[Mini-défi -- Le jeu de Fizz-buzz]\label{exo:lexing/automata/challenge}
-% 
-%  Dans le jeu Fizz-buzz, les joueurs comptent à voix haute à tour de rôle, en remplaçant
-%  tout nombre divisible par trois par le mot \og fizz \fg,
-%  tout nombre divisible par cinq par le mot \og buzz \fg,
-%  et tout nombre divisible par quinze par le mot \og fizz-buzz \fg.
-%  La séquence commence donc par
-%  \begin{center}
-%  \og 1, 2, fizz, 4, buzz, fizz, 7, 8, fizz, buzz, 11, fizz, 13, 14, fizz-buzz, etc \fg
-%  \end{center}
-% 
-%  On travaille sur l'alphabet $\{0,1\}$.
-%  Le but de cet exercice est de concevoir un automate fini capable de catégoriser
-%  les nombres selon leur divisibilité par $3$, $5$ et $15$. 
-% 
-% 
-%  
-%  Un mot $w$ (sans zéro initial inutile) code en binaire un entier $N(w)$.
-%  On veut concevoir un AFD qui, à la fin de la lecture,
-%  \begin{itemize}
-%    \item s'arrête dans un état de \textbf{catégorie} \emph{fizz-buzz} si $15 \mid N(w)$,
-%    \item s'arrête dans un état de \textbf{catégorie} \emph{fizz} si $3 \mid N(w)$ et $15 \nmid N(w)$,
-%    \item s'arrête dans un état de \textbf{catégorie} \emph{buzz} si $5 \mid N(w)$ et $15 \nmid N(w)$,
-%    \item sinon s'arrête dans un état non accepteur (\emph{autre}).
-%  \end{itemize}
-% 
-%  \begin{question}
-%  \item Proposer un AFD satisfaisant ces exigences (décrire $Q,\ \Sigma,\ \delta,\ q_0$, et partitionner $F$ en trois \emph{catégories d’acceptation} : \textsc{fizz}, \textsc{buzz}, \textsc{fizz-buzz}).
-%  \item (Optionnel) Donner un petit tableau de transitions représentatif et/ou un schéma partiel.
-%  \end{question}
-% 
-%\end{exercice}
-
-%  \item On représente l'automate comme un tableau
-%    
-%  \begin{tabular}{|c|c|c|c|}
-%    \hline
-%    état & catégorie & 0 & 1 \\
-%    \hline
-%    0  & fizz-buzz & 0  & 1  \\ 
-%    1  &           & 2  & 3  \\ 
-%    2  &           & 4  & 5  \\ 
-%    3  & fizz      & 6  & 7  \\ 
-%    4  &           & 8  & 9  \\ 
-%    5  & buzz      & 10 & 11 \\ 
-%    6  & fizz      & 12 & 13 \\ 
-%    7  &           & 14 & 0  \\ 
-%    8  &           & 1  & 2  \\ 
-%    9  & fizz      & 3  & 4  \\ 
-%    10 & buzz      & 5  & 6  \\ 
-%    11 &           & 7  & 8  \\ 
-%    12 & fizz      & 9  & 10 \\ 
-%    13 &           & 11 & 12 \\ 
-%    14 &           & 13 & 14 \\ 
-%    \hline
-%  \end{tabular}
