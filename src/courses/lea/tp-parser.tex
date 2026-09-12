@@ -3,6 +3,7 @@
 
 \documentclass{td}
 
+\usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
 \typeTP[2]
@@ -307,7 +308,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
 
 \end{exercice}
 \begin{correction}
-  \begin{lstlisting}
+  \begin{lstlisting}[gobble=4]
     /* Terminaux ajoutés pour les booléens */
     terminal PLUS, MOINS, MULTIPLIE, PAR_G, PAR_D, EGAL, OU, ET, NON;
     terminal Integer ENTIER;
@@ -356,7 +357,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
       | somme:s                            {: RESULT = s; :}
     ;
      
-    // PRODUIT (*)
+    // PRODUIT ( * )
     somme ::=
         somme:s MULTIPLIE produit:p        {: RESULT = s * p; :}
       | produit:p                          {: RESULT = p; :}

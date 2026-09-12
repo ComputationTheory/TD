@@ -4,32 +4,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{config}[2026/09/09 Configuration of the Computability and Complexity exercise booklet]
 
-\RequirePackage[T1]{fontenc}
-\RequirePackage[hidelinks]{hyperref}
-\RequirePackage{amsmath,amssymb, mathrsfs, stmaryrd}
-\RequirePackage{pdfpages}
-\RequirePackage{cleveref}
-\RequirePackage{subcaption}
-\usetikzlibrary{decorations.pathmorphing, backgrounds, fit}
-
-\PassOptionsToPackage{vlined}{algorithm2e}
-\RequirePackage{algos}\AlgoFrench
-\RequirePackage{statemachines}
-\RequirePackage{trees}
-\RequirePackage{dominos}
-
-\newcommand\eqdef{\stackrel{\text{def}}{=}}
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Théorème}
-
 \codeUE{XLG6IU350}
 \intituleUE{Calculabilité et complexité}
 \institution{Nantes Université}
 \logo{src/img/logoUN.png}
 
-\author[Matthieu Perrin]{
+\author[Matthieu \textsc{Perrin}]{
   Matthieu \textsc{Perrin}\\
-  Nantes Université\\
   Laboratoire des Sciences du Numérique de Nantes \\
   UMR CNRS 6004\\
   Bureau 410, bâtiment 34 \\
@@ -37,61 +18,11 @@
 }
 
 \cursus[L3 Informatique]{
-  \begin{tabular}[b]{l}
+  \begin{tabular}[b]{@{}l@{}}
     UFR Sciences et Techniques\\
-    Licence Informatique et Info-Maths\\
+    Licence Informatique\\
     3\ieme{} année\\
   \end{tabular}
-}
-
-\newcounter{indepfig}
-\AtBeginEnvironment{subfigure}{%
-  \refstepcounter{indepfig}%
-  \def\theHsubfigure{\theindepfig}% (pour hyperref)
-  \edef\@currentlabel{\theindepfig}% (pour \ref)
-  \def\thesubfigure{\theindepfig}% (pour les \refs internes)
-}
-\renewcommand\p@subfigure{}%
-\DeclareCaptionLabelFormat{indep-fig}{\figurename~\theindepfig}
-\captionsetup[subfigure]{labelformat=indep-fig,labelsep=colon}
-
-\newmdenv[linewidth=.5pt,
-  innerleftmargin=8pt,
-  innerrightmargin=8pt,
-  innertopmargin=8pt,
-  innerbottommargin=8pt]{problembox}
-
-\newcommand\Probleme[3]{
-  \begin{center}
-    \begin{minipage}{14cm}
-      \begin{problembox}
-        \textsc{#1}
-        \begin{description}
-        \item[Instance :]#2
-        \item[Question :]#3
-        \end{description}
-      \end{problembox}
-    \end{minipage}
-  \end{center}
-}
-
-\newcommand\Minibox[1]{
-  \begin{center}
-    \begin{minipage}{14cm}
-      \begin{problembox}
-        #1
-      \end{problembox}
-    \end{minipage}
-  \end{center}
-}
-
-\tikzset{
-  graph node/.style={
-    rounded corners,
-    draw,
-    fill=black!10,
-    align=center,
-  },
 }
 
 \endinput
