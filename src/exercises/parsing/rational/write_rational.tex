@@ -6,7 +6,7 @@
 \begin{exercice}[Grammaires rationnelles]\label{exo:parsing/rational/write_rational}
 
   Donner une grammaire rationnelle qui engendre chacun des langages suivants.
-  \begin{question}
+  \begin{questions}
   \item $L_1 \eqdef \mathcal{L}((a | b)^\star a b (a | b)^\star)$
   \item $L_2 \eqdef \mathcal{L}(a^\star ba | b^\star a b a)$
   \item $L_3 \eqdef \mathcal{L}\left(
@@ -50,13 +50,13 @@
       \path (2) edge             node {$b$}   (1);
     \end{tikzpicture}
     \right)$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item $L_1 : \left\langle \{a, b\}, \{S, A, B\}, S,
     \left\{\begin{array}{lll}
     S   &\rightarrow& a S \mid b S \mid a A\\
@@ -91,9 +91,9 @@
     S_4   &\rightarrow& a S_1 \mid b S_1 \mid b S_4 \mid \varepsilon\\
     \end{array}\right\}\right\rangle$
 
-  \end{question}
+  \end{questions}
   
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

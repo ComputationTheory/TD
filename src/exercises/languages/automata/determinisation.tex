@@ -23,10 +23,10 @@
     \end{tikzpicture}
   \end{center}
 
-  \begin{question}
+  \begin{questions}
   \item Donnez le graphe des configurations de $A$ accessibles depuis la configuration initiale sur les mots $ab$, $aab$ et $aba$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item Configurations accessibles à partir de $ab$ :
       \begin{tikzpicture}[y=5mm, x=20mm, baseline=(c1.base)]
@@ -85,33 +85,33 @@
       \end{tikzpicture}
       
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Les mots précédents sont-ils reconnus par $A$ ?
     Justifier votre réponse.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item Le mot $ab$ est accepté car $\langle \varepsilon, 3\rangle$ est accessible.
     \item Le mot $aab$ est accepté car $\langle \varepsilon, 3\rangle$ est accessible.
     \item Le mot $aba$ est rejeté car $\langle \varepsilon, 3\rangle$ n'est pas accessible.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Décrire le langage reconnu par l'automate $A$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Le langage reconnu est $(a\mid b)^\star a (a(a\mid b)^\star \mid \varepsilon)  b$
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Appliquer la construction des sous-ensembles (Rabin--Scott) pour obtenir
     un automate fini déterministe équivalent à $A$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On obtient l'automate suivant :
     \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
       \state[initial]   (0) at (0,1) {$0$};
@@ -131,7 +131,7 @@
       \path (4) edge[bend left]  node {$a$}   (2);
       \path (4) edge[loop right] node {$b$}   (4);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

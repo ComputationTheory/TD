@@ -24,7 +24,7 @@
     Existe-t-il une affectation (Vrai/Faux) de chacune des variables de $X$ qui rend $\varphi$ satisfiable ?
   }
 
-  \begin{question}
+  \begin{questions}
     \item Montrer que \textsc{3-Sat} est dans NP.
 
     \medskip
@@ -118,12 +118,12 @@
     \emph{Remarque :} on peut en réalité montrer qu’une formule $\varphi$ peut être satisfaite si et seulement si son graphe des implications $G_\varphi$ ne contient aucun circuit passant à la fois par $\ell$ et $\neg\ell$.  
     Cette propriété peut être vérifiée par un algorithme de graphes qui calcule, en temps polynomial, les composantes fortement connexes de $G_\varphi$.  
     Ainsi, \textsc{2-Sat} est dans~P : la construction puis l’analyse de $G_\varphi$ se font toutes deux en temps polynomial.
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
-  \begin{question}
+\begin{corrections}
+  \begin{questions}
 
   \item Le but ici est de donner des arguments « en français », sans trop formaliser.  
     L’appartenance à NP se justifie en deux étapes :
@@ -251,8 +251,8 @@
     \end{itemize}
     Ainsi, $x_1$ ne peut être ni Vrai ni Faux : la formule $\varphi$ est donc insatisfiable.
   
-  \end{question}
-\end{correction}
+  \end{questions}
+\end{corrections}
 
 \endgroup
 \endinput

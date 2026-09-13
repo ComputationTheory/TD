@@ -18,19 +18,19 @@
   \right.
   $$
   
-  \begin{question}
+  \begin{questions}
   \item Montrer que pour tout $i \ge 2$, il existe un palindrome $u_i$ tel que:
     $$ f_i = \left \{\begin{array}{ll}
     u_i\cdot a\cdot b & \mbox{si $i$ pair} \\
     u_i\cdot b\cdot a & \mbox{si $i$ impair}
   \end{array}\right.$$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Preuve par récurrence forte. Soit $i \ge 2$. Supposons la propriété pour tout $k<i$,
     et prouvons la propriété pour $i$. On sépare les cas $i\le 5$ et $i > 5$ pair et $i > 5$ impair.
     \begin{description}
@@ -52,9 +52,9 @@
       
       En posant $u_{n} = u_{n-2} a b  u_{n-3} b a  u_{n-2}$, on a alors $f_{n}  = u_n ab$ où $u_n$ est un palindrome.
     \end{description}
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

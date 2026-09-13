@@ -6,15 +6,15 @@
 \begin{exercice}[Génération d'analyseur lexical]\label{exo:lexing/kleene/thompson}
 
   Donner un AFN reconnaissant chacun les langages suivants en appliquant l'algorithme de Thompson.
-  \begin{question}
+  \begin{questions}
   \item $\mathcal{L}((ab|ba)^\star)$
   \item $\mathcal{L}((a \mid b)^\star ab (a \mid b)^\star)$
   \item $\mathcal{L}(a^\star b (ab)^\star)$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
   Le but de cet exercice \emph{n'est pas} d'obtenir des automates finis déterministes, mais d'appliquer l'algorithme de Thompson pour construire des AFN.
   Deux variantes vues en cours sont autorisées :
@@ -26,7 +26,7 @@
   \emph{Détaillez toutes les étapes} et indiquez explicitement les transitions $\varepsilon$.
   Aucune minimisation/simplification hors de la variante choisie n'est attendue.
   
-  \begin{question}
+  \begin{questions}
   \item 
     \begin{itemize}
     \item $\mathcal{L}(a)$ reconnu par
@@ -245,8 +245,8 @@
       \path (62) edge node[swap] {$b$} (63);
       \path (63) edge node {$\varepsilon$} (6);
     \end{tikzpicture}
-  \end{question}
-\end{correction}
+  \end{questions}
+\end{corrections}
 
 \endgroup
 \endinput

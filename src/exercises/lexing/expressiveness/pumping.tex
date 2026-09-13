@@ -6,16 +6,16 @@
 \begin{exercice}[Lemme de l'étoile] \label{exo:lexing/expressiveness/pumping}
 
   Démontrez que les langages suivants sur l'alphabet $\Sigma = \{a, b, c\}$ \emph{ne sont pas rationnels} en utilisant le lemme de l'étoile.
-  \begin{question}
+  \begin{questions}
   \item $\left\{u \in \Sigma^\star \mid |u|_a = |u|_b + |u|_c \right\}$
   \item $\left\{a^m b^n c^p \mid m = n \lor n = p \right\}$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
 
   \item Supposons (par l'absurde), que $L_1 \eqdef \{u \in \Sigma^\star \mid |u|_a = |u|_b + |u|_c \}$ est rationnel.
     
@@ -41,9 +41,9 @@
     Alors $m'\neq n'$ (car $|y|>0$) et $n'\neq p'$ (car $N\neq N+1$). Donc $xy^iz \notin L_2$.
     Absurde, donc $L_2$ n'est pas rationnel.
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

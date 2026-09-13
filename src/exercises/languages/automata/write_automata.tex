@@ -7,11 +7,11 @@
 
   Proposez un automate fini déterministe reconnaissant chacun des langages ci-dessous.
   
-  \begin{question}
+  \begin{questions}
   \item Le langage des mots sur l'alphabet $\{a,b\}$ contenant un nombre de $a$ divisible par $3$. 
-  \end{question}
+  \end{questions}
 
-  \begin{correction}
+  \begin{corrections}
     On encode le nombre de $a$ modulo 3 dans les états de l'automate :
 
     \begin{center}
@@ -29,13 +29,13 @@
       \end{tikzpicture}
     \end{center}
     
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Le langage sur l'alphabet $\{0,1\}$, des écritures binaires sans zéro initial de nombres entiers divisibles par $3$. 
-  \end{question}
+  \end{questions}
 
-  \begin{correction}
+  \begin{corrections}
 
     En se basant sur l'identité $(2n + m) \mod 3 = (2(n \mod 3) + m) \mod 3$,
     on peut n'encoder que le reste de la division par 3 du préfixe déjà analysé, en 3 états (0, 1 et 2).
@@ -71,7 +71,7 @@
       \end{tikzpicture}
     \end{center}
     
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

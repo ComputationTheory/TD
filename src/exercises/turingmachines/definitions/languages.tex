@@ -7,10 +7,10 @@
 
   Dans cet exercice, on se limitera au modèle strict des machines de Turing sur un seul ruban. 
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine de Turing déterministe qui décide le langage $\{ w c w \mid w\in \{a, b\}^\star \}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0)]
       \state[initial above] (0) at (2,1) {$0$}; 
       \state                (1) at (3,2) {$1$}; 
@@ -39,12 +39,12 @@
       \path (6) edge[loop above] node {\smTMtransR{X}{X}}                                                              (6);
 
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Construire une machine de Turing déterministe qui génère le langage $\{a^n b^n a^n \mid n \ge 0\}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(1), y=20mm]
       \state[initial, accepting] (0) at (0,1) {$0$}; 
       \state                     (1) at (1,1) {$1$}; 
@@ -66,12 +66,12 @@
       \path (6) edge[loop below] node {\smTMtransR{a}{a}}                            (6);
       \path (6) edge             node {\smTMtransR{\blank}{a}}                       (2);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine de Turing déterministe qui décide le langage $\{ a^{2^n} \mid n \ge 0 \}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0)]
       \state                (0) at (0,0) {$0$}; 
       \state[initial above] (1) at (1,0) {$1$}; 
@@ -90,7 +90,7 @@
       \path (2) edge[loop below] node {\smTMtransR{A}{A}} (2);
       \path (3) edge[loop below] node {\smTMtransL{A}{A}} (3);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

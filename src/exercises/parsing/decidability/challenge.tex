@@ -6,23 +6,23 @@
 \begin{exercice}[Mini-défi -- Stabilité des langages algébriques]\label{exo:parsing/decidability/challenge}
 
   Soient $L_1$ et $L_2$ deux langages algébriques sur un alphabet $\Sigma$.
-  \begin{question}
+  \begin{questions}
   \item Montrer que $ L_1 \cup L_2 $, $ L_1 \cdot L_2 $ et $ L_1^\star $ sont trois langages algébriques.
   \item Démontrer que l'intersection d'un langage rationnel et d'un langage algébrique est un langage algébrique. 
   \item Montrer que $ L_1^{\textsc{r}} $, le langage contenant les mots miroir de $L_1$, est un langage algébrique. 
   \item Soit $L_3 \eqdef \{a^n b^n a^k \mid n, k \in \mathbb{N}\}$. $L_3 \cap L_3^{\textsc{r}}$ est-il algébrique ?
   \item Démontrer que le langage $L_4 = \{ a^i b^j c^k \mid i, j, k \in \mathbb{N} \land (i \neq j \lor j \neq k) \}$ est algébrique.
   \item Le complémentaire de $L_4$ est-il algébrique ?
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
 
-\begin{correction}
+\begin{corrections}
   
   Il existe deux grammaires algébriques $G_1 = \langle \Sigma, \Gamma_1, S_1, R_1\rangle$ et $G_2 = \langle \Sigma, \Gamma_2, S_2, R_2\rangle$ engendrant
   respectivement $L_1$ et $L_2$, avec $\Gamma_1 \cap \Gamma_2 = \emptyset$. 
-  \begin{question}
+  \begin{questions}
   \item Soit $S \notin \Gamma_1 \cup \Gamma_2$. 
     \begin{itemize}
     \item $L_1 \cup L_2$ est engendré par $\langle \Sigma, \Gamma_1 \cup \Gamma_2 \cup \{S\}, S, R_1 \cup R_2 \cup \{S \rightarrow S_1 | S_2\} \rangle$.
@@ -75,9 +75,9 @@
     Comme $\mathcal{S}(a^\star b^\star c^\star)$ est rationnel, si $\overline{L_4}$ était algébrique, $\{a^n b^n c^n\}$ serait algébrique, or ce n’est pas le cas.
     Donc, $\overline{L_4}$ n'est pas algébrique.
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

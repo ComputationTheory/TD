@@ -268,11 +268,11 @@
     $G$ est-il hamiltonien ?
   }
 
-  \begin{question}
+  \begin{questions}
   \item On considère les graphes des figures \ref{figure:hamiltoncircuit:icosian} et \ref{figure:hamiltoncircuit:herschel}.
     Ces deux graphes sont-ils hamiltoniens ?
     Justifier en donnant un circuit hamiltonien, ou en expliquant brièvement pourquoi il ne peut pas y en avoir.
-  \end{question}
+  \end{questions}
 
   \begin{figure}[h]%
     \centering
@@ -282,7 +282,7 @@
 
   \ifcorrection{\newpage}
 
-  \begin{correction}
+  \begin{corrections}
     Le graphe de la figure~\ref{figure:hamiltoncircuit:icosian} est hamiltonien. On a par exemple le circuit suivant.
     \begin{center}
       \begin{tikzpicture}
@@ -419,36 +419,36 @@
         \draw[densely dotted] (40) to (82) to (44) ;
       \end{tikzpicture}
     \end{center}
-  \end{correction}
+  \end{corrections}
 
   
-  \begin{question}
+  \begin{questions}
   \item On cherche maintenant à montrer que \textsc{Circuit Hamiltonien} est dans NP.
     Quelle forme peut prendre un \emph{certificat} pour $G \in \textsc{Circuit Hamiltonien}$ ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un certificat naturel est une \emph{liste ordonnée} $c = [c[1], c[2], \dots, c[n]]$ des sommets telle que le chemin
     $$(c[1], c[2], \dots, c[n], c[1])$$
     est un circuit hamiltonien de $G$. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Soit $G$ un graphe hamiltonien. Montrer que la \emph{taille} d'un tel certificat pour $G$
     est polynomiale par rapport à la taille de l'entrée $G$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     En encodant un sommet par son identifiant, la taille du certificat est $n$ identifiants,
     donc $\mathcal{O}(n\log n)$ bits si les identifiants sont sur $\mathcal{O}(\log n)$ bits.
     Par rapport à une entrée encodée en listes d'adjacence (taille $\Theta(|S| + |A|)$)
     ou matrice d'adjacence (taille $\Theta(|S|^2)$), la taille du certificat est \emph{polynomiale}.
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Proposer un \emph{algorithme vérificateur} qui, étant donné en entrée un graphe $G$ et un candidat $c$,
     décide si $c$ est un certificat \emph{valide} pour l'appartenance de $G$ à \textsc{Circuit Hamiltonien}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On a un algorithme simple en $\mathcal{O}(n^3)$. \\
     \begin{algorithm}[H]
       \SetKwFunction{Verify}{verify}
@@ -492,23 +492,23 @@
         \Return \False;
       }
     \end{algorithm}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Calculer la \emph{complexité en temps} dans le pire cas de votre vérificateur.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On a un algorithme en $\mathcal{O}(n^3)$, où $n$ est inférieur à la taille des entrées (puisque $c$ est en $\mathcal{O}(n \log(n))$),
     donc en temps \emph{polynomial} en la taille de l'entrée.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Conclure que \textsc{Circuit Hamiltonien} est dans NP.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Il existe un certificat de taille polynomiale (une permutation des sommets) et un vérificateur en temps polynomial.  
     Par définition, $\textsc{Circuit Hamiltonien} \in \mathbf{NP}$.
-  \end{correction}
+  \end{corrections}
 
   \ifnotcorrection{\pagebreak}
   On cherche maintenant à démontrer que le problème \textsc{Circuit Hamiltonien} est NP-difficile par une réduction polynomiale de \textsc{Sat} vers \textsc{Circuit Hamiltonien}.
@@ -523,24 +523,24 @@
   On considère les circuits \emph{à rotation près} : par exemple $(1,2,3,1)$ et $(2,3,1,2)$ représentent le même circuit.
 
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Dans le graphe de la figure~\ref{figure:hamiltoncircuit:reduction}, combien existe-t-il de circuits hamiltoniens (à rotation près) ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Par rotation, on peut choisir de commencer par le sommet $v_1$. Le schéma impose, pour chaque $i\in\{1,2,3\}$,
     un choix binaire au sommet $v_i$ : emprunter l'arc $\langle v_i,a_i^1\rangle$ ou l'arc $\langle v_i, b_i^2\rangle$.  
     Ces choix sont indépendants et, pour chacun, il n'y a qu'une seule façon d'inclure tous les sommets $a_i^j$ et $b_i^j$. 
     \emph{À rotation près}, on obtient donc exactement $2^3=8$ circuits hamiltoniens,
     correspondant à tous les choix possibles de sortie des trois $v_i$.
-  \end{correction}
+  \end{corrections}
   
   Pour $i \in \{1,2,3\}$, on note $x_i$ le prédicat unaire sur les circuits $c$ défini par :
   $x_i(c) \eqdef ``\text{$c$ emprunte l'arc}\langle v_i, a_i^1\rangle"$.
 
-  \begin{question}
+  \begin{questions}
   \item Caractériser de manière \emph{unique} le circuit hamiltonien $c_0$ dessiné en gras sur la figure~\ref{figure:hamiltoncircuit:reduction}
     par une formule booléenne en $x_1(c_0)$, $x_2(c_0)$ et $x_3(c_0)$.
-  \end{question}
+  \end{questions}
 
   \begin{figure}[h!]%
     \centering
@@ -548,30 +548,30 @@
     \gadget%
   \end{figure}
 
-  \begin{correction}
+  \begin{corrections}
     Dans le circuit en gras, un choix est imposé pour chaque $x_i(c_0)$ :
     $x_1(c_0)=\text{Vrai}$, $x_2(c_0)=\text{Faux}$ et $x_3(c_0)=\text{Faux}$.
     C'est donc l'unique circuit hamiltonien \emph{à rotation près} du graphe tel que :
     $$ x_1 \land \lnot x_2 \land \lnot x_3.$$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item On ajoute un nouveau sommet $C^1$ et deux arcs $\langle a_1^1, C^1\rangle$ et $\langle C^1, b_1^1\rangle$
     comme à gauche de la figure~\ref{figure:hamiltoncircuit:gadgets}.
     Définir un prédicat logique $P(c)$ sur les circuits hamiltoniens $c$,
     exprimé en fonction de $x_1(c)$, $x_2(c)$ et $x_3(c)$,
     qui caractérise l'ensemble des circuits hamiltoniens du graphe \emph{modifié}. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Tout circuit hamiltonien doit désormais \emph{nécessairement} passer par $C^1$.
     Or $C^1$ n'est accessible que si le parcours a pris la branche gauche au niveau de $v_1$ (celle qui mène à $a_1^1$ puis vers $b_1^1$).  
     Par conséquent, l’ensemble des circuits hamiltoniens du graphe \emph{modifié} est exactement $\{c \mid P(c) \}$, où $P(c)  \eqdef x_1(c)$. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Caractériser tous les circuits hamiltoniens du graphe de la figure~\ref{figure:hamiltoncircuit:gadgets}. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On a deux gadgets ($C^1$ et $C^2$), donc le prédicat est une conjonction des deux clauses : 
     \begin{itemize}
     \item $C_1$ impose seulement $x_1(c)$ ;
@@ -579,17 +579,17 @@
       et impose donc la disjonction $x_2(c) \lor \lnot x_3(c)$. 
     \end{itemize}
     L'ensemble des chemins hamiltoniens de ce graphe est donc $\{ c \mid x_1(c) \land (x_2(c) \lor \lnot x_3(c))\}$.
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item En modifiant localement la figure~\ref{figure:hamiltoncircuit:reduction} sur le même principe,
     proposer des graphes dont l'ensemble des circuits hamiltoniens est exactement :
     \begin{center}
       $\{c \mid \lnot x_2(c)\}$ \quad\quad $\{c \mid x_1(c) \land \lnot x_2(c)\}$  \quad\quad $\{c \mid x_1(c) \lor \lnot x_2(c)\}$ 
     \end{center}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item $\{ c \mid \lnot x_2(c) \}$ : insérer un sommet $C^2$ et deux arcs $\langle b_2^2, C^2\rangle$ et $\langle C^2, a_2^2 \rangle$
       ($C_2$ est entre $b_2^2$ et $a_2^2$, accessible de la droite vers la gauche)
@@ -598,13 +598,13 @@
     \item $\{ c \mid x_1(c) \lor \lnot x_2(c) \}$ : il faut utiliser le même sommet dans les deux portes.
       On ajoute un sommet $C$ et quatre arcs : $\langle a_1^1, C\rangle$, $\langle C, b_1^1 \rangle$, $\langle b_2^2, C\rangle$ et $\langle C, a_2^2 \rangle$.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Construire un graphe orienté dont les circuits hamiltoniens sont exactement les circuits $c$ tels que :
     $$(\lnot x_1(c) \lor \lnot x_2(c) \lor x_4(c)) \land (x_1(c) \lor x_2(c)) \land (\lnot x_2(c) \lor x_3(c) \lor \lnot x_4(c))$$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Attention, la formule $\varphi$ a trois clauses et quatre variables, donc il faut agrandir le graphe de base pour avoir
     quatre gadgets de variables contenant chacun trois sommets $a_i^j$ et trois sommets $b_i^j$. 
 
@@ -731,16 +731,16 @@
         \draw[-latex, rounded corners=10] (b43) to (right|-b43) to (right|-v1) to (v1);
       \end{tikzpicture}
     \end{center}
-  \end{correction}
+  \end{corrections}
   
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Définir une transformation $\mathcal{G}$ qui, à toute formule $\varphi$
     en forme normale conjonctive sur des variables $x_1,\dots,x_n$, associe un graphe orienté $\mathcal{G}(\varphi)$
     dont $\varphi$ caractérise les circuits hamiltoniens.
     En déduire que $\varphi \in \textsc{Sat} \iff \mathcal{G}(\varphi) \in \textsc{Circuit Hamiltonien}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $$
     \begin{array}{rcl@{\quad}l}
       \mathcal{G}(\varphi) &=& \langle S(\varphi), A(\varphi) \rangle, \text{ avec :} \\
@@ -760,31 +760,31 @@
     Il existe donc une affectation des variables de $\varphi$ si, et seulement si,
     il existe un circuits hamiltoniens dans $\mathcal{G}(\varphi)$.
     Autrement dit, $$\varphi \in \textsc{Sat} \iff \mathcal{G}(\varphi) \in \textsc{Circuit Hamiltonien}.$$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Soit $\varphi$ une formule à $n$ variables, et $k$ clauses.
     \begin{itemize}
     \item donner une surapproximation du nombre de sommets et d'arcs de $\mathcal{G}(\varphi)$ en fonction de $n$ et $k$ ;
     \item conclure que la construction $\mathcal{G}$ s'effectue en temps polynomial.
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Le calcul est détaillé sur la transformation de la question précédente.
     Le nombre de sommets dans $\mathcal{G}(\varphi)$ est borné par $2 n k + n + k = \mathcal{O}(n k)$.
     Le nombre d'arcs dans $\mathcal{G}(\varphi)$ est borné par $4 n k + 2 n = \mathcal{O}(n k)$.
     La transformation n'a pas de difficulté algorithmique, donc elle s'effectue en temps polynomial.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Que peut-on conclure sur la complexité de \textsc{Circuit Hamiltonien} ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On a une réduction polynomiale de \textsc{Sat} vers \textsc{Circuit Hamiltonien}.
     On en déduit que \textsc{Circuit Hamiltonien} est NP-difficile.
     De plus, on sait que \textsc{Circuit Hamiltonien} est NP.
     On en déduit que \textsc{Circuit Hamiltonien} est NP-complet.
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

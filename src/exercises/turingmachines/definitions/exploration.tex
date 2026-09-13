@@ -10,10 +10,10 @@
   et la tête de lecture peut commencer sur une position arbitraire, potentiellement éloignée à gauche ou à droite du mot $w$.
   La machine de Turing doit atteindre une configuration bloquante dans laquelle la tête de lecture se trouve au début du mot $w$. 
 
-  \begin{question}
+  \begin{questions}
   \item Construisez une machine de Turing déterministe $M$ qui localise le début du mot $w$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0)]
       \state[initial above] (0) at (0,0) {$0$}; 
       \state                (1) at (1,0) {$1$}; 
@@ -25,14 +25,14 @@
       \path (1) edge[loop above] node {\smTMtransR{b}{b}}                            (1);
       \path (1) edge             node {\smTMtransS{a}{a}}                            (2);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Que se passe-t-il si $w\in \{a\}^\star$ ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     La machine $M_{d}$ ne termine pas sur le mot $\varepsilon$. 
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

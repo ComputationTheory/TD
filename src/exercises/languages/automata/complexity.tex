@@ -14,18 +14,18 @@
   On considère le langage $L_n = \{u a v \mid u, v \in \Sigma^\star \text{ et } |v| = n-1 \}$.
   Autrement dit, $w \in L_n$ si, et seulement si, le $n^{\text{e}}$ symbole de $w$ en partant de la fin est un $a$.
   
-  \begin{question}
+  \begin{questions}
   \item Construire un automate fini non déterministe $A_n$ à $n+1$ états qui reconnaît le langage $L_n$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On pose $A = \langle \Sigma = \{a, b\}, \{0, ..., n\}, \{0\}, \{n\}, \rightarrow \rangle$ avec :
     $$\rightarrow = \{\langle 0, a, 1\rangle, \langle 0, a, 0\rangle, \langle 0, b, 0\rangle\} \cup \{\langle k, a, k+1\rangle, \langle k, b, k+1\rangle \mid 0 < k < n \}$$ 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Appliquer la construction des sous-ensembles pour déterminiser l'automate $A_3$. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item Automate $A_3$ :
       \begin{tikzpicture}[automaton, size=20mm, baseline=(0.base)]
@@ -69,22 +69,22 @@
         \path (aab) edge[bend left]   node  {$b$} (abb);
       \end{tikzpicture}
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Montrer que l'automate déterministe obtenu est minimal.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Comme l'automate est émondé, la méthode de Moore donne l'automate minimal. Or, la méthode de Moore laisse l'automate inchangé.
     On en déduit que l'automate est déjà minimal.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item En déduire le nombre d'états nécessaires pour reconnaître $L_n$ par un automate déterministe.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     L'automate a $2^n$ états. 
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

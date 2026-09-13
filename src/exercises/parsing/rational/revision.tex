@@ -5,7 +5,7 @@
 
 \begin{exercice}[Révisions -- Grammaires rationnelles]\label{exo:parsing/rational/revision}
 
-  \begin{question}
+  \begin{questions}
   \item Poser le système d'équations correspondant à la grammaire ci-dessous. Quel est le problème lorsqu'on tente de le résoudre ?
 
     $$G_4 \eqdef \left\langle\{a, b\}, \{S, A\}, S, \left\{
@@ -13,22 +13,22 @@
       S   &\rightarrow& a A \mid \varepsilon \\
       A   &\rightarrow& S b\\
     \end{array}\right\}\right\rangle$$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Le système d'équations est $\left\{\begin{array}{lll}
     L   &=& a L_A \mid \varepsilon \\
     L_A   &=& L b\\
   \end{array}\right.$.
     Si on essaye de résoudre le système, on obtient $L = a L b \mid \varepsilon$ qui ne peut par être résolue avec le lemme d'Arden.
     Le langage est $\{a^n b^n | n\in \mathbb{N}\}$ qui n'est pas rationnel. 
-  \end{question}
+  \end{questions}
   
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

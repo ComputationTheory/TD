@@ -11,10 +11,10 @@
     \item et le modèle étendu vu en cours, à plusieurs rubans, qui autorise en plus l'insertion et la suppression de cases sur les rubans.
   \end{itemize}
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine du modèle étendu qui décide le langage $\{ww^\textsc{r} \mid w \in \{a, b\}^\star\}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0), x=30mm]
       \state[initial]   (0) at (0,0) {$0$}; 
       \state            (1) at (1,0) {$1$}; 
@@ -28,12 +28,12 @@
       \path (2) edge[loop above]  node {\smGroup{\smTMtransR[\textsc{i}]{x}{x}\smTMtransL[\textsc{a}]{x}{x}}} (2);
       \path (2) edge              node {\smGroup{\smTMtransL[\textsc{i}]{\blank}{\blank}\smTMtransR[\textsc{a}]{\blank}{\blank}}} (3);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine du modèle strict qui décide le langage $\{ww^\textsc{r} \mid w \in \{a, b\}^\star\}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(1), y=12mm]
       \state[initial above] (0) at (1,1) {$0$}; 
       \state                (1) at (2,2) {$1$}; 
@@ -55,14 +55,14 @@
       \path (5) edge             node[sloped]       {\smTMtransR{\blank}{\blank}}                  (0);
       \path (0) edge             node[sloped]       {\smTMtransR{\blank}{\blank}}                  (6);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine du modèle étendu qui décide le langage $\{a^{n^2} \mid n\in \mathbb{N} \}$.
     
     \emph{Remarque :} on rappelle que $\sum_{k=0}^n (2k+1) = (n+1)^2$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0), x=40mm]
       \state                (2) at (0,0) {$2$}; 
       \state                (1) at (1,0) {$1$}; 
@@ -76,12 +76,12 @@
       \path (2) edge[bend left=15] node {\smTMtransS[\textsc{k}]{\blank}{1}}                                   (0);
       \path (0) edge               node {\smTMtransL[\textsc{i}]{\blank}{\blank}}                              (3);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Construire une machine du modèle étendu qui décide le langage de Dyck : $\mathcal{L}(S \rightarrow (S) \mid SS \mid \varepsilon)$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \vspace{-2mm}
     \begin{tikzpicture}[turingMachine, baseline=(0), x=30mm]
       \state[initial]   (0) at (0,0) {$0$}; 
@@ -96,7 +96,7 @@
       \path (2) edge             node {\smTMtransS[\textsc{c}]{x}{x}}                                                            (3);
     \end{tikzpicture}
     \vspace{-2mm}
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

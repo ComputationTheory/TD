@@ -13,9 +13,9 @@
   \item L'algorithme est-il polynomial ?
   \end{itemize}
 
-  \begin{question}
+  \begin{questions}
   \item Test de primalité :
-  \end{question}
+  \end{questions}
   
   \begin{algorithm}[H]
     \SetKwFunction{Primality}{is\_prime}
@@ -28,7 +28,7 @@
       \Return \True;
     }
   \end{algorithm}
-  \begin{correction}
+  \begin{corrections}
     \begin{itemize}
     \item L'entrée est $n$, codé en binaire. Sa taille est donc $m = \lceil \log_2(n+1) \rceil$.
     \item La boucle incrémente $i$ de $2$ à $\lfloor \sqrt{n} \rfloor$, donc effectue $\Theta(\sqrt{n})$ itérations.
@@ -42,11 +42,11 @@
       
       Par contre, il existe un algorithme polynomial pour ce problème.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Multiplication à la russe :
-  \end{question}
+  \end{questions}
   \begin{algorithm}[H]
     \SetKwFunction{Russian}{multiply}
     \Fun{$\Russian(a\in\mathbb{N}, b\in\mathbb{N}) \in \mathbb{N}$}{
@@ -59,7 +59,7 @@
       \Return $r$\;
     }
   \end{algorithm}
-  \begin{correction}
+  \begin{corrections}
     \begin{itemize}
     \item L'entrée est le couple $(a,b)$, codé en binaire. Sa taille est
       $m = \Theta(\log a + \log b)$.
@@ -73,11 +73,11 @@
       \]
     \item Oui, l'algorithme est polynomial en la taille de l'entrée.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Sommes de sous-ensembles :
-  \end{question}
+  \end{questions}
   \begin{algorithm}[H]
     \SetKwFunction{Subset}{subset\_sum}
     \SetKwFunction{Aux}{aux}
@@ -93,7 +93,7 @@
       }
     }
   \end{algorithm}
-  \begin{correction}
+  \begin{corrections}
     \begin{itemize}
     \item L'entrée est le tableau \texttt{values} contenant $n = |\mathit{values}|$ entiers naturels.
       On suppose que chaque entier est codé en binaire sur au plus $B$ bits.
@@ -118,7 +118,7 @@
       Comme $n \le m$, l'algorithme est également exponentiel en la taille de l'entrée.
       Il n'est donc pas polynomial.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

@@ -6,19 +6,19 @@
 \begin{exercice}[Expressions rationnelles] \label{exo:lexing/regexp/write_regexp}
 
   Proposer des expressions rationnelles définissant les langages suivants :
-  \begin{question}
+  \begin{questions}
   \item $L_1 = \{ab\}$
   \item $L_2 = \{a^nba^m \mid n, m \in \mathbb{N}\}$
   \item $L_3 = $ les identificateurs en C, composés de chiffres, lettres, et $\_$, mais ne commençant pas par un chiffre
   \item $L_4 = $ les nombres décimaux sans 0 inutiles
   \item $L_5 = $ les mots sur $\{a,b\}$ qui ont $ab$ et $ba$ pour facteurs.
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item $ab$
   \item $a^\star b^\star$
   \item $(\_\mid a\mid b\mid  \ldots \mid z \mid A\mid B \mid  \ldots \mid Z)(\_\mid a\mid b\mid  \ldots \mid z \mid A\mid B \mid  \ldots \mid Z \mid 0\mid  \ldots \mid 9)^\star$
@@ -28,9 +28,9 @@
     \item $ (a|b)^\star ab (a|b)^\star ba (a|b)^\star \mid (a|b)^\star aba (a|b)^\star \mid (a|b)^\star ba (a|b)^\star ab (a|b)^\star \mid (a|b)^\star bab (a|b)^\star $
     \item $ (a^+ b^+ a | b^+ a^+ b) (a|b)^\star$
     \end{itemize}
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

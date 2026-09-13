@@ -6,7 +6,7 @@
 \begin{exercice}[Expressions rationnelles correspondant à un automate]\label{exo:lexing/kleene/automaton_to_regexp}
 
   Traduire chaque automate ci-dessous en une expression rationnelle sur l'alphabet $\{a,b\}$.
-  \begin{question}
+  \begin{questions}
   \item
     \begin{tikzpicture}[automaton, size=20mm, baseline=(1.base)]
       \state[initial]   (1) at (0,0) {$1$}; 
@@ -45,15 +45,15 @@
       \path (3) edge             node       {$a$} (4);
       \path (4) edge[bend left]  node       {$b$} (3);
     \end{tikzpicture}    
-  \end{question}
+  \end{questions}
   
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
   Il faut passer par le système d'équations rationnelles, puis utiliser le lemme d'Arden.
   
-  \begin{question}
+  \begin{questions}
   \item $\left\{\begin{array}{lllll}
     L_1 & = & a L_1 \mid b L_1 \mid a L_2  & = & (a\mid b)L_1 \mid a L_2\\
     L_2 & = & b L_3 \\
@@ -92,9 +92,9 @@
     \item $L_3 = a L_4 \mid b L_1 = a^+ b L_3 \mid a \mid b^+ a^+ b L_3 \mid b^+ = b^\star a^+ b L_3 \mid a \mid b^+  = (b^\star a^+ b)^\star (a \mid b^+)$
     \end{itemize}
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

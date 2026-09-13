@@ -35,12 +35,12 @@
     Existe-t-il un entier $n\in\mathbb{N}$ tel que l'appel $P.\texttt{decide}(n)$ termine ?
   }
 
-  \begin{question}
+  \begin{questions}
   \item On veut démontrer que le problème \textsc{universal halt} est indécidable par réduction du problème \textsc{halt}.
     Quelle doit être la signature (types d'entrée et de retour) de la réduction par mappage ? Donner une interface Java
     implémentée par la réduction par mappage. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Une réduction de \textsc{halt} vers \textsc{universal halt} doit implémenter l'interface suivante :
     \begin{lstlisting}
       interface HtoUH {
@@ -53,12 +53,12 @@
     \item[Sortie :] une instance $Q = \texttt{reduce}(P, n)$ de \textsc{universal halt}, telle que $P$ termine $n$ si,
       et seulement si, $Q$ termine sur $x$ pour tout $x$. 
     \end{description}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Démontrer que le problème \textsc{universal halt} est indécidable par réduction du problème \textsc{halt}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On pose la réduction suivante :
     \begin{lstlisting}
       HtoUH reduction = (P, n) -> {
@@ -70,19 +70,19 @@
     \end{lstlisting}
     \texttt{reduction} est clairement calculable puisqu'il s'agit d'un programme Java qui ne fait aucun calcul (seulement une déclaration).
     De plus, pour tout $x$, on a bien que $\texttt{reduce}(P, n)$ termine sur $x$ si, et seulement si, $P$ termine $n$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Démontrer que le problème \textsc{existential halt} est indécidable par réduction du problème \textsc{halt}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     La même réduction qu'à la question précédente fonctionne.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Démontrer que le problème \textsc{existential halt} est semi-décidable.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On décrit un semi-décideur pour \textsc{Existential Halt} :
     
     \begin{lstlisting}
@@ -105,27 +105,27 @@
     \item S'il existe $m$ tel que $P.\texttt{decide}(m)$ termine, alors cette terminaison sera observée à un tour fini, et $S$ accepte.
     \item Si pour tout $m$, $P.\texttt{decide}(m)$ ne termine pas, alors aucune simulation ne termine et $S$ n'accepte jamais.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Décrire le complémentaire\footnote{Au sens ensembliste des langages.}
     du problème \textsc{universal halt}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{description}
     \item[Entrée :] une instance de \textsc{halt}, c'est à-dire un couple $\langle M, u \rangle$.
     \item[Sortie :] une instance $M'$ de \textsc{universal halt}, telle que $M$ termine $u$ si,
       et seulement si, $M'$ termine sur $v$ pour tout $v$. 
     \end{description}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item En déduire que le problème \textsc{universal halt} n'est pas semi-décidable.
-  \end{question}
+  \end{questions}
 
   \ifdefined\CORRECTION
 
-  \begin{correction}
+  \begin{corrections}
 
     \paragraph{Convention.}
     On raisonne sur des programmes Java comme sur des objets mathématiques : une \emph{réduction} construit,
@@ -230,7 +230,7 @@
 
     \end{enumerate}
 
-  \end{correction}
+  \end{corrections}
 
   \fi
 
@@ -272,22 +272,22 @@
     Existe-t-il un mot $u\in \Sigma^\star$ tel que l'exécution de $M$ sur $u$ termine ?
   }
   
-  \begin{question}
+  \begin{questions}
   \item On veut démontrer que le problème \textsc{universal halt} est indécidable par réduction du problème \textsc{halt}.
     Quels doivent être le domaine et l'ensemble de retour de la réduction par mappage ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{description}
     \item[Entrée :] une instance de \textsc{halt}, c'est à-dire un couple $\langle M, u \rangle$.
     \item[Sortie :] une instance $M'$ de \textsc{universal halt}, telle que $M$ termine $u$ si,
       et seulement si, $M'$ termine sur $v$ pour tout $v$. 
     \end{description}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Démontrer que le problème \textsc{universal halt} est indécidable par réduction du problème \textsc{halt}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Il suffit de considérer la réduction
     $f : \left\{\begin{array}{rcll}
     \textsc{halt}^{\mathcal{I}} &\rightarrow& \textsc{universal halt}^{\mathcal{I}}\\
@@ -299,24 +299,24 @@
     
     La réduction $f$ est bien calculable, et pour tout $M$, 
     $M \in L_{\mathit{empty\_halt}} \Leftrightarrow f(M) = \langle M, \varepsilon \rangle \in L_{\mathit{halt}}$.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Démontrer que le problème \textsc{existential halt} est indécidable par réduction du problème \textsc{halt}.
   \item Démontrer que le problème \textsc{existential halt} est semi-décidable.
   \item Décrire le complémentaire\footnote{Le mot ``complémentaire'' doit être compris au sens ensembliste des langages :
   une instance est positive dans le complémentaire de \textsc{universal halt} si, et seulement si, elle est négative dans \textsc{universal halt}.}
     du problème \textsc{universal halt}. 
   \item En déduire que le problème \textsc{universal halt} n'est pas semi-décidable.
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
 
 
 
-\begin{correction}
-  \begin{question}
+\begin{corrections}
+  \begin{questions}
   \item 
     Il suffit de considérer la réduction
     $f : \left\{\begin{array}{rcll}
@@ -352,9 +352,9 @@
       \path[dashed] (M0) edge[bend right]                                                                  (Mf);
     \end{tikzpicture}
 
-  \end{question}
+  \end{questions}
   
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

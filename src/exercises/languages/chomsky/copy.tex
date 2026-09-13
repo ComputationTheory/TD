@@ -13,18 +13,18 @@
   $$
   où $u^\textsc{r}$ représente le mot \emph{miroir} de $u$. 
 
-  \begin{question}
+  \begin{questions}
   \item Donner une \emph{grammaire algébrique} pour le langage $L_{\mathit{mir}}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $G_{\mathit{mir}} = \left\langle \{a,b,c\}, \{S\}, S, \{S \to aSa \mid bSb \mid c\} \right\rangle$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Montrer que $L_{\mathit{mir}}$ n'est pas \emph{rationnel} 
     en utilisant le lemme de l'étoile. En déduire le type de $L_{\mathit{mir}}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Supposons $L_{\mathit{mir}}$ rationnel.
     Soit $N$ la constante donnée par le lemme de l'étoile, et posons
     $u = a^N c a^N$. On a bien $u\in L_{\mathit{mir}}$ et $|u|>N$.
@@ -41,13 +41,13 @@
     Ainsi $L_{\mathit{mir}}$ n'est pas rationnel.
     Comme il existe une grammaire de type 2 pour $L_{\mathit{mir}}$ et que le langage n’est pas de type 3,
     il est de type 2.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Montrer que $L_{\mathit{cop}}$ n'est pas \emph{algébrique}
     en utilisant le lemme de pompage pour les langages algébriques.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Supposons $L_{\mathit{cop}}$ algébrique.
     Soit $N$ la constante du lemme de pompage, et posons
     $u = a^N b^N c a^N b^N \in L_{\mathit{cop}}$ avec $|u|>N$.
@@ -64,17 +64,17 @@
     \end{itemize}
 
     Dans tous les cas, contradiction. Donc $L_{\mathit{cop}}$ n’est pas algébrique.
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Proposer une \emph{grammaire générale} pour $L_{\mathit{cop}}$.
 
     \emph{Indication :} on pourra commencer par générer des mots de la forme
     $(aA \mid bB)^\star c$, puis ajouter des règles qui réordonnent les
     minuscules et les majuscules afin d'obtenir un mot de la forme $u c u$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $\left\langle \{a, b, c\}, \{S, A, B\}, S,
     \left\{\begin{array}{rcl}
     S   &\rightarrow& aA S \mid bB S \mid c\\
@@ -85,9 +85,9 @@
     Bb &\rightarrow& bB\\
     Bc &\rightarrow& cb\\
     \end{array}\right\}  \right\rangle$
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Adapter la question précédente pour obtenir une \emph{grammaire contextuelle}
     pour $L_{\mathit{cop}}$.
 
@@ -96,8 +96,8 @@
     $$
     XY \rightarrow XZ \rightarrow YZ \rightarrow YX
     $$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On introduit des non-terminaux $\alpha$ et $\beta$ pour les $a$ et $b$ à gauche de $c$,
     un non-terminal $C$ pour représenter le $c$,
     et des non-terminaux $U$, $V$, $W$, $X$, $Y$ et $Z$ pour effectuer les inversions.
@@ -118,7 +118,7 @@
     \alpha &\rightarrow& a\\
     \beta  &\rightarrow& b\\
     \end{array}\right\}  \right\rangle$
-  \end{correction}
+  \end{corrections}
 \end{exercice}
 
 \endgroup

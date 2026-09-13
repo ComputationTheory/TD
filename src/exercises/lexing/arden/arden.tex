@@ -6,7 +6,7 @@
 \begin{exercice}[Systèmes d'équations rationnelles]\label{exo:lexing/arden/arden}
 
   Résoudre les systèmes d'équations rationnelles suivants :
-  \begin{question}
+  \begin{questions}
   \item $\left\{\begin{array}{rcl}
     L_1 &=& aL_2 \mid  bL_3 \\
     L_2 &=& bL_2 \mid  \varepsilon \\
@@ -18,13 +18,13 @@
     L_3 &=& cL_4 \\
     L_4 &=& cL_4 \mid  \varepsilon
   \end{array}\right.$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item
     $\varepsilon b\notin b$, donc par le lemme d'Arden, l'équation
     $L_2 = b L_2 | \varepsilon$ a une unique solution $L_2 = b^\star \varepsilon = b^\star$\\
@@ -35,9 +35,9 @@
     $L_3 = c^+$ (par Arden)\\
     $L_2 = a^\star (ac^\star  \mid  \varepsilon)$ (par Arden) $= a^+c^\star  \mid  a^\star  = a^+c^\star  \mid  a^+ \mid  \varepsilon = a^+c^\star  \mid  \varepsilon$\\
     $L_1 = b(a^+c^\star  \mid  \varepsilon) \mid  bc^+ = b(a^+c^\star  \mid  \varepsilon \mid  c^+) = b(a^+c^\star  \mid  c^\star ) = ba^\star  c^\star $
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

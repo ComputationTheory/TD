@@ -6,26 +6,26 @@
 \begin{exercice}[Mini-défi -- Critères d'acceptation]\label{exo:parsing/pushdown/challenge}
 
   Dans la première partie, on fixe $\Sigma=\{a,b\}$ et $L \eqdef \{a^m b^n \mid m\neq n\}$.
-  \begin{question}
+  \begin{questions}
   \item Donner un automate à pile $A_F$ tel que $L = \mathcal{L}_F(A_F)$. 
   \item Donner un automate à pile $A_\emptyset$ tel que $L = \mathcal{L}_\emptyset(A_\emptyset)$. 
   \item Donner un automate à pile $A$ tel que $L = \mathcal{L}(A)$. 
-  \end{question}
+  \end{questions}
 
   On veut maintenant montrer que les trois critères d'acceptation
   reconnaissent exactement la même famille de langages (les langages algébriques).
   On fixe $A = \langle \Sigma, \Gamma, \blank, Q, I, F, \rightarrow \rangle$ un automate à pile.
-  \begin{question}
+  \begin{questions}
   \item Donnez un automate à pile $B$ tel que $\mathcal{L}_\varepsilon(B) = \mathcal{L}_F(A)$
   \item Donnez un automate à pile $C$ tel que $\mathcal{L}(C) = \mathcal{L}_\varepsilon(A)$
   \item Donnez un automate à pile $D$ tel que $\mathcal{L}_F(D) = \mathcal{L}(A)$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
 
   \item Automate non-déterministe $A_F$ tel que $L=\mathcal{L}_F(A_F)$ :
 
@@ -86,9 +86,9 @@
   \item \textbf{De $A$ (pile vide \emph{et} final) à $D$ (final) avec $\mathcal{L}_F(D)=\mathcal{L}(A)$.}\
     Ajouter au démarrage un nouveau marqueur de fond $\square\notin \Gamma$ en empilant $\square$ sous $\blank$. Modifier la transition « finale » de $A$ (celle qui dépile $\blank$ et atteint un état final) pour qu’elle \emph{n}’exige plus de vider $\square$ : au moment où $A$ viderait la pile, $D$ va simplement dans un état final $f$ en laissant $\square$ en pile. On n’utilise plus la pile ensuite. Ainsi, $D$ accepte par état final exactement les mots pour lesquels $A$ atteignait simultanément un état final \emph{et} la pile vide : $\mathcal{L}_F(D)=\mathcal{L}(A)$.
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

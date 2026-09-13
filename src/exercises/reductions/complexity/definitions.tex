@@ -10,88 +10,88 @@
   Dans toutes les questions qui suivent, on se donne un problème de décision \PROBLEM, dont la taille des données
   est $n$. Pour chaque question, il s'agit de répondre \og Oui \fg, \og Non \fg ou \og On ne peut pas conclure \fg.
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'il existe un algorithme en $\mathcal{O}\left(n^4 \cdot \log(n) \right)$ pour résoudre \PROBLEM.
     \begin{itemize}
     \item \PROBLEM{} est-il dans P ?
     \item \PROBLEM{} est-il dans NP ?
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $n^4 \cdot \log(n) = \mathcal{O}\left(n^5\right)$, donc l'algorithme est polynomial. 
     Cela place par définition \PROBLEM{} dans P.
     Comme $P \subseteq NP$ , \PROBLEM{} est également dans NP.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'il existe un algorithme en $\mathcal{O}\left(n \cdot 2^n\right)$ pour résoudre \PROBLEM.
     \begin{itemize}
     \item \PROBLEM{} est-il dans P ?
     \item \PROBLEM{} est-il dans NP ?
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Il existe un algorithme exponentiel pour résoudre \PROBLEM, mais cela ne nous indique rien sur
     l'existence (ou non) d'un algorithme polynomial pour \PROBLEM. En résumé, on dispose de trop peu
     d'informations pour conclure, et la réponse aux deux questions est : ``On ne peut pas conclure''.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'il existe un algorithme en $\mathcal{O}\left(2^{\log_2(n)^2} \right)$ pour résoudre \PROBLEM.
     \begin{itemize}
     \item \PROBLEM{} est-il dans P ?
     \item \PROBLEM{} est-il dans NP ?
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $2^{\log_2(n)^2} = n^{\log_2(n)}$, donc l'algorithme est quasi-polynomial mais pas polynomial. 
     On est dans la même situation que dans la question précédente : on ne peut pas conclure.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'on démontre que \PROBLEM{} est dans NP. \PROBLEM{} est-il dans P ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Il s'agit juste de considérations ensemblistes, en se souvenant que $P \subseteq NP$.
     Ici, on ne peut pas conclure.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'on démontre que \PROBLEM{} est dans P. \PROBLEM{} est-il dans NP ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Oui.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'on démontre que \PROBLEM{} n'est pas dans P. \PROBLEM{} est-il dans NP ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On ne peut pas conclure.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons qu'on démontre que \PROBLEM{} n'est pas dans NP. \PROBLEM{} est-il dans P ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Non.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons que \PROBLEM{} soit NP-complet.
     Peut-on conclure que \PROBLEM{} n'admet pas d'algorithme en temps polynomial ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On ne peut pas conclure : si $\text{P} = \text{NP}$, la réponse est non, sinon, la réponse est oui. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons que \PROBLEM{} soit dans NP et que son complémentaire soit également dans NP.
     \PROBLEM{} est-il dans P ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On ne peut pas conclure.
-  \end{correction}
+  \end{corrections}
   
   On considère le raisonnement suivant, censé démontrer que $\text{P} \neq \text{NP}$.
 
@@ -110,12 +110,12 @@
     Puisque \PROBLEM{} est dans NP mais pas dans P, on en conclut que $\text{P} \neq \text{NP}$.
   }
 
-  \begin{question}
+  \begin{questions}
   \item Le raisonnement ci-dessus est incorrect.
     Indiquez précisément à quel endroit se situe l'erreur,
     et expliquez en une ou deux phrases pourquoi il est faux.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     L'erreur vient de l'identification suivante : 
     \og{}$L_k$ se réduit à \PROBLEM{} en temps polynomial\fg{}
     ne signifie pas
@@ -130,7 +130,7 @@
 
     Ainsi, la complexité $\Omega(n^k)$ de $L_k$ est déjà payée par la réduction elle-même :
     on ne peut donc rien en déduire sur la complexité intrinsèque de \PROBLEM.
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

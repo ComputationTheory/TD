@@ -6,16 +6,16 @@
 \begin{exercice}[Langages non algébriques]\label{exo:parsing/expressiveness/pumping}
 
   Démontrer que les langages suivants ne sont pas algébriques.
-  \begin{question}
+  \begin{questions}
   \item $L_1 \eqdef \{ u \in \{a, b, c\}^\star \mid |u|_a = |u|_b = |u|_c \}$.
   \item $L_2 \eqdef \{a^n b^n c^m \mid n \leq m \leq 2n\}$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons (par l'absurde), que $L_1$ est algébrique.\\
     Alors $L_1$ vérifie le lemme de pompage, donc il existe $N \in \mathbb{N}$ tel que pour tout mot $u$ tel que $|u|\ge N$,
     il existe $v, w, x, y, z \in \Sigma^\star$ tels que $u=vwxyz$, $wy\neq \emptyset$, $|wxy| \le N$ et pour tout $i\in \mathbb{N}$, $vw^ixy^i z\in L_1$. \\
@@ -34,9 +34,9 @@
     \item Sinon $w y$ contient au moins un $\alpha\in \{a, b\}$, donc \\ $|v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_c = N < 2N \le  3N = |v \cdot  w^{2N}\cdot x\cdot y^{2N}\cdot z|_\alpha$. Absurde.
     \end{itemize}
     Le langage $L_2$ n'est donc pas algébrique.
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

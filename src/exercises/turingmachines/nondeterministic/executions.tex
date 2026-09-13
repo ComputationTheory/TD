@@ -27,13 +27,13 @@
     \end{tikzpicture}
   \end{center}
   
-  \begin{question}
+  \begin{questions}
   \item Donnez le graphe des configurations de $M$ accessibles à partir de $C_{\mathit{init}}(aabbb)$.
     On pourra contracter les portions déterministes du graphe en écrivant
     $c \leadsto^\star c'$ lorsqu'il existe un chemin $c=c_0\leadsto c_1\leadsto\cdots\leadsto c_k=c'$
     tel que, pour tout $i<k$, la configuration $c_i$ n'a qu'un seul successeur accessible.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[x=25mm, y=15mm]
       \node (0)  at (0,1) {$\langle \varepsilon, 0, aabbb       \rangle$}; 
       \node (1)  at (1,1) {$\langle abbb,        2, \varepsilon \rangle$}; 
@@ -59,31 +59,31 @@
       \path (6)  edge[leadsto] node[auto]{$\star$} (9);
       \path (7)  edge[leadsto] node[auto]{$\star$} (10);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Le mot $aabbb$ est-il reconnu par $M$ ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Deux exécutions mènent à une configuration acceptante $\langle \varepsilon, 5, \varepsilon \rangle$, donc le mot est reconnu. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Quel est le langage reconnu par $M$ ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $\mathcal{L}(M) = \{a^n b^m \mid n\le m \le 2n\}$. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Quelle est la complexité en temps non déterministe de $M$ ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     À chaque itération de la boucle principale, on parcourt le mond une fois dans chaque sens, en supprimant au moins deux caractères.
     Il y a donc au plus $\left\lceil \frac{n}{2} \right\rceil$ tours de boucle, et chaque tour de boucle a une complexité bornée par
     $2n+2$ transitions. Finalement on ajoute une transition pour passer dans l'état $5$.
     Ainsi, la complexité est $\mathcal{O}(n^2)$.
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

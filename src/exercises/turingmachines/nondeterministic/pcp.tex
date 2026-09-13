@@ -23,22 +23,22 @@
     \end{itemize}
   }
 
-  \begin{question}
+  \begin{questions}
   \item Les deux instances suivantes de \textsc{PCP borné} sont-elles positives ? 
     $$
     \left\langle \left\{ \VDomino{ab}{aba}, \VDomino{ab}{bab},  \VDomino{abab}{b}  \right\}, 4 \right\rangle
     \quad\text{et}\quad
     \left\langle \left\{ \VDomino{ab}{aba}, \VDomino{ab}{bab},  \VDomino{abab}{b}  \right\}, 2 \right\rangle
     $$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item La première instance a une solution : $\VDomino{ab}{aba} \VDomino{ab}{bab} \VDomino{ab}{aba}  \VDomino{abab}{b}$
     \item La deuxième n'en a pas. On peut tester toutes les solutions à un ou deux dominos. 
       Pour un domino, il n'y a clairement pas de solution.
       Pour deux dominos, soit il y aura 4 symboles en haut et 6 en bas, soit 6 en haut et 4 en bas, soit 8 en haut et 2 en bas. 
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
   Le but de cet exercice est de comparer les deux définitions de $\text{NP}$.
   Pour cela, nous allons montrer de deux manières différentes que $\textsc{PCP borné} \in \text{NP}$.
@@ -61,11 +61,11 @@
   on a toujours $\mathit{longueur}(\langle D, N \rangle) \ge |D| + N$, puisque $N$ est encodé en unaire.
   
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Construire une machine de Turing non déterministe qui accepte \textsc{PCP borné}.
     Vous pouvez introduire des rubans de travail supplémentaires si nécessaire. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, x=35mm, y=20mm, baseline=(0.base)]
       \state[initial above] (0) at (1,1) {$0$}; 
       \state                (1) at (0,1) {$1$}; 
@@ -85,13 +85,13 @@
     \end{tikzpicture}
     
     $\forall x \in \{a, b\}, \forall y \in \{a, b, \langle, \rangle, |\}, \forall z \in \{1, \blank\}$
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Donner un polynôme $P(n)$ tel que, pour toute instance positive $\langle D, N \rangle$,
     il existe une exécution acceptante de cette machine dont la durée est inférieure à $P(\mathit{longueur}(\langle D, N \rangle))$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Une exécution consiste en au plus $N$ itérations de la boucle $0 \rightarrow 1 \rightarrow 2 \rightarrow 0$, suivies de la conclusion
     $0 \rightarrow 3 \rightarrow 4$.
     \begin{itemize}
@@ -103,18 +103,18 @@
       On rajoute deux étapes pour les transitions $0 \rightarrow 3$ et $3 \rightarrow 4$.
     \end{itemize}
     Finalement, l'algorithme s'exécute en au plus $2 \times N \times \mathit{longueur}(D) + 2 = \mathcal{O}(N \times \mathit{longueur}(D))$ étapes. 
-  \end{correction}
+  \end{corrections}
   
   On en déduit qu'il existe une machine de Turing non déterministe qui accepte \textsc{PCP borné} en temps polynomial,
   donc $\textsc{PCP borné} \in \text{NP}$.
 
   On veut maintenant montrer que $\textsc{PCP borné} \in \text{NP}$ en utilisant la caractérisation à base de \emph{certificats polynomiaux}.
   
-  \begin{question}
+  \begin{questions}
   \item Quelle forme peut prendre un \emph{certificat} pour $\langle D, N \rangle \in \textsc{PCP borné}$ ?
     Justifier que votre certificat est bien polynomial en explicitant le polynome.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un certificat est une suite d'au plus $N$ dominos de $D$.
     \begin{itemize}
     \item Pour un algorithme, on la représente par un tableau de couples de chaînes de caractères.
@@ -122,15 +122,15 @@
       $\langle \alpha_{i_1} \mid \beta_{i_1} \rangle \cdots \langle \alpha_{i_k} \mid \beta_{i_k} \rangle$
     \end{itemize}
     La longueur du certificat est bornée par $N \times \mathit{longueur}(\langle D, N \rangle)$.
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Donner un algorithme qui vérifie qu'un candidat $C$
     est bien un certificat pour une instance $\langle D, N \rangle$ de \textsc{PCP borné}.
     Justifier que votre algorithme est bien polynomial en explicitant le polynome.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{algorithm}[H]
       \SetKwFunction{Verify}{verify}
       \SetKwFunction{Contains}{contains}
@@ -159,16 +159,16 @@
     \end{algorithm}
 
     L'algorithme est en $\mathcal{O}(|c|^2 + |c| \times \mathit{longueur}(D)) = \mathcal{O}(n^2)$, où $n$ est la longueur de l'entrée.
-  \end{correction}
+  \end{corrections}
 
   
   On en déduit que \textsc{PCP borné} peut être vérifié en temps polynomial, donc $\textsc{PCP borné} \in \text{NP}$.
 
-  \begin{question}
+  \begin{questions}
   \item Donner un algorithme déterministe qui décide \textsc{PCP borné}.
     Évaluer sa complexité temporelle en fonction de $|D|$ et $N$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{algorithm}[H]
       \SetKwFunction{Verify}{verify}
       \SetKwFunction{Contains}{contains}
@@ -193,7 +193,7 @@
       }
     \end{algorithm}
     L'algorithme est en $\mathcal{O}(|D|^N)$. La complexité est donc super-exponentielle en $\mathit{longueur}(\langle D, N\rangle)$. 
-  \end{correction}
+  \end{corrections}
 \end{exercice}
 
 \endgroup

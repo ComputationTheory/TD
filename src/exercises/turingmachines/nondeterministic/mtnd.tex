@@ -7,10 +7,10 @@
 
   Construire une machine de Turing non déterministe qui accepte chacun des langages suivants.
   
-  \begin{question}
+  \begin{questions}
   \item $\{x x^\textsc{r} y \mid x, y \in \{a, b\}^\star \land |y| \le |x| \}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Initialement, le mot est écrit sur le ruban \textsc{i}. $\forall x, y \in \{a, b\}$ :
     
     \begin{tikzpicture}[turingMachine, baseline=(1), x=20mm]
@@ -25,12 +25,12 @@
       \path (1) edge             node {\smTMtransR[\textsc{x}]{\blank}{\blank}}                                   (2);
       \path (2) edge             node {\smTMtransL[\textsc{i}]{\blank}{\blank}}                                   (3);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item $\{w c x c y c x c z \mid x \in \{a, b\}^\star \land  w, y, z \in \{a, b, c\}^\star\}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Initialement, le mot est écrit sur le ruban \textsc{i}. $\forall x \in \{a, b\}, \forall y \in \{a, b, c\}$ :
     
     \begin{tikzpicture}[turingMachine, baseline=(1), x=20mm]
@@ -48,7 +48,7 @@
       \path (2) edge             node {\smGroup{\smTMtransR[\textsc{i}]{c}{c}\smTMtransR[\textsc{x}]{\blank}{\blank}}} (3);
       \path (3) edge             node {\smGroup{\smTMtransR[\textsc{i}]{c}{c}\smTMtransL[\textsc{x}]{\blank}{\blank}}} (4);
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

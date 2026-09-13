@@ -25,7 +25,7 @@
     $\mathrm{diam}(G) \eqdef \max_{u,v\in V} d_G(u,v)$.
   \end{itemize}
   
-  \begin{question}
+  \begin{questions}
   \item Pour chacun des graphes ci-dessous, calculer le diamètre du graphe et exhiber une paire de sommets atteignant la distance maximale.
   \begin{center}
     \begin{tikzpicture}[x=10mm, y=10mm]
@@ -53,24 +53,24 @@
       \draw[thick] (4) -- (3) -- (1) -- (2) -- (4) -- (5) -- (7) -- (6) -- (4);
     \end{tikzpicture}
   \end{center}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item $\mathrm{diam}(G_1)=3$. La distance maximale est atteinte pour le couple $\langle 1, 5 \rangle$.
     \item $\mathrm{diam}(G_2)=4$. La distance maximale est atteinte pour le couple $\langle 1, 7 \rangle$.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Donner un exemple de graphe connexe à $n$ sommets de diamètre $1$, $2$ et $n-1$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item diamètre $1$ : le graphe complet $K_n$ ;
     \item diamètre $2$ : l'étoile $S_n$ (centre + $n-1$ feuilles) ;
     \item diamètre $n-1$ : le chemin $P_n$.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
   On s'intéresse maintenant plus précisément aux deux problèmes suivants. 
   
@@ -87,22 +87,22 @@
   }
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Les problèmes \textsc{diam} et \textsc{diam\_inf} sont-ils des problèmes de décision ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un problème de décision doit avoir une réponse binaire (\textsf{oui}/\textsf{non}).
     \textsc{diam} demande en sortie un entier, donc ce n'est pas un problème de décision.
     Par contre, \textsc{diam\_inf} est un problème de décision. 
-  \end{correction}
+  \end{corrections}
 
   On suppose disposer d'un algorithme \Decide qui décide le problème \textsc{diam\_inf}.
   
-  \begin{question}
+  \begin{questions}
   \item Proposer un algorithme déterministe \Diam qui calcule le diamètre d'un graphe $G$ en utilisant  \Decide comme sous-routine.
     On pourra utiliser le fait que, pour un graphe connexe à $n$ sommets, $0\le \Diam(G)\le n-1$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On peut faire une recherche linéaire, mais elle fera $n$ appels.
     On effectue ici une recherche dichotomique sur $k\in\{0,\dots,n-1\}$,
     en exploitant la monotonie de la propriété ``$\Diam(G)\le k$'' par rapport à $k$.
@@ -120,15 +120,15 @@
         \Return $\mathit{min}$\;
       }
     \end{algorithm}
-  \end{correction}
+  \end{corrections}
   
 
   On suppose que de plus que \Decide s'exécute en temps $\mathcal{O}\left( f(|V|, |E|) \right)$, pour une certaine fonction $f$.
-  \begin{question}
+  \begin{questions}
   \item Donner une borne sur le nombre d'appels à la fonction \Decide effectués par l'algorithme \Diam de la question précédente,
     et en déduire la complexité totale en fonction de $f(|V|, |E|)$ et de $G$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{enumerate}
     \item La recherche dichotomique sur un intervalle de taille $n$ effectue
       $\lceil\log_2(n)\rceil$ itérations, donc $\mathcal{O}(\log(|V|))$ appels à \Decide.
@@ -143,14 +143,14 @@
       
       Si l'on utilise une recherche linéaire, on obtient $\mathcal{O}\left(|V| \cdot f(|V|, |E|) \right)$.
     \end{enumerate}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item On suppose qu'il a été démontré que tout algorithme calculant $\Diam(G)$
     nécessite au moins $g(|V|, |E|)$ étapes dans le pire cas, pour une certaine fonction $g$.
     Que peut-on en déduire sur la complexité temporelle du problème $\textsc{diam\_inf}$ ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     La complexité temporelle du problème $\textsc{diam\_inf}$ est $\Omega(\frac{g(|V|, |E|)}{\log(|V|)})$.
     
     Supposons, par contradiction, qu'il existe un algorithme qui décide $\textsc{diam\_inf}$
@@ -164,14 +164,14 @@
     \vspace{-2mm}
     étapes.
     Contradiction.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Réciproquement, on suppose qu'il a été démontré que tout algorithme décidant
     $\textsc{diam\_inf}$ nécessite au moins $h(|V|, |E|)$ étapes dans le pire cas.
     Que peut-on en déduire sur la complexité temporelle du problème $\textsc{diam}$ ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \emph{Attention} : la réduction explorée dans cet exercice ne permet pas de conclure sur la
     complexité de $\textsc{diam}$. Cependant, on peut introduire une réduction dans l'autre sens.
     
@@ -183,7 +183,7 @@
 
     Par le même raisonnement, on en déduit que
     la complexité temporelle de $\textsc{diam}$ est $\Omega(h(|V|, |E|))$.
-  \end{correction}
+  \end{corrections}
 
   On veut maintenant définir formellement le problème \textsc{diam\_inf} comme un problème de décision sur les langages.
   On fixe l'alphabet $\Sigma = \{0,1,\#,\rightarrow\}$.
@@ -205,24 +205,24 @@
   $1 \le u_i < v_i \le n$.
   L'ordre des arêtes est arbitraire.
 
-  \begin{question}
+  \begin{questions}
   \item Donnez un encodage du graphe $G_1$ dans ce langage.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $\langle G_1 \rangle = 101\#1\rightarrow10\#10\rightarrow11\#11\rightarrow100\#100\rightarrow101\#10\rightarrow100$
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
     \item Définissez le langage $L_{\textsc{diam\_inf}}$ des encodages des instances positives du problème \textsc{diam\_inf}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $L_{\textsc{diam\_inf}} \eqdef \{ \langle G \rangle \# \langle k \rangle \mid \mathrm{diam}(G) \le k \}$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item En déduire une borne sur la complexité de \Diam en fonction de $f$ et de la taille de son entrée. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Dans l'encodage choisi, on a $|\langle n\rangle| = \Theta(\log n)$ et,
     pour chaque arête, $|\langle u_i\rangle|$ et $|\langle v_i\rangle|$ valent $\Theta(\log n)$, puisque $1\le u_i,v_i\le n$.
     Chaque arête contribue donc $\Theta(\log n)$ bits (à une constante près), et les séparateurs contribuent $O(1)$.
@@ -231,7 +231,7 @@
     On peut réécrire la complexité obtenue uniquement en fonction de la taille $s$ de l'entrée.
     L'algorithme \Diam s'exécute donc en temps
     $\mathcal{O}\left(\log(s) \cdot f(s, s)\right)$.
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

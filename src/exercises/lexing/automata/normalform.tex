@@ -5,7 +5,7 @@
 
 \begin{exercice}[Automates standards et normalisés]\label{exo:lexing/automata/normalform}
 
-  \begin{question}
+  \begin{questions}
   \item Donner un automate fini standard  équivalent à l'automate ci-dessous défini sur l'alphabet $\{a,b,c\}$. 
 
   \begin{center}
@@ -32,13 +32,13 @@
 
   \item Donner un automate fini normalisé équivalent. 
   \item Montrer qu'un automate fini normalisé n'est jamais complet.
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Automate standard
     \begin{center}
       \begin{tikzpicture}[automaton, size=20mm]
@@ -94,9 +94,9 @@
   \item Un automate normalisé a un et un sel état final, dont aucune transition ne doit partir de l'état final.
     Par contre, pour un automate complet, tout état (y compris les états finaux) doit posséder une transition sur chacun des symboles de l'alphabet. 
     Ces deux contraintes sont donc totalement incompatibles.
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

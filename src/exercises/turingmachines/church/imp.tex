@@ -88,21 +88,21 @@
 
   \pagebreak
   
-  \begin{question}
+  \begin{questions}
   \item Proposer un programme IMP qui initialise la configuration $\langle \mathit{left}, \mathit{state}, \mathit{right} \rangle$
     en fonction de $\mathit{input}$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $\mathit{left} \leftarrow ``" ; \mathit{state} \leftarrow q_0 ; \mathit{right} \leftarrow \mathit{input}$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item On considère une transition $ q\xrightarrow{\smTMtransR{a}{b}} q'$ de $M$.
     Proposer un programme IMP qui vérifie si la transition peut être tirée,
     et si oui modifie les variables $\mathit{state}$, $\mathit{left}$ et $\mathit{right}$
     en conséquence.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $$\begin{array}{l}
       \mathit{empty} \leftarrow ``" ; \mathit{blank} \leftarrow ``\blank" ;\\
       \mathit{tstate}~\leftarrow q ;
@@ -119,9 +119,9 @@
       \quad \texttt{if }\mathit{right} \neq \mathit{empty} \texttt{ then skip else } \mathit{right} \leftarrow \mathit{right} + \mathit{blank} \texttt{ end}\\
       \texttt{end}
     \end{array}$$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item En déduire un programme IMP qui simule les exécutions de la machine de Turing suivante.
     On veillera en particulier à initialiser la variable $\mathit{output}$
     en fonction de la configuration $\langle \mathit{left}, \mathit{state}, \mathit{right} \rangle$.
@@ -132,8 +132,8 @@
       \path (a) edge[loop above] node {\smTMtransR{1}{0}} (a);
       \path (a) edge             node {\smTMtransL{0}{1}} (b);
     \end{tikzpicture}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
 
     $$\begin{array}{l}
       \mathit{empty} \leftarrow ``" ; \mathit{blank} \leftarrow ``\blank" ; \mathit{done} \leftarrow \mathit{empty};\\
@@ -164,7 +164,7 @@
       \quad \mathit{tmp} \leftarrow \texttt{head}(\mathit{left}) ; \mathit{output} \leftarrow \mathit{tmp} + \mathit{output} ; \mathit{left} \leftarrow \texttt{tail}(\mathit{left})\\
       \texttt{end}
     \end{array}$$
-  \end{correction}
+  \end{corrections}
   
   On cherche maintenant à établir la réciproque du résultat précédent :
   toute exécution d’un programme IMP $P$ peut être simulée par une machine de Turing déterministe $M(P)$.
@@ -194,13 +194,13 @@
   \end{tikzpicture}
 
 
-  \begin{question}
+  \begin{questions}
   \item Étant données deux variables $x$ et $y$, construire les machines
     de Turing qui mène dans deux états distincts $q_+$ et $q_-$
     en fonction de l'égalité des mots stockés sur les rubans
     \textsc{x} et \textsc{y}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \vspace{-4mm}
     \begin{tikzpicture}[turingMachine, baseline=(0.base), x=30mm, y=10mm]
     \state[initial above] (0) at (2,0) {$q_0$}; 
@@ -220,7 +220,7 @@
   \end{tikzpicture}
 
   $\forall x\in \Gamma, \forall y, z \in \Gamma\cup\{\blank\}, y\neq z$.
-  \end{correction}
+  \end{corrections}
 
   Dans la suite de l'exercice, on représentera la machine obtenue par : 
   \begin{tikzpicture}[turingMachine, baseline=(a.base), y=6mm]
@@ -235,10 +235,10 @@
   \end{tikzpicture}
   
   Étant données trois variables $x$, $y$ et $z$ et deux programmes $P_1$ et $P_2$, construire les machines suivantes en fonction de $M(P_1)$ et $M(P_2)$.
-  \begin{question}
+  \begin{questions}
   \item $M(P_1 ; P_2)$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
   \begin{tikzpicture}[turingMachine, baseline=(a1.base)]
     \state[tm state, initial]   (a1) at (2,3) {}; 
     \state[tm state]            (b1) at (4,3) {}; 
@@ -253,12 +253,12 @@
       \node[sub tm, fit=(a2.center)(b2.center)]         {};
     \end{pgfonlayer}%
   \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item $M(x \leftarrow y + z)$. On supposera que $x$, $y$ et $z$ sont distinctes.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
   \begin{tikzpicture}[turingMachine, baseline=(0.base)]
     \state[initial]   (0) at (0,1) {}; 
     \state            (1) at (1,1) {}; 
@@ -279,12 +279,12 @@
     \path   (4) edge             node{\smTMtransR[\textsc{z}]{\blank}{\blank}}                                   (5);
   \end{tikzpicture}
   $(\forall x \in \Gamma)$
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item $M(\texttt{if } x\neq y \texttt{ then } P_1 \texttt{ else } P_2 \texttt{ end})$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \vspace{-1mm}
     \begin{tikzpicture}[turingMachine, baseline=(0.base), x=15mm, y=6mm]
     \state[tm state, initial]   (a)  at (2,3)  {}; 
@@ -313,13 +313,13 @@
     \end{pgfonlayer}%
     \end{tikzpicture}
     \vspace{-1mm}
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item $M(\texttt{while } x \neq z \texttt{ do } P_1 \texttt{ end})$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0.base), x=30mm, y=20mm]
 
       \state[tm state, initial above] (a)  at (2,2)  {}; 
@@ -340,10 +340,10 @@
     \end{pgfonlayer}%
 
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
   
   On admettra que les autres constructions de IMP peuvent être compilées de manière similaire.
-  \begin{question}
+  \begin{questions}
   \item En déduire la construction correspondante pour le programme suivant.
     On pourra utiliser les machines correspondant aux affectations comme des boîtes noires, sans en détailler le fonctionnement interne.
     $$
@@ -358,8 +358,8 @@
       \texttt{end}
     \end{array}
     $$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{tikzpicture}[turingMachine, baseline=(0.base), x=17mm, y=20mm] \scriptsize
       \state[tm state, initial]   (03) at (0,3)  {}; 
       \state[tm state]            (13) at (2,3)  {}; 
@@ -418,7 +418,7 @@
       \fill[sub tm] (11.north)--(01.north)--(01.west)--(10.south)--(10.east)--(11.east);
     \end{pgfonlayer}%
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
   On en déduit finalement que les fonctions calculables par un programme IMP
   sont exactement les fonctions calculables par une machine de Turing.

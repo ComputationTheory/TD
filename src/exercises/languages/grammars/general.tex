@@ -20,18 +20,18 @@
   1Z &\rightarrow& Z1 \\
   \end{array}\right\}\right\rangle$$
 
-  \begin{question}
+  \begin{questions}
   \item Indiquer à quels types de la hiérarchie de Chomsky la grammaire $G$ peut appartenir.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     La grammaire est seulement de type 0, car les règles du type $0U \rightarrow U0$ ne sont  pas contextuelles.
     Cependant, la grammaire est non contractante, donc le langage est au pire du type 1. 
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Générer deux mots par la grammaire.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On peut générer $1+0=1$ et $1+01=10$
     \begin{itemize}
     \item $\begin{array}[t]{rclclclcl}
@@ -51,33 +51,33 @@
       &\vdash& 1+01=10
     \end{array}$
     \end{itemize}
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Appliquer l'algorithme de recherche ascendante par force brute pour déterminer
     si les mots suivants appartiennent au langage engendré par $G$ :
     $$1+1=1, \quad 1+10=11.$$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item $1+1=1$ n'appartient pas au langage
     \item $1+10=11$ appartient au langage
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item En déduire le langage engendré par la grammaire $G$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Les additions par 1 en binaire, avec des 0 inutiles potentiels à gauche. 
     $$\{ 1 + u = v \mid |u| = |v| \land \exists n\in \mathbb{N}, u \in 0^\star(n)_2 \land v \in 0^\star (1+n)_2 \}$$
-  \end{correction}
+  \end{corrections}
   
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Existe-t-il une grammaire de type plus élevé engendrant le même langage que $G$ ? 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On peut démontrer que le langage n'est pas algébrique en utilisant le lemme de pompage, et en posant $u = 1+10^N01^N = 10^N10^N$ et $i=2$.
 
     Il est possible de la transformer en grammaire de type 1. En effet,
@@ -98,7 +98,7 @@
     X &\rightarrow& 0 \\
     Y &\rightarrow& 1 \\
     \end{array}\right\}\right\rangle$$
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

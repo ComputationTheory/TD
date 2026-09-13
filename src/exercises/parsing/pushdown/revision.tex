@@ -5,7 +5,7 @@
 
 \begin{exercice}[Révisions -- Automates à pile]\label{exo:parsing/pushdown/revision}
 
-  \begin{question}
+  \begin{questions}
   \item Décrire les langages $\mathcal{L}_F(A)$, $\mathcal{L}_\varepsilon(A)$ et $\mathcal{L}(A)$ pour l'automate à pile $A$ suivant :
     $$\begin{tikzpicture}[pushdown, baseline=(0.base)]
       \state[initial]   (0) at (0,0) {$0$}; 
@@ -19,10 +19,10 @@
       \path (1) edge             node {\smPAtrans{\varepsilon}{\blank}{\blank}} (2);
       \path (2) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (3);
     \end{tikzpicture}$$
-  \end{question}
+  \end{questions}
   
   Pour chacune des langages ci-dessous donner un automate à pile reconnaissant le langage, et dire si l'automate proposé, est déterministe. 
-  \begin{question}
+  \begin{questions}
   \item $\{u \in \{a, b\}^\star  \mid  |u|_a = |u|_b \}$
   \item $\{u \in \{a, b\}^\star  \mid  u \mbox{ est un palindrome}\}$
   \item $\left\langle \{a, b\}, \{S\}, S,
@@ -39,13 +39,13 @@
   \item $\{a^n b^n c^m \mid n, m > 0\}$
   \item $\{a^n b^{n+m} c^m \mid n, m  \in \mathbb{N}\}$
   \item $\{a^n b^n b^n \mid  n \in \mathbb{N} \}$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
   
-  \begin{question}
+  \begin{questions}
 
   \item
     $
@@ -209,9 +209,9 @@
       \path (q) edge             node       {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
     \end{tikzpicture}
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

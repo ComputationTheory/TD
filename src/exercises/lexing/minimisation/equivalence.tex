@@ -5,7 +5,7 @@
 
 \begin{exercice}[Équivalence entre expressions rationnelles]\label{exo:lexing/minimisation/equivalence}
 
-  \begin{question}
+  \begin{questions}
   \item En appliquant l'algorithme de Thompson, donner un automate fini non déterministe reconnaissant \linebreak$\mathcal{S}((a^\star \mid b^\star)^\star)$. 
   \item Déterminiser l'automate obtenu en utilisant l'algorithme de Rabin et Scott. 
   \item Minimiser l'automate obtenu en utilisant l'algorithme de Moore. 
@@ -13,13 +13,13 @@
   \item En déduire que $(a^\star \;|\; b^\star)^\star \equiv (a \;|\; b)^\star$. 
   \item Proposer une méthode générale pour décider si deux expressions rationnelles décrivent le même langage,
     en utilisant les algorithmes vus en cours. 
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
 
   \item \begin{tikzpicture}[automaton, baseline=(0.base)]
     \state[initial]   (0)  at (0,3) {$0$}; 
@@ -98,9 +98,9 @@
   on calcule les automates finis minimaux associés aux deux expressions rationnelles.
   Elles reconnaissent le même langage si, et seulement si, ces automates minimaux sont isomorphes.
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

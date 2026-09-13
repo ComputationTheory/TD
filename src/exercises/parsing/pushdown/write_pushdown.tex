@@ -6,7 +6,7 @@
 \begin{exercice}[Grammaires et automates à pile non déterministes]\label{exo:parsing/decision/non_deterministic_pushdown}
 
   Pour chacune des langages ci-dessous donner un automate à pile reconnaissant le langage, et dire si l'automate proposé, est déterministe. 
-  \begin{question}
+  \begin{questions}
   \item $\{ a^n b^{2n} \mid  n > 0\}$
   \item $\{a^n b^m c^{n+m} \mid n, m  \in \mathbb{N}\}$
   \item $\{x c x^\textsc{r} \mid  x \in \{a, b\}^\star  \}$ ($x^\textsc{r}$ est le mot miroir de $x$)
@@ -19,13 +19,13 @@
     S &\rightarrow& a S b \mid  T\\
     T &\rightarrow& cT \mid  c
     \end{array}\right\}  \right\rangle$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
   
-  \begin{question}
+  \begin{questions}
 
   \item Automate déterministe reconnaissant $L_1 = \{ a^n b^{2n} \mid  n > 0\}$ :
 
@@ -119,9 +119,9 @@
       \path (s) edge             node {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (f);
     \end{tikzpicture}
 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

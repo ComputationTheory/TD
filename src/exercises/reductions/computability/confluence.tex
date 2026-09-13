@@ -57,10 +57,10 @@
   I b & I
   \end{array}\right.
   $$
-  \begin{question}
+  \begin{questions}
   \item Les systèmes $R_1$ et $R_2$ sont-ils localement confluent ?
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     La seule paire critique de chacun des deux systèmes provient du symbole $S$, avec
     $S \to Pv$ et  $S \to I$.
     Le système est localement confluent ssi ces deux branches sont joignables. Comme $I$ est en forme normale,
@@ -71,7 +71,7 @@
     \item Pour $R_2$, on a $Pabaaab \rightarrow Ibaaab \rightarrow Iaaab \rightarrow Paab \rightarrow Iab \rightarrow Pb \rightarrow P$,
       donc $R_2$ ne l'est pas.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
   On définit maintenant la fonction suivante :
   $$
@@ -93,14 +93,14 @@
   $$
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item 
     Pour quel problème \textsc{Mystère} la fonction $f$ définit-elle une réduction vers
     \textsc{Confluence locale} ?  
     (Autrement dit, quel est le problème \textsc{Mystère} tel que
     $v\in \textsc{Mystère} \iff f(v)$ est localement confluent ?)
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     En général, $f(v)$ est localement confluent ssi $Pv\to^\star I$. 
     Or la suite de mots de la réduction en forme normale de $Pv$ correspond à la suite de configurations dans l'exécution de
     l'automate suivant sur le mot $v$. Ainsi, $Pv$ et $I$ sont joignables ssi $v$ est reconnu par l'automate. 
@@ -116,10 +116,10 @@
       \end{tikzpicture}
     \end{center}
     L'automate reconnaît le langage $\textsc{Mystère} = \{u \in \{a, b\}^\star \mid |u|_a \text{ est impair}\}$.
-  \end{correction}
+  \end{corrections}
   
   \ifnotcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item On cherche maintenant à reproduire la même idée avec une machine de Turing.
     Pour tout mot $v\in{a,b}^\star$, définir un système de réécriture $g(v)$ sur un alphabet
     $\Delta$ (à préciser) tel que la paire critique issue de $S$ est joignable si,
@@ -136,8 +136,8 @@
         \path (1) edge[loop right] node {\smAlign{\smTMtransR{a}{a}\smTMtransR{b}{b}}} (1);
       \end{tikzpicture}
     \end{center}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On se place sur l'alphabet $\Delta = \{\llparenthesis, \rrparenthesis, S, a, b, \blank, 0, 1\}$. 
     $$
     g(v) = 
@@ -156,10 +156,10 @@
     \alpha 0 b      & 0 \alpha b & \forall \alpha \in \{a, b, \blank\} : \text{transition $0\xrightarrow{\smTMtransL{b}{b}} 0$}
     \end{array}\right.
     $$
-  \end{correction}
+  \end{corrections}
   
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item Listez toutes les paires critiques du système $g(v)$ selon les trois catégories suivantes
     et justifiez qu'il n'en existe pas d'autre :
     \begin{enumerate}
@@ -168,8 +168,8 @@
       (ces mots ne représentent pas une configuration valide de la machine, et ne peuvent pas être atteints depuis $S$) ;
     \item\label{confluence:critical:blank} les paires critiques provenant de la gestion des symboles blancs aux bords du ruban.
     \end{enumerate}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{enumerate}
     \item La seule paire critique issue de $S$ est $\langle \llparenthesis 0 \rrparenthesis, \llparenthesis 0 v \rrparenthesis  \rangle$.
     \item On cherche des mots $\alpha q_1 \beta q_2 \gamma$ (resp. $q_1 \beta q_2 \gamma$), tels que $\alpha q_1 \beta$ (resp. $\alpha q_1 \beta$)
@@ -180,15 +180,15 @@
       et les paires issues de l'intéraction entre $\blank \rrparenthesis$ et les règles finissant par un $\blank$
       (par exemple, $0 \blank \rrparenthesis$ donne la paire critique $\langle 0 \rrparenthesis, a1 \rrparenthesis\rangle$).
     \end{enumerate}
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Montrez que les paires critiques de la catégorie (\ref{confluence:critical:blank}) sont joignables.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Les paires critiques de la troisième catégorie utilisent toutes la règle $\llparenthesis \blank \hookrightarrow \llparenthesis$
     ou la règle $\blank\rrparenthesis \hookrightarrow \rrparenthesis$. Or ces deux règles sont réversibles. 
-  \end{correction}
+  \end{corrections}
 
   Pour traiter les paires critiques de la catégorie~(\ref{confluence:critical:invalid}),
   on introduit deux symboles supplémentaires (le marqueur `?' et `\ERR{}') et les règles suivantes : 
@@ -205,11 +205,11 @@
 
   On admettra que toutes les paires critiques introduites par ces nouvelles règles sont joignables.
 
-  \begin{question}
+  \begin{questions}
   \item Montrez que tout mot $u$ contenant au moins deux symboles d'état peut se réécrire en une ou plusieurs étapes en $\ERR$,
     et en déduire que toutes les paires critiques de la catégorie~(\ref{confluence:critical:invalid}) sont joignables.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Soit $u = v q_1 \alpha_1 ... \alpha_n q_2 w$ un mot contenant au moins deux symboles d'état. On a :
     $$
     \begin{array}{rcl}
@@ -225,24 +225,24 @@
     $$
 
     Toutes les paires critiques de la catégorie (2) sont formées de mots contenant deux symboles d'état, donc elles sont toujours joignables en \ERR. 
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Entre quels problèmes la réduction construite dans les questions précédentes établit-elle un lien, et dans quel sens ?  
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Le système de réécriture est joignable ssi le mot est engendré par la machine de Turing ci-dessus, donc
     $\{a^nb^n \mid n\in \mathbb{N}\} \le_m \textsc{Confluence locale}$. 
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item En généralisant cette construction à une machine de Turing arbitraire $M$ \emph{configurée pour la reconnaissance}
     (qui, si elle s'arrête, efface entièrement son ruban et entre dans un état final $q_f$),
     montrez que le problème \textsc{Confluence locale} est indécidable
     par réduction du problème de l'arrêt.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On pose la réduction suivante : 
     $$
     r : \left\{\begin{array}{rcl}
@@ -272,7 +272,7 @@
     Ainsi, $r\langle M, v \rangle$ est localement confluente si et seulement si $M$ s'arrête sur $v$. 
     La transformation $r$ est calculable, donc $$\textsc{Halt}\ \le_m\ \textsc{Confluence locale}.$$
     Finalement, \textsc{Confluence locale} est indécidable.
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

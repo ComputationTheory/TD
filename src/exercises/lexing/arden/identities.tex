@@ -5,18 +5,18 @@
 
 \begin{exercice}[Équivalence d'expressions rationnelles]\label{exo:lexing/arden/simplify_regexp}
 
-  \begin{question}
+  \begin{questions}
   \item Montrer que $a(ba)^\star  b$ est solution de $X = ab X \mid ab$. 
   \item En déduire $a(ba)^\star  b \equiv (ab)^+$.
   \item Montrer que $a(a\mid ba)^\star$ est solution de $X = (a \mid ab) X \mid a$.
   \item En déduire $a(a\mid ba)^\star \equiv (a\mid ab)^\star  a$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item $\begin{array}[t]{rcl}
     ab\, \underline{a(ba)^\star  b} \mid ab
     &=& a  (ba(ba)^\star \mid \varepsilon ) b \\
@@ -30,9 +30,9 @@
     &=& \underline{a(a\mid ba)^\star} \\
   \end{array}$
   \item D'après le lemme d'Arden, l'unique solution de $X = (a\mid ab) X \mid a$ est $(a\mid ab)^\star a$, \\donc $a(a\mid ba)^\star \equiv (a\mid ab)^\star  a$. 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

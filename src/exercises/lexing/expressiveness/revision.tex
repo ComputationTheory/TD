@@ -8,7 +8,7 @@
   Pour chacun des langages suivants sur l’alphabet $\Sigma = \{a,b\}$,
   déterminer s’il est rationnel. Justifier votre réponse :
 
-  \begin{question}
+  \begin{questions}
 
   \item $\{ a^i b^j \mid i \not\equiv j \pmod{3} \}$.
   
@@ -18,13 +18,13 @@
 
   \item $\{ a^{2^n} \mid n \in \mathbb{N} \}$.
 
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Supposons (par l'absurde), que $L_1$ est rationnel.\\
     Alors $L_1$ vérifie le lemme de l'étoile, donc il existe $N \in \mathbb{N}$ tel que pour tout mot $u$ tel que $|u|\ge N$,
     il existe $x, y, z \in \Sigma^\star$ tels que $u=xyz$, $y\neq \emptyset$, $|xy| \le N$ et pour tout $i\in \mathbb{N}$, $xy^i z\in L_1$. \\
@@ -47,9 +47,9 @@
 
     $(N+1)^2$ et $(N+2)^2$ sont deux carrés parfaits consécutifs, donc $|x\cdot y^2 \cdot z|$ n'est pas un carré parfait.
     Donc $x\cdot y^2 \cdot z \notin L_3$. Absurde, donc $L_3$ n'est pas rationnel. 
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

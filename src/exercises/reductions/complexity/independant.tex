@@ -35,11 +35,11 @@
 
   Le but de cet exercice est de montrer qu'\textsc{Ensemble Stable} est NP-complet.
   
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q8} Expliquez pourquoi le problème \textsc{Ensemble Stable} appartient à la classe NP.
     Pour cela, précisez quel certificat fournir pour une réponse ``oui'', et expliquez comment vérifier ce certificat en temps polynomial.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un certificat pour le problème \textsc{Ensemble Stable} est un tableau $T$ de $k$ sommets. Si l'instance est positive, on a forcément $k \le |E| \le |G|$.
     
     Pour vérifier ce certificat (qu'on suppose déjà parsé sous la forme d'un tableau), il faut
@@ -50,7 +50,7 @@
       Il y a $\mathcal{O}(k^2)$ paires d'indices, et suivant l'encodage du graphe, chaque tour de boucle peut coûter jusqu'à  $\mathcal{O}(|G|)$. 
     \end{itemize}
     Finalement, vérifier le certificat est bien polynômial en la taille du graphe. 
-  \end{correction}
+  \end{corrections}
 
   On souhaite maintenant démontrer que $\textsc{3-SAT} \leq_P \textsc{Ensemble Stable}$. On rappelle et précise la définition de \textsc{3-SAT}
   utilisée dans cet exercice. 
@@ -76,12 +76,12 @@
   $$
   
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q1} Déterminez des valeurs pour les variables $x_1, x_2, x_3$ et $x_4$ qui satisfont $\psi$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Par exemple, $x_1 = x_3 = \text{vrai}$ et $x_2 = x_4 = \text{faux}$
-  \end{correction}
+  \end{corrections}
   
   On définit maintenant une transformation $f$ qui, à chaque formule $\varphi$ de \textsc{3-SAT},
   associe une instance \linebreak $f(\varphi) = \langle G, k\rangle$ du problème \textsc{Ensemble Stable} construite selon les règles suivantes :
@@ -135,11 +135,11 @@
     \end{itemize}
   \end{itemize}
   
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q2} Fournissez l'instance $f(\psi) = \langle G_\psi, k_\psi \rangle$ d'\textsc{Ensemble Stable}
     obtenue par la transformation de la formule $\psi$ utilisée dans la question~\ref{ex3.Q1} : pour cela, dessinez $G_\psi$ et donnez la valeur de $k_\psi$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
 
     $k=4$
     
@@ -179,27 +179,27 @@
       \draw[red, thick] (C3B) -- (C4C); % ¬x4 -- x4
       \draw[red, thick] (C2B) -- (C4C); % ¬x4 -- x4
     \end{tikzpicture}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q3} En vous appuyant sur la valuation trouvée à la question~\ref{ex3.Q1}
     et l'instance $\langle G_\psi, k_\psi \rangle$ obtenue dans la question~\ref{ex3.Q2},
     déterminez un ensemble stable de taille $k_\psi$ dans $G_\psi$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     $\{ 1:x_1, 2:\lnot x_2, 3:\lnot x_2, 4:\lnot x_2\}$
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\newpage}
   On se place dans le cas général : on part d'une formule arbitraire $\varphi$ de \textsc{3-SAT}, et on considère l'instance 
   $f(\varphi) = \langle G, k\rangle$ du problème \textsc{Ensemble Stable}, construite comme précédemment.
 
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q4} En généralisant le raisonnement de la question~\ref{ex3.Q3},
     expliquez comment une valuation qui satisfait~$\varphi$ permet de construire
     un ensemble stable de taille~$k$ dans le graphe~$G$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Soit $v$ une valuation qui satisfait la formule $\varphi$. Par définition, chaque clause $C_i$ contient au moins un littéral $l_i$ tel que $l_i$ est satisfait par $v$.
 
     Pour chaque clause $C_i$, on choisit un tel littéral $l_i$ et on considère le sommet $i : l_i$ du triangle-clause correspondant dans le graphe $G$. On définit alors :
@@ -214,26 +214,26 @@
     \end{itemize}
 
     Ainsi, aucun sommet de $S$ n’est adjacent à un autre, ce qui prouve que $S$ est un ensemble stable de taille $k$ dans le graphe $G$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q5} On suppose que $G$ admet un ensemble stable de taille $k$, que l'on note $V'$.
     Expliquez pourquoi $V'$ contient {\em exactement un} sommet dans chaque triangle-clause, et
     pourquoi $V'$ ne peut pas contenir deux sommets correspondant à des littéraux opposés (de la forme $x_j$ et $\neg x_j$).
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{itemize}
     \item Chaque triangle-clause ajouté dans la construction de $G$ correspond à une clause $C_i$ de la formule $\varphi$, et contient exactement 3 sommets, reliés entre eux. Par définition d’un ensemble stable, $V'$ ne peut contenir plus d’un sommet par triangle-clause. Or, il y a $p$ clauses, donc $p$ triangles, et $|V'| = p$ ; par conséquent, $V'$ contient exactement un sommet dans chaque triangle-clause.
 
     \item Soient $i : l$ et $j : l'$ deux sommets distincts de $V'$. Comme $V'$ est un ensemble stable, les sommets $i : l$ et $j : l'$ ne sont pas adjacents. Or, dans le graphe $G$, les seules arêtes entre triangles-clause relient des sommets correspondant à des littéraux opposés (de la forme $x$ et $\lnot x$). Il s’ensuit que $l$ et $l'$ ne peuvent pas être des littéraux opposés. Autrement dit, $V'$ ne contient pas deux littéraux contradictoires.
     \end{itemize}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Déduisez-en comment construire une valuation des variables qui satisfait $\varphi$ à partir des sommets de $V'$.
     Justifiez pourquoi cette méthode fonctionne.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On peut alors définir une valuation $v$ comme suit :
     \begin{itemize}
     \item pour chaque variable $x_j$ telle que $V'$ contient un sommet étiqueté $i : x_j$, on pose $v(x_j) = \text{vrai}$ ;
@@ -244,25 +244,25 @@
     Cette valuation est bien définie : comme vu plus haut, $V'$ ne contient pas deux sommets correspondant à des littéraux opposés, donc aucune variable ne se voit assigner deux valeurs différentes.
 
     Il reste à vérifier que $v$ satisfait la formule $\varphi$. En effet, pour chaque clause $C_i$, $V'$ contient un unique sommet $i : l_i$ appartenant au triangle-clause de $C_i$, et le littéral $l_i$ est vérifié par $v$ par construction. Ainsi, chaque clause $C_i$ contient au moins un littéral vrai, donc $v \models \varphi$.
-  \end{correction}
+  \end{corrections}
   
   \ifcorrection{\newpage}
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q6} Illustrez ce raisonnement sur l'instance $\langle G_\psi, k_\psi \rangle$ de la question~\ref{ex3.Q2} :
     décrivez un ensemble stable de taille $k_\psi$ dans $G_\psi$ et déduisez-en des valeurs des variables $x_1, x_2, x_3$ et $x_4$ qui satisfont $\psi$.
 
     \emph{Attention : } l'ensemble stable et la valuation devront être différents de ceux des questions~\ref{ex3.Q1} et~\ref{ex3.Q3}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Par exemple, $V' = \{1 : \neg x_3, 2 : \neg x_1, 3 : \neg x_4, 4 : \neg x_1\}$. On en déduit la valuation suivante : $x_1 = x_3 = x_4 = \text{faux}, x_2 = \text{vrai}$
-  \end{correction}
+  \end{corrections}
 
   Vous avez établi ci-dessus que toute formule $\varphi$ de \textsc{3-SAT} peut être transformée
   en une instance $\langle G, k \rangle$ de \textsc{Ensemble Stable}, telle que $\varphi$
   est satisfiable si et seulement si $G$ admet un ensemble stable de taille $k$.
   Dans cette dernière partie, vous allez conclure sur la complexité du problème \textsc{Ensemble Stable}.
 
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q7}
     On veut justifier que la transformation $f : \varphi \mapsto \langle G, k \rangle$ s'effectue en temps polynomial.
     \begin{itemize}
@@ -271,8 +271,8 @@
     \item Décrivez les principales étapes d'un algorithme calculant $f(\varphi)$, et exprimez leur complexité temporelle.
     \item Concluez que la transformation $f$ peut être effectuée en temps polynomial par rapport à $L$.
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Chaque clause de 3 littéraux donne lieu à un triangle-clause, soit 3 sommets. On a donc $n_G = 3p = L$. De plus, on ne peut relier chaque paire de sommets que
     par au plus une arête, donc $m_G \le L^2$. 
 
@@ -282,13 +282,13 @@
     \item Indexer les sommets selon les variables, puis ajouter une arête entre tout couple de sommets portant des littéraux opposés : $\mathcal{O}(L^2)$.
     \end{enumerate}
     La transformation $f$ s’effectue en temps polynomial en la taille $L$ de l’instance $\varphi$ de \textsc{3-SAT}.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item\label{ex3.Q9} Concluez que le problème \textsc{Ensemble Stable} est NP-complet. Pour cela,
     précisez ce que les questions précédentes permettent de conclure, et pourquoi cela suffit à établir la NP-complétude.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Les questions~\ref{ex3.Q4} à~\ref{ex3.Q6} établissent une équivalence entre la satisfiabilité d’une formule $\varphi$ et l’existence
     d’un ensemble stable de taille $k$ dans le graphe $G$ associé.
     La transformation $f$ constitue donc une réduction de $\textsc{3-SAT}$ vers $\textsc{Ensemble Stable}$.
@@ -300,7 +300,7 @@
 
     Enfin, la question~\ref{ex3.Q8} montre que \textsc{Ensemble Stable} appartient à la classe NP.
     On peut donc conclure que \textsc{Ensemble Stable} est NP-complet.
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

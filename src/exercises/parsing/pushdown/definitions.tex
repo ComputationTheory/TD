@@ -26,18 +26,18 @@
   Donner le graphe de la relation d'action entre toutes les configurations accessibles
   dans la reconnaissance de chacun des mots suivants et en déduire s'ils sont acceptés
   par état accepteur, par pile vide et par état accepteur et pile vide.
-  \begin{question}
+  \begin{questions}
   \item $ab$
   \item $aba$
   \item $abab$
   \item Décrire les langages $\mathcal{L}_F(A)$, $\mathcal{L}_\varepsilon(A)$ et $\mathcal{L}(A)$.
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
   
-  \begin{question}
+  \begin{questions}
 
   \item $\langle 0, ab, \blank \rangle \leadsto^\star \langle 0, \varepsilon, \varepsilon \rangle$, donc $ab$ est accepté par les trois critères. 
     \begin{center}
@@ -142,9 +142,9 @@
   \item Le langage reconnu par état accepteur est $\mathcal{L}_{F}(A) = \{a^m b^m a^n \mid m, n \in \mathbb{N}\}$.
     Le langage reconnu par pile vide est $\mathcal{L}_{\varepsilon}(A) = \{a^m b^m a^n b^n \mid m, n \in \mathbb{N}\}$.
     Le langage reconnu par les deux conditions est $\mathcal{L}(A) = \{a^n b^n \mid n \in \mathbb{N}\}$.
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

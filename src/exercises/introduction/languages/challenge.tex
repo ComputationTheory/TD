@@ -6,7 +6,7 @@
 \begin{exercice}[Mini-défi -- Lemme de Levi]\label{exo:introduction/languages/challenge}
 
   Soit $\Sigma$ un alphabet. 
-  \begin{question}
+  \begin{questions}
   \item Soient $t,u,v,w \in \Sigma^\star$ tels que $t \cdot u = v \cdot w$. 
     Montrer qu'il existe un unique $z \in \Sigma^\star$ tel que :
     \begin{itemize}
@@ -16,21 +16,21 @@
   \item En déduire que pour tous $u,v,w \in \Sigma^\star$,  
     si $u \in \mathrm{Pref}(w)$ et $v \in \mathrm{Pref}(w)$ alors  
     $u \in \mathrm{Pref}(v)$ ou \linebreak $v \in \mathrm{Pref}(u)$.
-  \end{question}
+  \end{questions}
 
   On dit qu'un langage $L$ sur $\Sigma$ est \emph{sans préfixe}
   si aucun mot de $L$ n'est préfixe propre d'un autre mot de $L$. 
-  \begin{question}
+  \begin{questions}
   \item Montrer que le produit de deux langages sans préfixe est sans préfixe. 
   \item Montrer, par récurrence sur $|u|$, que
     $$\forall a,b \in \Sigma,\ \forall u \in \Sigma^\star,\ u\cdot a = b\cdot u \ \Rightarrow\ a = b\ \land\ u \in \{a\}^\star.$$
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 
-\begin{correction}
+\begin{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Soient $t, u, v, w \in \Sigma^\star$ tels que $t\cdot u = v\cdot w$.\\
     \emph{Preuve d'existence}. Distinguons 2 cas :
     \begin{description}
@@ -89,9 +89,9 @@
         de récurrence qui dit que $a = b$ et $z \in \{a\}^\star$. Puisque $u = za$ alors $u \in \{a\}^\star$.
       \end{itemize}
     \end{description}
-  \end{question}
+  \end{questions}
 
-\end{correction}
+\end{corrections}
 
 \endgroup
 \endinput

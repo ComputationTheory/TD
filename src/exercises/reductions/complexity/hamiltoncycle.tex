@@ -15,10 +15,10 @@
 
   Le problème \textsc{Cycle Hamiltonien} est donc l'équivalent non orienté du problème \textsc{Circuit Hamiltonien}.
 
-  \begin{question}
+  \begin{questions}
   \item Montrer que \textsc{Cycle Hamiltonien} est dans NP.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un certificat naturel est un cycle simple listant chaque sommet exactement une fois (avec retour au point de départ).
 
     Pour vérifier le certificat, on contrôle que la liste contient $n$ sommets
@@ -28,7 +28,7 @@
     La vérification est donc polynomiale.
     
     Ainsi, $\textsc{Cycle Hamiltonien} \in \text{NP}$.
-  \end{correction}
+  \end{corrections}
   
   On veut maintenant démontrer qu'on peut réduire en temps polynomial le problème \textsc{Circuit Hamiltonien} vers \textsc{Cycle Hamiltonien}, c'est-à-dire :
   $$\textsc{Circuit Hamiltonien} \le_P \textsc{Cycle Hamiltonien}.$$
@@ -71,45 +71,45 @@
     \end{tikzpicture}
   \end{center}
 
-  \begin{question}
+  \begin{questions}
   \item On souhaite montrer (d'abord sur l'exemple) que l'on répond \textsc{OUI} à \textsc{Circuit Hamiltonien} pour $G$
     si et seulement si on répond \textsc{OUI} à \textsc{Cycle Hamiltonien} pour $G'$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     On part d'un graphe orienté $G=(V,A)$ et on construit un graphe non orienté $G'$ tel que :
     $$
     G \text{ a un circuit hamiltonien } \iff G' \text{ a un cycle hamiltonien}.
     $$
     Intuition : remplacer chaque sommet orienté par un \emph{gadget de direction} qui impose de le traverser dans un
     sens « entrée $\to$ sortie », et remplacer chaque arc $(u,v)$ par une arête reliant la sortie du gadget de $u$ à l'entrée du gadget de $v$.
-  \end{correction}
+  \end{corrections}
   
-  \begin{question}
+  \begin{questions}
   \item Clairement, un circuit hamiltonien existe dans le graphe $G$ (à gauche).  
     En déduire un cycle hamiltonien dans le graphe $G'$ (à droite).
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Si un circuit hamiltonien de $G$ visite $v_1 \to v_2 \to \dots \to v_n \to v_1$, alors dans $G'$ on parcourt successivement,
     pour chaque $v_i$, le gadget $v_i$ \emph{de l'entrée à la sortie}, puis on suit l'arête correspondant à l'arc $(v_i,v_{i+1})$
     vers l'entrée du gadget $v_{i+1}$. On obtient un cycle hamiltonien de $G'$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Trouver un cycle hamiltonien dans $G'$, et en déduire un circuit hamiltonien dans $G$.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Un cycle hamiltonien de $G'$ doit traverser chaque gadget de $G'$ en suivant
     l'ordre imposé « entrée $\to$ milieu $\to$ sortie » (voir le gadget ci-dessous).
     Les seules arêtes quittant la sortie de $u$ mènent à l'entrée de gadgets $v$ tels que $(u,v)\in A$.
     En lisant ces transitions, on récupère un circuit hamiltonien orienté dans $G$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item On cherche maintenant à rendre générale la réduction : indiquer, dans le cas général, comment construire le graphe non orienté $G'$ à partir d'un graphe orienté $G$.  
     Illustrer cette réduction sur le graphe orienté $G$ à trois sommets $v_1, v_2, v_3$ possédant les arcs suivants :
     $$(v_2, v_1),\quad (v_3, v_1),\quad (v_2, v_3).$$
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Pour chaque sommet $v\in V$, créer trois sommets $v^{\mathsf{in}}, v^{\mathsf{mid}}, v^{\mathsf{out}}$ et les relier en triangle :
     \[
     \{v^{\mathsf{in}}v^{\mathsf{mid}},\ v^{\mathsf{mid}}v^{\mathsf{out}},\ v^{\mathsf{in}}v^{\mathsf{out}}\}.
@@ -123,37 +123,37 @@
     \emph{Illustration demandée :} pour $V=\{v_1,v_2,v_3\}$ et $A=\{(v_2,v_1),(v_3,v_1),(v_2,v_3)\}$, créer les triangles
     $v_i^{\mathsf{in}}-v_i^{\mathsf{mid}}-v_i^{\mathsf{out}}-v_i^{\mathsf{in}}$ pour $i=1,2,3$, puis ajouter les arêtes
     $v_2^{\mathsf{out}}v_1^{\mathsf{in}}$, $v_3^{\mathsf{out}}v_1^{\mathsf{in}}$, $v_2^{\mathsf{out}}v_3^{\mathsf{in}}$.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Pour un graphe orienté $G$ à $n$ sommets et $m$ arcs, quelle est la taille (nombre de sommets, nombre d'arêtes) du graphe $G'$~?  
     En déduire que la réduction se fait en temps polynomial.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Si $G$ a $n$ sommets et $m$ arcs :
     \[
     |V(G')| = 3n,\qquad |E(G')| = 3n + m
     \]
     (trois arêtes internes par gadget, plus une arête par arc de $G$).  
     La construction se fait en temps $O(n+m)$ (polynomial).
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Montrer que si $G$ admet un circuit hamiltonien, alors $G'$ admet un cycle hamiltonien.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Soit $v_1\to v_2\to\cdots\to v_n\to v_1$ un circuit hamiltonien dans $G$. Dans $G'$, pour chaque $v_i$ on parcourt
     $v_i^{\mathsf{in}} - v_i^{\mathsf{mid}} - v_i^{\mathsf{out}}$, puis l'arête $v_i^{\mathsf{out}}v_{i+1}^{\mathsf{in}}$ correspondant à l'arc $(v_i,v_{i+1})$.  
     On visite ainsi exactement une fois tous les sommets de $G'$ et on ferme le cycle : c'est un cycle hamiltonien.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Montrer que si $G'$ admet un cycle hamiltonien, alors $G$ admet un circuit hamiltonien.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Dans $G'$, tout cycle hamiltonien doit visiter les trois sommets de chaque gadget. Le triangle impose qu'ils soient pris consécutivement, et qu'on « entre » par $v^{\mathsf{in}}$ et « sorte » par $v^{\mathsf{out}}$ (sinon on ne peut pas connecter les gadgets sans répéter des sommets).  
     Les arêtes reliant gadgets sont exactement les $u^{\mathsf{out}}v^{\mathsf{in}}$ pour $(u,v)\in A$, donc l'ordre des gadgets lu au niveau des sorties/entrées code un circuit hamiltonien orienté dans $G$.
-  \end{correction}
+  \end{corrections}
 
   On a donc montré que $\textsc{Circuit Hamiltonien} \le_P \textsc{Cycle Hamiltonien}$.
   Comme la réduction se fait en temps polynomial, on a une équivalence de réponse (\textsc{OUI}/\textsc{NON}) entre les deux problèmes.
