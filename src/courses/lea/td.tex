@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTD
-
-
-
 \hypersetup{
   pdftitle  = {Langages et Automates -- Livret de TD},
   pdfauthor = {Matthieu Perrin},
@@ -20,13 +16,14 @@
 \begin{document}
 
 \maketitlepage
-%\maketitlepage
- 
+\typesession[TD]{Travaux Dirigés}
+
+
 \session{Rappels mathématiques}
 \input{introduction/maths/set_proofs}
 \input{introduction/maths/induction}
 \input{introduction/maths/equipotence}
-\sessionappendix
+\annexesession
 \input{introduction/maths/revision}
 \input{introduction/maths/challenge}
  
@@ -35,7 +32,7 @@
 \input{introduction/languages/words}
 \input{introduction/languages/languages}
 \input{introduction/languages/palindrome}
-\sessionappendix
+\annexesession
 \input{introduction/languages/revision}
 \input{introduction/languages/challenge}
  
@@ -44,7 +41,7 @@
 \input{lexing/regexp/read_regexp}
 \input{lexing/regexp/write_regexp}
 \input{lexing/regexp/excel}
-\sessionappendix
+\annexesession
 \input{lexing/regexp/revision}
 \input{lexing/regexp/challenge}
  
@@ -53,7 +50,7 @@
 \input{lexing/arden/simplification}
 \input{lexing/arden/arden}
 \input{lexing/arden/identities}
-\sessionappendix
+\annexesession
 \input{lexing/arden/revision}
 \input{lexing/arden/challenge}
  
@@ -62,7 +59,7 @@
 \input{lexing/automata/definitions}
 \input{lexing/automata/write_automata}
 \input{lexing/automata/normalform}
-\sessionappendix
+\annexesession
 \input{lexing/automata/revision}
 \input{lexing/automata/challenge}
  
@@ -70,14 +67,14 @@
 \session{Théorème de Kleene}
 \input{lexing/kleene/automaton_to_regexp}
 \input{lexing/kleene/thompson}
-\sessionappendix
+\annexesession
 \input{lexing/kleene/revision}
 \input{lexing/kleene/challenge}
  
  
 \session{Automates finis déterministes et complets}
 \input{lexing/determinisation/properties}
-\sessionappendix
+\annexesession
 \input{lexing/determinisation/revision}
 \input{lexing/determinisation/challenge}
  
@@ -85,7 +82,7 @@
 \session{Automates minimaux et émondés}
 \input{lexing/minimisation/minimisation}
 \input{lexing/minimisation/equivalence}
-\sessionappendix
+\annexesession
 \input{lexing/minimisation/revision}
 \input{lexing/minimisation/challenge}
  
@@ -93,7 +90,7 @@
 \session{Le lemme de l'étoile}
 \input{lexing/expressiveness/pumping}
 \input{lexing/expressiveness/types}
-\sessionappendix
+\annexesession
 \input{lexing/expressiveness/revision}
 \input{lexing/expressiveness/challenge}
  
@@ -102,7 +99,7 @@
 \input{parsing/grammars/calculator}
 \input{parsing/grammars/write_grammars}
 \input{parsing/grammars/read_grammars}
-\sessionappendix
+\annexesession
 \input{parsing/grammars/revision}
 \input{parsing/grammars/challenge}
  
@@ -110,7 +107,7 @@
 \session{Algorithme Cocke-Younger-Kasami}
 \input{parsing/CYK/CYK}
 \input{parsing/CYK/FNC}
-\sessionappendix
+\annexesession
 \input{parsing/CYK/revision}
 \input{parsing/CYK/challenge}
  
@@ -118,7 +115,7 @@
 \session{Automates à pile}
 \input{parsing/pushdown/definitions}
 \input{parsing/pushdown/write_pushdown}
-\sessionappendix
+\annexesession
 \input{parsing/pushdown/revision}
 \input{parsing/pushdown/challenge}
  
@@ -126,7 +123,7 @@
 \session{Décidabilité des langages algébriques}
 \input{parsing/decidability/LRparser}
 \input{parsing/decidability/pumping}
-\sessionappendix
+\annexesession
 \input{parsing/decidability/revision}
 \input{parsing/decidability/challenge}
  
@@ -134,7 +131,7 @@
 \session{Grammaires rationnelles}
 \input{parsing/rational/write_rational}
 \input{parsing/rational/rational_to_other}
-\sessionappendix
+\annexesession
 \input{parsing/rational/revision}
 \input{parsing/rational/challenge}
 

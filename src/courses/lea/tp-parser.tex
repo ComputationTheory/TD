@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTP[2]
-\title{Introduction à CUP}
-\cursus{L2 Informatique}
-
 \hypersetup{
   pdftitle  = {Langages et Automates - TP 2 - Introduction à CUP},
   pdfauthor = {Matthieu Perrin},
@@ -19,7 +15,11 @@
 
 \begin{document}
 
-\maketitle
+\numerosession{2}
+\typesession[TP]{Travaux Pratiques}
+
+
+\session{Introduction à CUP}
 
 CUP (\emph{Constructor of Useful Parsers}) est un générateur d'analyseurs
 syntaxiques pour Java, conceptuellement proche de Bison ou Yacc développés pour C/C++.
@@ -43,7 +43,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   Il servira de base aux exercices suivants. Nous allons commencer par le
   télécharger, générer les analyseurs et compiler le projet.
 
-  \begin{question}
+  \begin{questions}
   \item Clonez le dépôt :
     \begin{lstlisting}[gobble=6, language=bash]
       git clone https://github.com/LangagesEtAutomates/lea-tp3-parser
@@ -76,7 +76,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
       1 2 +         // Sortie attendue : 3   (1+2)
       2 3 * 4 5 * + // Sortie attendue : 26  (2*3 + 4*5)
     \end{lstlisting}
-  \end{question}
+  \end{questions}
 
   \paragraph{Architecture du programme}
   L'entrée du programme est la méthode \lstinline|Main.main|, qui
@@ -92,10 +92,10 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   (\lstinline|Parser.parse()|) consomme ces \lstinline|Symbol| successifs
   pour appliquer les règles de la grammaire et calculer le résultat final.
 
-  \begin{question}
+  \begin{questions}
   \item L'analyseur lexical est déjà donné dans le fichier \lstinline{src/lea/Lexer.flex}.
     Lisez le fichier et identifiez les motifs reconnus. 
-  \end{question}
+  \end{questions}
   
   La méthode \lstinline|Parser.parse()| se charge ensuite d'appeler
   autant de fois \lstinline|lexer.yylex()| que nécessaire pour analyser la
@@ -176,15 +176,15 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   Après chaque symbole, \texttt{:nom} permet de donner un nom
   à sa valeur sémantique, afin de pouvoir l'utiliser dans les actions.
 
-  \begin{question}
+  \begin{questions}
   \item Testez le programme avec les expressions suivantes,
     et dessinez les arbres de dérivation des résultats :
     \begin{lstlisting}
       1 2 4 + +  // Sortie attendue : 7
       10 2 + 3 * // Sortie attendue : 36
     \end{lstlisting}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
   \vspace{-3mm}
   \begin{center}
     \begin{tikzpicture}[tree, x=10mm, y=7mm]
@@ -212,7 +212,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
     \end{tikzpicture}
   \end{center}
   \vspace{-3mm}
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 
@@ -223,14 +223,14 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   Les terminaux \verb|CRO_G| et \verb|CRO_D| sont déjà déclarés dans l'analyseur lexical
   pour reconnaître les crochets gauche et droit. 
   
-  \begin{question}
+  \begin{questions}
   \item Modifiez la grammaire pour que le non-terminal \texttt{dyck} reconnaisse le langage de Dyck.
     
   \item Modifiez les actions associées aux règles de la grammaire
     pour calculer le nombre maximal de crochets imbriqués dans
     la chaîne. Par exemple, l'analyse de la chaîne \verb|[[[[]]][[]]]|
     devra retourner \verb|4|.
-  \end{question}
+  \end{questions}
 
   \emph{Remarque :} pour reconnaître le mot vide $\varepsilon$, il suffit de laisser le membre droit vide.
   Par exemple, la règle \texttt{dyck} du code de départ reconnaît le langage neutre. 
@@ -239,13 +239,13 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   \end{lstlisting}
 
 \end{exercice}
-\begin{correction}
+\begin{corrections}
   \begin{lstlisting}
     dyck ::= /* epsilon */               {: RESULT = 0; :}
            | dyck:d1 CRO_G dyck:d2 CRO_D {: RESULT = Math.max(d1, d2 + 1); :}
     ;
   \end{lstlisting}
-\end{correction}
+\end{corrections}
 
 
 
@@ -254,7 +254,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   On souhaite maintenant définir une grammaire complète pour des expressions
   arithmétiques avec priorités usuelles des opérateurs.
 
-  \begin{question}
+  \begin{questions}
 
   \item Modifiez le fichier \texttt{Parser.cup} pour implémenter la grammaire suivante.  
     $$
@@ -287,7 +287,7 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
     L'opposé unaire doit être plus prioritaire que la multiplication,
     mais moins que les parenthèses.
     Par exemple, l'expression \verb|-(2*-3)| doit être évaluée à \verb|6|.
-  \end{question}
+  \end{questions}
 
   On souhaite maintenant ajouter des opérations booléennes à notre calculatrice.
   La valeur booléenne \texttt{faux} sera représentée par l'entier $0$,
@@ -299,15 +299,15 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
   L'opérateur \lstinline|=| est ici un \emph{test d’égalité} :
   il devra produire $1$ si les deux opérandes sont égaux, et $0$ sinon.
 
-  \begin{question}
+  \begin{questions}
 
   \item Modifiez votre calculatrice pour prendre en charge
     les opérateurs \lstinline|ou|, \lstinline|et|, \lstinline|non| et \lstinline|=|.
     
-  \end{question}
+  \end{questions}
 
 \end{exercice}
-\begin{correction}
+\begin{corrections}
   \begin{lstlisting}[gobble=4]
     /* Terminaux ajoutés pour les booléens */
     terminal PLUS, MOINS, MULTIPLIE, PAR_G, PAR_D, EGAL, OU, ET, NON;
@@ -375,6 +375,6 @@ et associer des actions sémantiques aux règles de grammaire pour construire de
       | ENTIER:n                           {: RESULT = n; :}
     ;
   \end{lstlisting}
-\end{correction}
+\end{corrections}
 
 \end{document}

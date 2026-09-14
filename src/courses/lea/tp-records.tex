@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTP[5]
-\title{Projet --- Enregistrements}
-\cursus{L2 Informatique}
-
 \hypersetup{
   pdftitle  = {Langages et Automates - Projet - Enregistrements},
   pdfauthor = {Matthieu Perrin},
@@ -19,23 +15,24 @@
 
 \begin{document}
 
-\maketitle
+\numerosession{5}
+\typesession{Projet}
 
-\vspace{-5mm}
 
-\begin{center}
-  \begin{minipage}{.9\textwidth}
-    \it
-    \textbf{Remarque importante.} Ce projet n'est pas à rendre. En revanche, il constitue l'entraînement principal pour le TP noté de fin de semestre.
-    L'épreuve sera un exercice d'extension similaire à réaliser en temps limité. En particulier :
-    \begin{itemize}
-    \item Le code de départ sera identique à celui de ce projet, à l'exception de tests spécifiques.
-    \item Le TP noté est un travail strictement individuel.
-    \end{itemize}
-  \end{minipage}
-\end{center}
+\session{Gestion des enregistrements}
 
-\vspace{3mm}
+%\vspace{-5mm}
+
+\begin{abstract}
+  \textbf{Remarque importante.} Ce projet n'est pas à rendre. En revanche, il constitue l'entraînement principal pour le TP noté de fin de semestre.
+  L'épreuve sera un exercice d'extension similaire à réaliser en temps limité. En particulier :
+  \begin{itemize}
+  \item Le code de départ sera identique à celui de ce projet, à l'exception de tests spécifiques.
+  \item Le TP noté est un travail strictement individuel.
+  \end{itemize}
+\end{abstract}
+
+%\vspace{3mm}
 
 Le but de ce projet est d'ajouter au langage algorithmique développé dans les TPs précédents la notion d'\emph{enregistrement}.
 Un enregistrement est un type structuré dont les instances sont des tuples nommés et typés.
@@ -104,7 +101,7 @@ Par exemple, le programme suivant doit produire la sortie ``Point(6,8) est sur l
 \vspace{-4mm}
 \begin{exercice}[Travail attendu]
 
-  \begin{question}
+  \begin{questions}
   \item Clonez le dépôt du TP : \lstinline[language=bash]{git clone https://github.com/LangagesEtAutomates/lea-tp6-project}
 
     La compilation et l'exécution de l'interpréteur sont similaires aux TPs précédents.
@@ -116,7 +113,7 @@ Par exemple, le programme suivant doit produire la sortie ``Point(6,8) est sur l
   \item Quelques tests sont déjà fournis pour vous aider à démarrer.
     N'hésitez pas à les adapter et à en ajouter en fonction de votre avancement. 
     
-  \end{question}
+  \end{questions}
 
 \end{exercice}
 

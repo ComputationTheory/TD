@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTP[0]
-\title{Coloration syntaxique dans Gedit}
-\cursus{L2 Informatique}
-
 \hypersetup{
   pdftitle  = {Langages et Automates - Coloration syntaxique dans Gedit},
   pdfauthor = {Matthieu Perrin},
@@ -19,7 +15,11 @@
 
 \begin{document}
 
-\maketitle
+
+\typesession[TP]{Travaux Pratiques}
+
+
+\session*{Coloration syntaxique dans Gedit}
 
 Le but de ce TP est de configurer l'éditeur de texte Gedit pour 
 la coloration syntaxique d'un langage algorithmique appelé \texttt{Algo}.
@@ -32,7 +32,7 @@ Ce TP est indépendant du projet que nous développerons dans les séances suiva
 
 \begin{exercice}[Mise en place]
 
-  \begin{question}
+  \begin{questions}
   \item Clonez le dépôt du TP :
     \begin{lstlisting}[gobble=6]
       git clone https://github.com/LangagesEtAutomates/lea-tp1-gedit
@@ -61,7 +61,7 @@ Ce TP est indépendant du projet que nous développerons dans les séances suiva
   \item Dans le menu \og Préférences $\rightarrow$ Police et couleurs \fg, sélectionnez le thème \lstinline{TPLea}.
 
   \item Dans le menu \og Affichage $\rightarrow$ Mode de coloration \fg, sélectionnez le langage \lstinline{Algo}.
-  \end{question}
+  \end{questions}
 
   Vous devriez avoir un affichage en mode sombre, avec certains mots-clés écrits en bleu clair.
 \end{exercice}
@@ -142,32 +142,32 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
   Activez l'outil de recherche avec \lstinline{Ctrl+F}.
   Cliquez sur l'icône loupe et cochez l'option \og Expressions régulières \fg.
 
-  \begin{question}
+  \begin{questions}
   \item Recherchez les motifs ``\lstinline{si}'' puis ``\lstinline{\bsi\b}''.
     Expliquez la différence observée.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \lstinline{\b} correspond à une chaîne vide à l'extrémité d'un mot. En l'ajoutant en début et en fin de l'expression rationnelle,
     on reconnaît uniquement les occurrences du mot complet.
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Un commentaire de ligne commence par \lstinline{//} et se termine en fin de ligne.
     Proposez une expression rationnelle qui reconnaît un commentaire de ligne. Vérifiez-la dans Gedit.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Une réponse possible est \lstinline{//.*$}.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Un nombre entier est représenté par une suite de chiffres ne commençant pas par $0$, sauf si le nombre est exactement $0$. 
     Proposez une expression rationnelle qui reconnaît les nombres. 
     Vérifiez votre proposition en l'utilisant dans la recherche de Gedit.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Une réponse possible est \lstinline{\b([1-9][0-9]*|0)\b}.
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 
@@ -209,14 +209,14 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
     \end{lstlisting}
   \end{description}
 
-  \begin{question}
+  \begin{questions}
   \item Ajoutez une référence au contexte \lstinline{identifier} dans le contexte principal ``algo''.
     Dans un premier temps, ajoutez la ligne \lstinline{<context ref="identifier"/>}
     juste après la ligne \lstinline{<include>}. Relancez gedit et observez le résultat.
     Descendez la ligne \lstinline{<context ref="identifier"/>} juste avant la ligne \lstinline{</include>}.
     Comparez et expliquez la différence. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Les mot-clés comme ``si'', ``alors'', etc sont à la fois reconnus par ``identifier'' et par ``keyword''.
     Il faut placer ``keyword'' en premier car les règles de priorité impliquent que la première qui soit retenue dans ce cas.
     
@@ -230,14 +230,14 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
       </context>
     \end{lstlisting}
     \vspace{-5mm}
-  \end{correction}
+  \end{corrections}
 
   \ifcorrection{\pagebreak}
-  \begin{question}
+  \begin{questions}
   \item Modifiez la liste de mots-clés pour reconnaître les mots-clés manquants :
     ``\lstinline{et}'', ``\lstinline{ou}'' et ``\lstinline{fin}''. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       <context id="keyword" style-ref="def:keyword">
         <keyword>algorithme</keyword>
@@ -250,13 +250,13 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
         <keyword>ou</keyword>
       </context>
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item En vous inspirant du context ``\texttt{identifier}'', ajoutez un contexte ``\texttt{number}'' pour reconnaître
     les nombres entiers tels que spécifiés dans l'exercice précédent, et appliquer le style \lstinline{def:number}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Ne pas oublier de rajouter le contexte à ``\texttt{algo}''
     \begin{lstlisting}[gobble=6]
       <context id="number" style-ref="def:number">
@@ -265,13 +265,13 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
         </match>
       </context>
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Ajoutez un contexte ``\texttt{char}'' pour reconnaître les caractères (entre guillemets simples).
     Ils devront appliquer le style \lstinline{def:character}. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Ne pas oublier de rajouter le contexte à ``\texttt{algo}''
     \begin{lstlisting}[gobble=6]
       <context id="char" style-ref="def:character">
@@ -280,7 +280,7 @@ Dans ce TP, nous utiliserons indifféremment les termes \emph{expression rationn
         </match>
       </context>
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 

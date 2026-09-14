@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTP[3]
-\title{Interpréteur pour le langage algorithmique}
-\cursus{L2 Informatique}
-
 \hypersetup{
   pdftitle  = {Langages et Automates - TP 3 - Interpréteur pour le langage algorithmique},
   pdfauthor = {Matthieu Perrin},
@@ -19,7 +15,11 @@
 
 \begin{document}
 
-\maketitle
+\numerosession{3}
+\typesession[TP]{Travaux Pratiques}
+
+
+\session{Interpréteur pour le langage algorithmique}
 
 Dans les TPs précédents, nous avons appris à utiliser JFlex et CUP pour construire
 un analyseur lexical et syntaxique pour une calculatrice.
@@ -37,12 +37,12 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
 
 \begin{exercice}[Mise en place de l'interpréteur]
   
-  \begin{question}
+  \begin{questions}
   \item Clonez le dépôt du TP :
     \begin{lstlisting}[gobble=4, language=bash]
       git clone https://github.com/LangagesEtAutomates/lea-tp4-interpreter
     \end{lstlisting}
-  \end{question}
+  \end{questions}
 
   La compilation et l'exécution de l'interpréteur sont similaires aux TPs précédents.
   
@@ -171,22 +171,22 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
   Cette architecture sera étendue dans les exercices suivants pour permettre
   la gestion d'autres structures de contrôle.
 
-  \begin{question}
+  \begin{questions}
   \item Que se passe-t-il lorsqu'on évalue un identifiant qui n'a pas encore
     été initialisé ? Proposez un autre choix raisonnable possible.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Une \lstinline{PanicException} est levée, et l'interprétation est interrompue.
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Dessinez l'AST produit par le parser pour le programme suivant :
     \begin{lstlisting}
       x <- 4;
       écrire(x);
     \end{lstlisting}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \vspace{-2mm}
     \begin{tikzpicture}[tree, x=20mm, y=8mm]
       \tree{\lstinline|Sequence|}{
@@ -200,14 +200,14 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
       }
     \end{tikzpicture}
     \vspace{-3mm}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Énumérez la suite d'appels aux méthodes \lstinline|interpret|
     et \lstinline|eval| lors de l'exécution du programme de la question précédente, ainsi que leurs
     valeurs de retour.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}
       interpret(x <- 4; écrire(x);)
       interpret(x <- 4;)
@@ -215,7 +215,7 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
       interpret(écrire(x);)
       eval(x)
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
 
   \paragraph{Gestion des erreurs syntaxiques}
@@ -238,7 +238,7 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
   est inséré dans l'AST, ce qui permet de poursuivre l'analyse
   du reste du programme.
   
-  \begin{question}
+  \begin{questions}
   \item On souhaite maintenant affiner la récupération d'erreurs pour les conditionnelles.
 
     Modifiez la grammaire afin de détecter une erreur située
@@ -247,15 +247,15 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
     Une erreur devra être signalée via \linebreak
     \lstinline|error("Erreur dans la conditionnelle")|, qui retourne un n\oe ud \lstinline|ErrorNode|
     à insérer dans l'AST afin de permettre la poursuite de l'analyse.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     Ajouter dans la règle \lstinline{conditionnelle} :
     \begin{lstlisting}
       | error FIN SI {: RESULT = error("Erreur dans la conditionnelle"); :}
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item (Optionnel) Dessinez l'AST retourné par les programmes ci-dessous et indiquez à quel endroit l'analyse reprend.
 
     \begin{minipage}{.3\textwidth}
@@ -281,8 +281,8 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
         écrire(1);
       \end{lstlisting}
     \end{minipage}%
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{minipage}{.3\textwidth}
       \begin{tikzpicture}[tree, x=20mm, y=8mm]
         \tree{\lstinline|Sequence|}{
@@ -328,7 +328,7 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
       
       Reprise au \lstinline|fin si|
     \end{minipage}%
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 
@@ -344,30 +344,30 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
     fin tant que
   \end{lstlisting}
   
-  \begin{question}
+  \begin{questions}
   \item Modifiez le lexer JFlex afin d'ajouter les nouveaux mots-clés \lstinline|tant|, \lstinline|que| et \lstinline|faire|.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       "tant"      { return symbol(Terminal.TANT); }
       "que"       { return symbol(Terminal.QUE); }
       "faire"     { return symbol(Terminal.FAIRE); }
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Étendez l'AST avec un nouveau n\oe ud \lstinline|While(Expression cond, Instruction body)| qui implémente \lstinline|Instruction|.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       public record While(Expression condition, Instruction body) implements Instruction { }
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Modifiez le parseur CUP afin de reconnaître syntaxiquement la boucle \texttt{tant que}.
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       terminal TANT, QUE, FAIRE;
       while ::=
@@ -376,14 +376,14 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
            FIN TANT:fin  {: RESULT = mark(new While(c, s), deb, fin); :}
       ;
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Modifiez l'interpréteur afin de prendre en compte la boucle \lstinline|tant que|.
     Votre implémentation doit respecter la sémantique attendue :
     tant que la condition s'évalue en \lstinline|Bool(true)|, le corps de la boucle, \lstinline|body| doit être interprété. 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       private void interpret(While w) throws PanicException {
         while (evalAsBool(w.condition())) {
@@ -391,9 +391,9 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
         }
       } 
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Sur le même modèle, ajoutez la boucle \lstinline|pour|
     permettant d'itérer une variable entière entre deux bornes, avec un pas optionnel.
 
@@ -417,8 +417,8 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
     \item On supposera dans ce TP que le pas n'est jamais nul.
     \end{itemize}
 
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       // Lexer.flex
       "pour"      { return symbol(Terminal.POUR); }
@@ -461,7 +461,7 @@ pendant l'analyse syntaxique. Dans ce TP, le parseur construira donc un \emph{ar
         }
       }
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
   
 \end{exercice}
 

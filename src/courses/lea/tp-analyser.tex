@@ -6,10 +6,6 @@
 \usepackage{src/sty/requirements}
 \usepackage{src/courses/lea/config}
 
-\typeTP[4]
-\title{Analyse statique de programmes}
-\cursus{L2 Informatique}
-
 \hypersetup{
   pdftitle  = {Langages et Automates - TP 4 - Analyse statique de programmes},
   pdfauthor = {Matthieu Perrin},
@@ -19,7 +15,11 @@
 
 \begin{document}
 
-\maketitle
+\numerosession{4}
+\typesession[TP]{Travaux Pratiques}
+
+
+\session{Analyse statique de programmes}
 
 Dans ce TP, nous nous intéressons à \emph{l'analyse statique de programmes}.
 Contrairement à l'interprétation, qui exécute un programme sur des valeurs concrètes,
@@ -28,14 +28,14 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
 
 \begin{exercice}[Mise en place]
 
-  \begin{question}
+  \begin{questions}
   \item Clonez le dépôt du TP :
     \begin{lstlisting}[gobble=6, language=bash]
       git clone https://github.com/LangagesEtAutomates/lea-tp5-analyser
     \end{lstlisting}
 
     La compilation et l'exécution de l'interpréteur sont similaires aux TPs précédents.
-  \end{question}
+  \end{questions}
 
   \paragraph{Analyseur statique fourni}
   
@@ -78,7 +78,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
   initialisées dans chaque branche.  
 
   \pagebreak
-  \begin{question}
+  \begin{questions}
   \item Indiquez quelles erreurs sont signalées par l'analyseur dans les programmes suivants, et pourquoi.
     
     \begin{minipage}{.3\textwidth}
@@ -116,8 +116,8 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
       fin
     \end{lstlisting}
     \end{minipage}%
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{minipage}{.3\textwidth}
     \begin{lstlisting}
       algorithme
@@ -158,9 +158,9 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
       fin
     \end{lstlisting}
     \end{minipage}%
-  \end{correction}
+  \end{corrections}
 
-  \begin{question}
+  \begin{questions}
   \item Étudiez la méthode \lstinline{analyse(If i, Context context)}. 
     Pour chacun des exemples suivants, identifiez la valeur de \lstinline{written} après chaque instruction, 
     et justifiez pourquoi l'analyse considère qu'une variable
@@ -212,8 +212,8 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
         fin
       \end{lstlisting}
     \end{minipage}%
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{minipage}{.3\textwidth}
       \begin{lstlisting}[gobble=8]
         algorithme
@@ -260,7 +260,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
         fin
       \end{lstlisting}
     \end{minipage}%
-  \end{correction}
+  \end{corrections}
 \end{exercice}
 
 
@@ -273,7 +273,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
   Lorsqu'elle est exécutée, elle termine \emph{immédiatement}
   l'itération courante et provoque la sortie de la boucle.
 
-  \begin{question}
+  \begin{questions}
   \item Ajoutez l'instruction \lstinline|interrompre| au langage.
     \begin{itemize}
     \item Étendez la hiérarchie de types avec un nouveau type d'instructions \lstinline|Break|.
@@ -285,8 +285,8 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
       lors de l'interprétation d'une instruction \lstinline|Break|, et à la rattraper dans
       l'interprétation de la boucle pour en sortir proprement. 
     \end{itemize}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       // Node.java
       public record Break() implements Instruction { }
@@ -325,7 +325,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
       }
       // Idem pour la boucle pour...
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
   Les instructions situées après un \lstinline|interrompre| 
   dans une même séquence d'instructions ne peuvent jamais être exécutées :
@@ -345,7 +345,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
     fin
   \end{lstlisting}
 
-  \begin{question}
+  \begin{questions}
   \item Quelles instructions des programmes suivants constituent-elles du \emph{code mort} ?
 
     \begin{minipage}{.33\textwidth}
@@ -401,8 +401,8 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
 	fin
       \end{lstlisting}
     \end{minipage}
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
         \begin{minipage}{.32\textwidth}
       \begin{lstlisting}[gobble=8]
         algorithme
@@ -456,7 +456,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
 	fin
       \end{lstlisting}
     \end{minipage}
-  \end{correction}
+  \end{corrections}
     
   On souhaite enrichir l'analyse statique afin de signaler le code mort. Pour cela, on enrichit le contexte d'un booléen
   \lstinline|Analyser.Context.accessible|, qui vaut \lstinline|true| dans les contextes des instructions qui précèdent
@@ -464,14 +464,14 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
   À la sortie d'une structure de contrôle (boucle ou conditionnelle), le booléen doit être mis à jour pour détecter si
   les instructions suivantes sont \emph{forcément} du code mort, c'est-à-dire quelle que soit la branche exécutée. 
 
-  \begin{question}
+  \begin{questions}
   \item Adaptez l'analyse statique afin de détecter lorsqu'une instruction est \emph{forcément}
     située après une instruction \lstinline|interrompre|.
     Lorsqu'une instruction \lstinline|commande| est analysée avec \lstinline|accessible = false|,
     une erreur doit être signalée en utilisant : 
     \lstinline|error(commande, "Code mort", context);|
-  \end{question}
-  \begin{correction}
+  \end{questions}
+  \begin{corrections}
     \begin{lstlisting}[gobble=6]
       public final class Analyser {
         ...
@@ -512,7 +512,7 @@ afin de détecter des erreurs potentielles ou des propriétés garanties.
         }
       }
     \end{lstlisting}
-  \end{correction}
+  \end{corrections}
 
 \end{exercice}
 
